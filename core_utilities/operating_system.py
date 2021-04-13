@@ -205,6 +205,30 @@ class OSUtilities:
             if data[i] == word + '.':
                 counter += 1
         return counter
+# ----------------------------------------------------------------------------
+
+    @classmethod
+    def create_directory(cls, directory_name: str) -> None:
+        """
+
+        :param directory_name: The name of the directory to be created
+                               to include the path-link
+        :return None:
+
+        This function creates a directory in the following manner
+
+        .. code-block:: python
+
+           > print(util.list_contents())
+           ['data.txt', 'document.doc']
+           > util.create_directory('new_directory')
+           > print(util.list_contents())
+           ['data.txt', 'document.doc', 'new_directory']
+        """
+        if os.path.isdir(directory_name):
+            print('{}{}'.format(directory_name, ' already exists'))
+        else:
+            os.mkdir(directory_name)
 # ================================================================================
 # ================================================================================
 # eof

@@ -239,7 +239,31 @@
                 <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">word</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span><span class="p">:</span>
                 <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">counter</span></div></div>
+        <span class="k">return</span> <span class="n">counter</span></div>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="OSUtilities.create_directory"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.create_directory">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">create_directory</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param directory_name: The name of the directory to be created</span>
+<span class="sd">                               to include the path-link</span>
+<span class="sd">        :return None:</span>
+
+<span class="sd">        This function creates a directory in the following manner</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">           &gt; print(util.list_contents())</span>
+<span class="sd">           [&#39;data.txt&#39;, &#39;document.doc&#39;]</span>
+<span class="sd">           &gt; util.create_directory(&#39;new_directory&#39;)</span>
+<span class="sd">           &gt; print(util.list_contents())</span>
+<span class="sd">           [&#39;data.txt&#39;, &#39;document.doc&#39;, &#39;new_directory&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory_name</span><span class="p">,</span> <span class="s1">&#39; already exists&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">)</span></div></div>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># eof</span>

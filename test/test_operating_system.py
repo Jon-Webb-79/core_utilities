@@ -112,6 +112,25 @@ def test_count_word_occurrence():
         file = r'..\data\test\text_file.txt'
     num_words = util.count_occurrence_of_word_in_file(file, 'file')
     assert num_words == 4
+# ------------------------------------------------------------------------------
+
+
+def test_create_directory():
+    """
+
+    This function tests the OSUtilities.create_directory command to ensure it correctly
+    creates a directory
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    if plat == 'Darwin' or 'Linux':
+        directory = '../data/test/test_directory3'
+    else:
+        directory = r'..\data\test\test_directory3'
+    util.create_directory(directory)
+    assert os.path.isdir(directory)
+    if os.path.isdir(directory):
+        os.rmdir(directory)
 # ================================================================================
 # ================================================================================
  # eof
