@@ -2,16 +2,17 @@
 platform linux -- Python 3.9.2, pytest-6.2.3, py-1.10.0, pluggy-0.13.1 -- /home/jonwebb/Code_Dev/Python/core_utilities/.venv/bin/python3
 cachedir: .pytest_cache
 rootdir: /home/jonwebb/Code_Dev/Python/core_utilities
-collecting ... collected 8 items
+collecting ... collected 9 items
 
-test_operating_system.py::test_change_directory PASSED                   [ 12%]
-test_operating_system.py::test_copy_directory PASSED                     [ 25%]
-test_operating_system.py::test_copy_file PASSED                          [ 37%]
-test_operating_system.py::test_count_word_occurrence PASSED              [ 50%]
-test_operating_system.py::test_create_directory PASSED                   [ 62%]
-test_operating_system.py::test_create_file PASSED                        [ 75%]
-test_operating_system.py::test_current_working_directory PASSED          [ 87%]
-test_operating_system.py::test_delete_directory PASSED                   [100%]
+test_operating_system.py::test_change_directory PASSED                   [ 11%]
+test_operating_system.py::test_copy_directory PASSED                     [ 22%]
+test_operating_system.py::test_copy_file PASSED                          [ 33%]
+test_operating_system.py::test_count_word_occurrence PASSED              [ 44%]
+test_operating_system.py::test_create_directory PASSED                   [ 55%]
+test_operating_system.py::test_create_file PASSED                        [ 66%]
+test_operating_system.py::test_current_working_directory PASSED          [ 77%]
+test_operating_system.py::test_delete_directory PASSED                   [ 88%]
+test_operating_system.py::test_delete_file PASSED                        [100%]
 
-============================== 8 passed in 0.01s ===============================
-Tue Apr 13 05:35:36 PM MDT 2021
+============================== 9 passed in 0.01s ===============================
+Tue Apr 13 05:42:37 PM MDT 2021

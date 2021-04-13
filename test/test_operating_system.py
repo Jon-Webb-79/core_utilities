@@ -187,6 +187,26 @@ def test_delete_directory():
     assert not os.path.isdir(dire)
     if not os.path.isdir(dire):
         os.mkdir(dire)
+# ------------------------------------------------------------------------------
+
+
+def test_delete_file():
+    """
+
+    This function tests the OSUtilities.delete_file function to ensure that it correctly
+    deletes a file
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        file = '../data/test/delete_test.txt'
+    else:
+        file = r'..\data\test\delete_test.txt'
+    util.delete_file(file)
+    assert not os.path.isfile(file)
+    if not os.path.isfile(file):
+        util.create_file(file)
 # ================================================================================
 # ================================================================================
  # eof

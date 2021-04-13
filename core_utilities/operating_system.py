@@ -305,6 +305,31 @@ class OSUtilities:
             print('{}{}'.format(directory_name, ' does not exist'))
         else:
             os.rmdir(directory_name)
+# ----------------------------------------------------------------------------
+
+    @classmethod
+    def delete_file(cls, file_name: str) -> None:
+        """
+
+        :param file_name: The name of the file to be deleted to include
+                          the path link
+        :return None:
+
+        This function deletes a file.
+
+        .. code-block:: python
+
+           > print(util.list_contents())
+           ['test_file.txt', 'test2.txt', 'word_document.doc']
+           > util.delete_file('word_document.doc')
+           print(util.list_contents())
+           ['test_file.txt', 'test2.txt']
+
+        """
+        if not os.path.isfile(file_name):
+            print('{}{}'.format(file_name, ' does not exist'))
+        else:
+            os.remove(file_name)
 # ================================================================================
 # ================================================================================
 # eof

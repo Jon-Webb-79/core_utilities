@@ -291,6 +291,27 @@ an example lets assume the following directory structure;</p>
 </div>
 </dd></dl>
 
+<dl class="py method">
+<dt id="operating_system.OSUtilities.delete_file">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">delete_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.delete_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.delete_file" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_name</strong> – The name of the file to be deleted to include
+the path link</p>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p>This function deletes a file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">list_contents</span><span class="p">())</span>
+<span class="p">[</span><span class="s1">&#39;test_file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;test2.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;word_document.doc&#39;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">delete_file</span><span class="p">(</span><span class="s1">&#39;word_document.doc&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">list_contents</span><span class="p">())</span>
+<span class="p">[</span><span class="s1">&#39;test_file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;test2.txt&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </div>
