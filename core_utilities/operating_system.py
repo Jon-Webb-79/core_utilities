@@ -269,6 +269,42 @@ class OSUtilities:
            '/users/computername/Desktop/Code_Dev/Python/core_utilities'
         """
         return os.getcwd()
+# ----------------------------------------------------------------------------
+
+    @classmethod
+    def delete_directory(cls, directory_name: str) -> None:
+        """
+
+        :param directory_name: The name of the directory to be deleted to
+                               include path links
+        :return None:
+
+        This function deletes an  un-populated directory.  As
+        an example lets assume the following directory structure;
+
+        .. code-block:: text
+
+           directory_1
+              |
+              text_file.txt
+              directory_2
+              directory_3
+                 |
+                 another_text_file.txt
+
+        .. code-block:: python
+
+           > print(util.list_contents())
+           ['text_file.txt', 'directory_2', 'directory_3']
+           > util.delete_directory('directory_2')
+           > print(util.list_contents())
+           ['text_file.txt', 'directory_3']
+
+        """
+        if not os.path.isdir(directory_name):
+            print('{}{}'.format(directory_name, ' does not exist'))
+        else:
+            os.rmdir(directory_name)
 # ================================================================================
 # ================================================================================
 # eof

@@ -60,7 +60,8 @@ def test_copy_directory():
     """
     util = OSUtilities()
     plat = platform.system()
-    if plat == 'Darwin' or 'Linux':
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
         directory1 = '../data/test/test_directory2'
         directory2 = '../data/test/test_directory3'
         file = '../data/test/test_directory3/test.txt'
@@ -84,7 +85,8 @@ def test_copy_file():
     """
     util = OSUtilities()
     plat = platform.system()
-    if plat == 'Darwin' or 'Linux':
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
         file1 = '../data/test/test_file2.txt'
         file2 = '../data/test/copy_test.txt'
     else:
@@ -106,7 +108,8 @@ def test_count_word_occurrence():
     """
     util = OSUtilities()
     plat = platform.system()
-    if plat == 'Darwin' or 'Linux':
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
         file = '../data/test/text_file.txt'
     else:
         file = r'..\data\test\text_file.txt'
@@ -123,7 +126,8 @@ def test_create_directory():
     """
     util = OSUtilities()
     plat = platform.system()
-    if plat == 'Darwin' or 'Linux':
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
         directory = '../data/test/test_directory3'
     else:
         directory = r'..\data\test\test_directory3'
@@ -142,7 +146,8 @@ def test_create_file():
     """
     util = OSUtilities()
     plat = platform.system()
-    if plat == 'Darwin' or 'Linux':
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
         file = '../data/test/create_file_test.txt'
     else:
         file = r'..\data\test\create_file_test.txt'
@@ -162,6 +167,26 @@ def test_current_working_directory():
     cwd = os.getcwd()
     cwd2 = OSUtilities.current_working_directory()
     assert cwd == cwd2
+# ------------------------------------------------------------------------------
+
+
+def test_delete_directory():
+    """
+
+    This function tests the OSUtilitiescreate_file function to ensure that it
+    correctly creates an ASCII based text file
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        dire = '../data/test/test_directory'
+    else:
+        dire = r'..\data\test\test_directory'
+    util.delete_directory(dire)
+    assert not os.path.isdir(dire)
+    if not os.path.isdir(dire):
+        os.mkdir(dire)
 # ================================================================================
 # ================================================================================
  # eof
