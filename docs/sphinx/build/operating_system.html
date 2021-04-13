@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OSUtilities &#8212; Core Utilities 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Introduction" href="Introduction.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Introduction.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Core Utilities 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">OSUtilities</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="osutilities">
+<h1>OSUtilities<a class="headerlink" href="#osutilities" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">OSUtilities</span></code> class is stored in the <code class="docutils literal notranslate"><span class="pre">operating_system</span></code> package.  This
+class contains many functions that allow a user to access comman line features
+from the Python console or from a Python script encoded to a text file.  This class is
+written with class methods that simplify or augment many of the utilities offered in
+<a class="reference external" href="https://docs.python.org/3/library/os.html">os</a> and <a class="reference external" href="https://docs.python.org/3/library/sys.html">sys</a> packages</p>
+<dl class="py class">
+<dt id="operating_system.OSUtilities">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">OSUtilities</span></code><a class="reference internal" href="_modules/operating_system.html#OSUtilities"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities" title="Permalink to this definition">¶</a></dt>
+<dd><p>This set of functions were written as class methods in order
+to ensure that they can be passed in bulk via decorator patters
+or through inheritance.  This class provides file analysis
+capabilities and a user interface for file and directory management
+similar to Bash and DOS functionality, although with different
+syntax</p>
+<p>All code examples are predicated on the instantiation of this class
+with the following command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">util</span> <span class="o">=</span> <span class="n">OSUtilities</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt id="operating_system.OSUtilities.change_directory">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">change_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_directory</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.change_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.change_directory" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>new_directory</strong> – The desired directory to include
+path link</p>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p>This function will change the directory in the same manner as
+the <cite>cd</cite> DOS and Linux command.  For example, if you are
+in the <cite>dir1</cite> directory within the following chain;</p>
+<p><cite>home/dir1/dir2/</cite></p>
+<p>You can use the following python script to change to the <cite>dir2</cite>
+directory.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">current_working_directory</span><span class="p">())</span>
+<span class="s1">&#39;/home/dir1&#39;</span>
+<span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">change_directory</span><span class="p">(</span><span class="s1">&#39;dir2&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">current_working_directory</span><span class="p">())</span>
+<span class="s1">&#39;/home/dir1/dir2&#39;</span>
+</pre></div>
+</div>
+<p>You can change back to the <cite>home</cite> directory with the following
+command;</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">change_directory</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">current_working_directory</span><span class="p">())</span>
+<span class="s1">&#39;/home&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Introduction.html"
+                        title="previous chapter">Introduction</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/operating_system.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Introduction.html" title="Introduction"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Core Utilities 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">OSUtilities</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Jonathan A. Webb.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+    </div>
+  </body>
+</html>

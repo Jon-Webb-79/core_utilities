@@ -13,11 +13,11 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../../src'))
+sys.path.insert(0, os.path.abspath('../../../core_utilities'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Project_Name'
+project = 'Core Utilities'
 copyright = '2021, Jonathan A. Webb'
 author = 'Jonathan A. Webb'
 
