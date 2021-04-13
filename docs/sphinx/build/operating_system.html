@@ -165,6 +165,42 @@ we are in the <code class="docutils literal notranslate"><span class="pre">direc
 </div>
 </dd></dl>
 
+<dl class="py method">
+<dt id="operating_system.OSUtilities.count_occurrence_of_word_in_file">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">count_occurrence_of_word_in_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.count_occurrence_of_word_in_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.count_occurrence_of_word_in_file" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> – The file name to include the path link</p></li>
+<li><p><strong>word</strong> – the word for which the number of occurrences in
+a file is desired.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return num</dt>
+<dd class="field-even"><p>The number of times a specific word occurs in a
+file.</p>
+</dd>
+</dl>
+<p>This function excludes the effects of punctuation.  For example
+if the user defined word is <cite>book</cite> and the file contains the
+word <cite>book.</cite> with a period following it indicating the end of a
+sentence, this function will count that word.  The same is true
+for commas.  As an example lets assume the file listed below,
+titled <code class="docutils literal notranslate"><span class="pre">test.txt</span></code>;</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>This is a text file, all
+of the information in this
+file is specifically for
+the purpose of testing file file
+</pre></div>
+</div>
+<p>The following code will count the occurrence of the word <code class="docutils literal notranslate"><span class="pre">file</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">num</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">count_occurrence_of_word_in_file</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;file&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+<span class="mi">4</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </div>

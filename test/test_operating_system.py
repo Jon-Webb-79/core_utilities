@@ -94,6 +94,24 @@ def test_copy_file():
     assert os.path.isfile(file2)
     if os.path.isfile(file2):
         os.remove(file2)
+# ------------------------------------------------------------------------------
+
+
+def test_count_word_occurrence():
+    """
+
+    This function tests the OSUtilities.count_occurrence_of_words_in_file
+    to ensure it correctly determines the number of times a word occurs in
+    a file
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    if plat == 'Darwin' or 'Linux':
+        file = '../data/test/text_file.txt'
+    else:
+        file = r'..\data\test\text_file.txt'
+    num_words = util.count_occurrence_of_word_in_file(file, 'file')
+    assert num_words == 4
 # ================================================================================
 # ================================================================================
  # eof

@@ -160,6 +160,51 @@ class OSUtilities:
             print('{}{}'.format(destination, ' already exists'))
         else:
             shutil.copy(source, destination)
+# ----------------------------------------------------------------------------
+
+    @classmethod
+    def count_occurrence_of_word_in_file(cls, file_name: str, word: str) -> int:
+        """
+
+        :param file_name: The file name to include the path link
+        :param word: the word for which the number of occurrences in
+                     a file is desired.
+        :return num: The number of times a specific word occurs in a
+                     file.
+
+        This function excludes the effects of punctuation.  For example
+        if the user defined word is `book` and the file contains the
+        word `book.` with a period following it indicating the end of a
+        sentence, this function will count that word.  The same is true
+        for commas.  As an example lets assume the file listed below,
+        titled ``test.txt``;
+
+        .. code-block:: text
+
+           This is a text file, all
+           of the information in this
+           file is specifically for
+           the purpose of testing file file
+
+        The following code will count the occurrence of the word ``file``
+
+        .. code-block:: python
+
+           > num = util.count_occurrence_of_word_in_file('test.txt', 'file')
+           > print(num)
+           4
+        """
+        file = open(file_name, "rt")
+        data = file.read().split()
+        counter = 0
+        for i in range(len(data)):
+            if data[i] == word:
+                counter += 1
+            if data[i] == word + ',':
+                counter += 1
+            if data[i] == word + '.':
+                counter += 1
+        return counter
 # ================================================================================
 # ================================================================================
 # eof
