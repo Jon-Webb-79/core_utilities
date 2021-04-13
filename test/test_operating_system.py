@@ -131,6 +131,37 @@ def test_create_directory():
     assert os.path.isdir(directory)
     if os.path.isdir(directory):
         os.rmdir(directory)
+# ------------------------------------------------------------------------------
+
+
+def test_create_file():
+    """
+
+    This function tests the OSUtilities.create_file function to ensure that it
+    correctly creates an ASCII based text file
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    if plat == 'Darwin' or 'Linux':
+        file = '../data/test/create_file_test.txt'
+    else:
+        file = r'..\data\test\create_file_test.txt'
+    util.create_file(file)
+    assert os.path.isfile(file)
+    if os.path.isfile(file):
+        os.remove(file)
+# --------------------------------------------------------------------------------
+
+
+def test_current_working_directory():
+    """
+
+    This function tests the OSUtilities.current_working_directory function to
+    ensure it correctly determines the working directory
+    """
+    cwd = os.getcwd()
+    cwd2 = OSUtilities.current_working_directory()
+    assert cwd == cwd2
 # ================================================================================
 # ================================================================================
  # eof

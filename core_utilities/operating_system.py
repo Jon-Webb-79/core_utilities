@@ -229,6 +229,46 @@ class OSUtilities:
             print('{}{}'.format(directory_name, ' already exists'))
         else:
             os.mkdir(directory_name)
+# ----------------------------------------------------------------------------
+
+    @classmethod
+    def create_file(cls, file_name: str) -> None:
+        """
+
+        :param file_name: The name of the file to be created to
+                          include the path link
+        :return None:
+
+        This function creates a file in a method that mimics the touch
+        command in Linux.
+
+        .. code-block:: python
+
+           > print(util.list_contents())
+           ['data.txt', 'document.doc']
+           > util.create_file('new_text.txt')
+           > print(util.list_contents())
+           ['data.txt', 'document.doc', 'new_text.txt']
+        """
+        with open(file_name, 'w'):
+            pass
+# ----------------------------------------------------------------------------
+
+    @classmethod
+    def current_working_directory(cls) -> str:
+        """
+
+        :return cwd: A string describing the current working directory
+
+        This function returns a string describing the current
+        working directory.
+
+        .. code-block:: python
+
+           > print(util.current_working_directory())
+           '/users/computername/Desktop/Code_Dev/Python/core_utilities'
+        """
+        return os.getcwd()
 # ================================================================================
 # ================================================================================
 # eof
