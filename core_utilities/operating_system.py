@@ -1,6 +1,7 @@
 # Import necessary packages here
 
 import os
+import shutil
 # ================================================================================
 # ================================================================================
 # Date:    Month Day, Year
@@ -72,6 +73,49 @@ class OSUtilities:
             os.chdir(new_directory)
 # --------------------------------------------------------------------------------
 
+    @classmethod
+    def copy_directory(cls, source: str, destination: str) -> None:
+        """
+
+        :param source: The name and path-link of the directory to
+                       be copied
+        :param destination: The name and path-link for the directory
+                            copy
+        :return None:
+
+        This function creates a copy of a directory and assigns
+        it to the directory of the users choosing.  This function
+        will copy populated and un-populated directories.  As
+        an example lets assume the following directory structure;
+
+        .. code-block:: text
+
+           directory_1
+              |
+              text_file.txt
+              directory_2
+              directory_3
+                 |
+                 another_text_file.txt
+
+        The following command will make  copy of ``directory_2`` in
+        the ``directory_3`` titled ``dir2_copy``, directory assuming
+        we are in the ``directory_1`` directory
+
+        .. code-block:: python
+
+           > copy_directory('directory_2', 'directory_3/dir2_copy')
+           > change_directory('directory_3')
+           > print(list_contents())
+           [''another_text_file.txt', 'dir2_copy']
+
+        """
+        if not os.path.isdir(source):
+            print('{}{}'.format(source, ' does not exist'))
+        elif os.path.isdir(destination):
+            print('{}{}'.format(destination, ' already exists'))
+        else:
+            shutil.copytree(source, destination)
 # ================================================================================
 # ================================================================================
 # eof

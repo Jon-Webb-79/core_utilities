@@ -2,6 +2,8 @@
 
 import os
 import sys
+import platform
+import shutil
 sys.path.insert(0, os.path.abspath('../core_utilities'))
 from core_utilities.operating_system import OSUtilities
 # ================================================================================
@@ -48,6 +50,29 @@ def test_change_directory():
     assert new == os.getcwd()
     util.change_directory("test")
 # --------------------------------------------------------------------------------
+
+
+def test_copy_directory():
+    """
+
+    This function tests the ability of the OSUtilities.copy_directory function to
+    copy a directory
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    if plat == 'Darwin' or 'Linux':
+        directory1 = '../data/test/test_directory2'
+        directory2 = '../data/test/test_directory3'
+        file = '../data/test/test_directory3/test.txt'
+    else:
+        directory1 = r'..\data\test\test_directory2'
+        directory2 = r'..\data\test\test_directory3'
+        file = r'..\data\test\test_directory3\test.txt'
+    util.copy_directory(directory1, directory2)
+    assert os.path.isdir(directory2)
+    assert os.path.isfile(file)
+    if os.path.isdir(directory2):
+        shutil.rmtree(directory2)
 # ================================================================================
 # ================================================================================
  # eof

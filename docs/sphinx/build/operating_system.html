@@ -89,6 +89,45 @@ command;</p>
 </div>
 </dd></dl>
 
+<dl class="py method">
+<dt id="operating_system.OSUtilities.copy_directory">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">copy_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.copy_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.copy_directory" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> – The name and path-link of the directory to
+be copied</p></li>
+<li><p><strong>destination</strong> – The name and path-link for the directory
+copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p>This function creates a copy of a directory and assigns
+it to the directory of the users choosing.  This function
+will copy populated and un-populated directories.  As
+an example lets assume the following directory structure;</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
+   |
+   text_file.txt
+   directory_2
+   directory_3
+      |
+      another_text_file.txt
+</pre></div>
+</div>
+<p>The following command will make  copy of <code class="docutils literal notranslate"><span class="pre">directory_2</span></code> in
+the <code class="docutils literal notranslate"><span class="pre">directory_3</span></code> titled <code class="docutils literal notranslate"><span class="pre">dir2_copy</span></code>, directory assuming
+we are in the <code class="docutils literal notranslate"><span class="pre">directory_1</span></code> directory</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">copy_directory</span><span class="p">(</span><span class="s1">&#39;directory_2&#39;</span><span class="p">,</span> <span class="s1">&#39;directory_3/dir2_copy&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">change_directory</span><span class="p">(</span><span class="s1">&#39;directory_3&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">list_contents</span><span class="p">())</span>
+<span class="p">[</span><span class="s1">&#39;&#39;</span><span class="n">another_text_file</span><span class="o">.</span><span class="n">txt</span><span class="s1">&#39;, &#39;</span><span class="n">dir2_copy</span><span class="s1">&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </div>
