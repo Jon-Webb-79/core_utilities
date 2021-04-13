@@ -330,6 +330,43 @@ class OSUtilities:
             print('{}{}'.format(file_name, ' does not exist'))
         else:
             os.remove(file_name)
+# ----------------------------------------------------------------------------
+
+    @classmethod
+    def delete_populated_directory(cls, directory_name: str) -> None:
+        """
+
+        :param directory_name: The name of the directory to be deleted to
+                               include path links
+        :return None:
+
+        This function deletes a directory that is populated with files
+        and other directories.  As an example lets assume the following
+        directory structure;
+
+        .. code-block:: text
+
+           directory_1
+              |
+              text_file.txt
+              directory_2
+              directory_3
+                 |
+                 another_text_file.txt
+
+        .. code-block:: python
+
+           > print(util.list_contents())
+           ['text_file.txt', 'directory_2', 'directory_3']
+           > util.delete_directory('directory_3')
+           > print(util.list_contents())
+           ['text_file.txt', 'directory_2']
+
+        """
+        if not os.path.isdir(directory_name):
+            print('{}{}'.format(directory_name, ' does not exist'))
+        else:
+            shutil.rmtree(directory_name)
 # ================================================================================
 # ================================================================================
 # eof
