@@ -2,10 +2,11 @@
 platform linux -- Python 3.9.2, pytest-6.2.3, py-1.10.0, pluggy-0.13.1 -- /home/jonwebb/Code_Dev/Python/core_utilities/.venv/bin/python3
 cachedir: .pytest_cache
 rootdir: /home/jonwebb/Code_Dev/Python/core_utilities
-collecting ... collected 2 items
+collecting ... collected 3 items
 
-test_operating_system.py::test_change_directory PASSED                   [ 50%]
-test_operating_system.py::test_copy_directory PASSED                     [100%]
+test_operating_system.py::test_change_directory PASSED                   [ 33%]
+test_operating_system.py::test_copy_directory PASSED                     [ 66%]
+test_operating_system.py::test_copy_file PASSED                          [100%]
 
-============================== 2 passed in 0.01s ===============================
-Tue Apr 13 04:37:46 PM MDT 2021
+============================== 3 passed in 0.01s ===============================
+Tue Apr 13 04:48:17 PM MDT 2021

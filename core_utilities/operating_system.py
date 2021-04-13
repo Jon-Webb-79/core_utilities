@@ -116,6 +116,50 @@ class OSUtilities:
             print('{}{}'.format(destination, ' already exists'))
         else:
             shutil.copytree(source, destination)
+# --------------------------------------------------------------------------------
+
+
+    @classmethod
+    def copy_file(cls, source: str, destination: str) -> None:
+        """
+
+        :param source: The name and path-link of the file to be
+                       copied
+        :param destination: The name and path-link for the file copy
+        :return None:
+
+        This function creates a copy of a file and assigns it to the
+        name and directory of the users choosing.  As
+        an example lets assume the following directory structure;
+
+        .. code-block:: text
+
+           directory_1
+              |
+              text_file.txt
+              directory_2
+              directory_3
+                 |
+                 another_text_file.txt
+
+        The following command will make  copy of ``text_file.txt`` in
+        the ``directory_3`` titled ``text_copy.txt``, directory assuming
+        we are in the ``directory_1`` directory
+
+        .. code-block:: python
+
+           > copy_file('text_file.txt', 'directory_3/text_copy.txt')
+           > change_directory('directory_3')
+           > print(list_contents())
+           [''another_text_file.txt', 'text_copy.txt']
+
+        """
+        if not os.path.isfile(source):
+            print('{}{}'.format(source, ' does not exist'))
+        elif os.path.isfile(destination):
+            print('{}{}'.format(destination, ' already exists'))
+        else:
+            shutil.copy(source, destination)
 # ================================================================================
 # ================================================================================
 # eof

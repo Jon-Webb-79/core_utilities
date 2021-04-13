@@ -73,6 +73,27 @@ def test_copy_directory():
     assert os.path.isfile(file)
     if os.path.isdir(directory2):
         shutil.rmtree(directory2)
+# --------------------------------------------------------------------------------
+
+
+def test_copy_file():
+    """
+
+    This function tests the ability of the OSUtilities.copy_file function to correctly
+    copy a file
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    if plat == 'Darwin' or 'Linux':
+        file1 = '../data/test/test_file2.txt'
+        file2 = '../data/test/copy_test.txt'
+    else:
+        file1 = r'..\data\test\test_file2.txt'
+        file2 = r'..\data\test\copy_test.txt'
+    util.copy_file(file1, file2)
+    assert os.path.isfile(file2)
+    if os.path.isfile(file2):
+        os.remove(file2)
 # ================================================================================
 # ================================================================================
  # eof

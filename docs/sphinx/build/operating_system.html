@@ -128,6 +128,43 @@ we are in the <code class="docutils literal notranslate"><span class="pre">direc
 </div>
 </dd></dl>
 
+<dl class="py method">
+<dt id="operating_system.OSUtilities.copy_file">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">copy_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.copy_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.copy_file" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> – The name and path-link of the file to be
+copied</p></li>
+<li><p><strong>destination</strong> – The name and path-link for the file copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p>This function creates a copy of a file and assigns it to the
+name and directory of the users choosing.  As
+an example lets assume the following directory structure;</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
+   |
+   text_file.txt
+   directory_2
+   directory_3
+      |
+      another_text_file.txt
+</pre></div>
+</div>
+<p>The following command will make  copy of <code class="docutils literal notranslate"><span class="pre">text_file.txt</span></code> in
+the <code class="docutils literal notranslate"><span class="pre">directory_3</span></code> titled <code class="docutils literal notranslate"><span class="pre">text_copy.txt</span></code>, directory assuming
+we are in the <code class="docutils literal notranslate"><span class="pre">directory_1</span></code> directory</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">copy_file</span><span class="p">(</span><span class="s1">&#39;text_file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;directory_3/text_copy.txt&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">change_directory</span><span class="p">(</span><span class="s1">&#39;directory_3&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">list_contents</span><span class="p">())</span>
+<span class="p">[</span><span class="s1">&#39;&#39;</span><span class="n">another_text_file</span><span class="o">.</span><span class="n">txt</span><span class="s1">&#39;, &#39;</span><span class="n">text_copy</span><span class="o">.</span><span class="n">txt</span><span class="s1">&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </div>
