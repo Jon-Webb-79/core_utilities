@@ -285,6 +285,31 @@ def test_file_word_count():
         file = r'../data/test/text_file.txt'
     words = util.file_word_count(file)
     assert words == 21
+# --------------------------------------------------------------------------------
+
+
+def test_move_directory():
+    """
+
+    This function test the OSUtilities.move_file_or_directory function to ensure that it
+    successfully moves directories between different locations
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        file1 = '../data/test/populated_dir2'
+        file2 = '../data/test/move_directory2/populated_dir2'
+        file3 = '../data/test/move_directory2/populated_dir2/test.txt'
+    else:
+        file1 = r'..\data\test\populated_dir2'
+        file2 = r'..\data\test\move_directory2\populated_dir2'
+        file3 = r'..\data\test\move_directory2\populated_dir2\test.txt'
+    util.move_directory(file1, file2)
+    assert os.path.isdir(file2)
+    assert os.path.isfile(file3)
+    if os.path.isdir(file2):
+        util.move_directory(file2, file1)
 # ================================================================================
 # ================================================================================
  # eof

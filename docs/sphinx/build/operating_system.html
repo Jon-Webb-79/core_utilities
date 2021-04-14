@@ -420,6 +420,49 @@ the purpose of testing file file
 </div>
 </dd></dl>
 
+<dl class="py method">
+<dt id="operating_system.OSUtilities.move_directory">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">move_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.move_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.move_directory" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> – The name of the file being moved to include the
+path-link</p></li>
+<li><p><strong>destination</strong> – The name of the file at its new destination
+to include the path link</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p>This function will move a file to a new location and give it a
+different or identical user define name.  The original file
+and location will be deleted.  As an example lets assume the
+following directory structure;</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
+   |
+   text_file.txt
+   directory_2
+   directory_3
+      |
+      another_text_file.txt
+</pre></div>
+</div>
+<p>The following command will create the updated directory structure.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">move_directory</span><span class="p">(</span><span class="s1">&#39;directory_2&#39;</span><span class="p">,</span> <span class="s1">&#39;directory_3/new_dir&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
+   |
+   text_file.txt
+   directory_3
+      |
+      new_dir
+      another_text_file.txt
+</pre></div>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </div>
