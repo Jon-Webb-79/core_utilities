@@ -420,7 +420,36 @@
 <span class="sd">           3450.5</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">byte_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span><span class="o">.</span><span class="n">st_size</span>
-        <span class="k">return</span> <span class="n">byte_size</span> <span class="o">/</span> <span class="mf">1024.0</span></div></div>
+        <span class="k">return</span> <span class="n">byte_size</span> <span class="o">/</span> <span class="mf">1024.0</span></div>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="OSUtilities.file_line_count"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.file_line_count">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">file_line_count</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param file_name: The file name to include the path-link</span>
+<span class="sd">        :return lines: The number of lines in a file</span>
+
+<span class="sd">        This function returns the number of lines in an ASCII</span>
+<span class="sd">        based file.  As an example lets assume the file listed below,</span>
+<span class="sd">        titled ``test.txt``;</span>
+
+<span class="sd">        .. code-block:: text</span>
+
+<span class="sd">           This is a text file, all</span>
+<span class="sd">           of the information in this</span>
+<span class="sd">           file is specifically for</span>
+<span class="sd">           the purpose of testing file file</span>
+
+<span class="sd">        The following code will count the occurrence of the word ``file``</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">           &gt; num = util.file_line_count(&#39;test.txt&#39;)</span>
+<span class="sd">           &gt; print(num)</span>
+<span class="sd">           4</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span></div></div>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># eof</span>

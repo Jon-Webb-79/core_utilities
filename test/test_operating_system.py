@@ -249,6 +249,24 @@ def test_determine_file_size():
         file = r'..\data\test\size_test.jpg'
     file_size = util.determine_file_size(file)
     assert isclose(file_size, 26674.009, rel_tol=1.0e-3)
+# ------------------------------------------------------------------------------
+
+
+def test_determine_file_line_count():
+    """
+
+    This function tests the OSUtilities.file_line_count function to ensure
+    it can correctly determine how many lines are in a file
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        file = '../data/test/text_file.txt'
+    else:
+        file = r'../data/test/text_file.txt'
+    lines = util.file_line_count(file)
+    assert lines == 4
 # ================================================================================
 # ================================================================================
  # eof

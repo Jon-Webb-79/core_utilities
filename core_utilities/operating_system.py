@@ -386,6 +386,35 @@ class OSUtilities:
         """
         byte_size = os.stat(file_name).st_size
         return byte_size / 1024.0
+# ----------------------------------------------------------------------------
+
+    @classmethod
+    def file_line_count(cls, file_name: str) -> int:
+        """
+
+        :param file_name: The file name to include the path-link
+        :return lines: The number of lines in a file
+
+        This function returns the number of lines in an ASCII
+        based file.  As an example lets assume the file listed below,
+        titled ``test.txt``;
+
+        .. code-block:: text
+
+           This is a text file, all
+           of the information in this
+           file is specifically for
+           the purpose of testing file file
+
+        The following code will count the occurrence of the word ``file``
+
+        .. code-block:: python
+
+           > num = util.file_line_count('test.txt')
+           > print(num)
+           4
+        """
+        return len(open(file_name).readlines())
 # ================================================================================
 # ================================================================================
 # eof
