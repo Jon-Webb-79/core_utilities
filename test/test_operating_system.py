@@ -4,6 +4,7 @@ import os
 import sys
 import platform
 import shutil
+from math import isclose
 sys.path.insert(0, os.path.abspath('../core_utilities'))
 from core_utilities.operating_system import OSUtilities
 # ================================================================================
@@ -230,6 +231,24 @@ def test_remove_populated_directory():
     if not os.path.isdir(directory):
         os.mkdir(directory)
         util.create_file(file)
+# ------------------------------------------------------------------------------
+
+
+def test_determine_file_size():
+    """
+
+    This function tests the OSUtilities.determine_file_size function to determine
+    if it can correctly determine the size of a file
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        file = '../data/test/size_test.jpg'
+    else:
+        file = r'..\data\test\size_test.jpg'
+    file_size = util.determine_file_size(file)
+    assert isclose(file_size, 26674.009, rel_tol=1.0e-3)
 # ================================================================================
 # ================================================================================
  # eof

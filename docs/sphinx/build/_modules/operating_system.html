@@ -401,7 +401,26 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory_name</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">directory_name</span><span class="p">)</span></div></div>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">directory_name</span><span class="p">)</span></div>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="OSUtilities.determine_file_size"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.determine_file_size">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">determine_file_size</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param file_name: The file name to include path length</span>
+<span class="sd">        :return kb_size: The size of a file in kilo-bites</span>
+
+<span class="sd">        This function returns the size of a file in units of kb.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">           &gt; num = util.determine_file_size(&#39;photo.jpg&#39;)</span>
+<span class="sd">           &gt; print(num)</span>
+<span class="sd">           3450.5</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">byte_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span><span class="o">.</span><span class="n">st_size</span>
+        <span class="k">return</span> <span class="n">byte_size</span> <span class="o">/</span> <span class="mf">1024.0</span></div></div>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># eof</span>

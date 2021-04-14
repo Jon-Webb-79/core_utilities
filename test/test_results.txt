@@ -2,18 +2,19 @@
 platform linux -- Python 3.9.2, pytest-6.2.3, py-1.10.0, pluggy-0.13.1 -- /home/jonwebb/Code_Dev/Python/core_utilities/.venv/bin/python3
 cachedir: .pytest_cache
 rootdir: /home/jonwebb/Code_Dev/Python/core_utilities
-collecting ... collected 10 items
+collecting ... collected 11 items
 
-test_operating_system.py::test_change_directory PASSED                   [ 10%]
-test_operating_system.py::test_copy_directory PASSED                     [ 20%]
-test_operating_system.py::test_copy_file PASSED                          [ 30%]
-test_operating_system.py::test_count_word_occurrence PASSED              [ 40%]
-test_operating_system.py::test_create_directory PASSED                   [ 50%]
-test_operating_system.py::test_create_file PASSED                        [ 60%]
-test_operating_system.py::test_current_working_directory PASSED          [ 70%]
-test_operating_system.py::test_delete_directory PASSED                   [ 80%]
-test_operating_system.py::test_delete_file PASSED                        [ 90%]
-test_operating_system.py::test_remove_populated_directory PASSED         [100%]
+test_operating_system.py::test_change_directory PASSED                   [  9%]
+test_operating_system.py::test_copy_directory PASSED                     [ 18%]
+test_operating_system.py::test_copy_file PASSED                          [ 27%]
+test_operating_system.py::test_count_word_occurrence PASSED              [ 36%]
+test_operating_system.py::test_create_directory PASSED                   [ 45%]
+test_operating_system.py::test_create_file PASSED                        [ 54%]
+test_operating_system.py::test_current_working_directory PASSED          [ 63%]
+test_operating_system.py::test_delete_directory PASSED                   [ 72%]
+test_operating_system.py::test_delete_file PASSED                        [ 81%]
+test_operating_system.py::test_remove_populated_directory PASSED         [ 90%]
+test_operating_system.py::test_determine_file_size PASSED                [100%]
 
-============================== 10 passed in 0.01s ==============================
-Tue Apr 13 05:47:40 PM MDT 2021
+============================== 11 passed in 0.01s ==============================
+Tue Apr 13 07:28:56 PM MDT 2021

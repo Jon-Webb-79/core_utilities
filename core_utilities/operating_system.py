@@ -367,6 +367,25 @@ class OSUtilities:
             print('{}{}'.format(directory_name, ' does not exist'))
         else:
             shutil.rmtree(directory_name)
+# ----------------------------------------------------------------------------
+
+    @classmethod
+    def determine_file_size(cls, file_name: str) -> float:
+        """
+
+        :param file_name: The file name to include path length
+        :return kb_size: The size of a file in kilo-bites
+
+        This function returns the size of a file in units of kb.
+
+        .. code-block:: python
+
+           > num = util.determine_file_size('photo.jpg')
+           > print(num)
+           3450.5
+        """
+        byte_size = os.stat(file_name).st_size
+        return byte_size / 1024.0
 # ================================================================================
 # ================================================================================
 # eof
