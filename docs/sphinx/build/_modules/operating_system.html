@@ -449,7 +449,40 @@
 <span class="sd">           &gt; print(num)</span>
 <span class="sd">           4</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span></div></div>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span></div>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="OSUtilities.file_word_count"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.file_word_count">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">file_word_count</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param file_name: The file name to include the path link</span>
+<span class="sd">        :return words: The number of words in a file.  A word is defined</span>
+<span class="sd">                       as a continuous string of characters with no empty</span>
+<span class="sd">                       spaces in the string.</span>
+
+<span class="sd">        This function returns the number of words in an ASCII based document.</span>
+<span class="sd">        As an example lets assume the file listed below, titled ``test.txt``;</span>
+
+<span class="sd">        .. code-block:: text</span>
+
+<span class="sd">           This is a text file, all</span>
+<span class="sd">           of the information in this</span>
+<span class="sd">           file is specifically for</span>
+<span class="sd">           the purpose of testing file file</span>
+
+<span class="sd">        The following code will count the occurrence of the word ``file``</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">           &gt; num = util.file_word_count(&#39;test.txt&#39;)</span>
+<span class="sd">           &gt; print(num)</span>
+<span class="sd">           21</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">())</span></div></div>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># eof</span>

@@ -267,6 +267,24 @@ def test_determine_file_line_count():
         file = r'../data/test/text_file.txt'
     lines = util.file_line_count(file)
     assert lines == 4
+# ------------------------------------------------------------------------------
+
+
+def test_file_word_count():
+    """
+
+    This function tests the OSUtilities.file_word_count function to determine
+    if it can correctly determine the number of words in a file
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        file = '../data/test/text_file.txt'
+    else:
+        file = r'../data/test/text_file.txt'
+    words = util.file_word_count(file)
+    assert words == 21
 # ================================================================================
 # ================================================================================
  # eof

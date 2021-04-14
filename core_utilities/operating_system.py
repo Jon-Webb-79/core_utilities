@@ -415,6 +415,39 @@ class OSUtilities:
            4
         """
         return len(open(file_name).readlines())
+# ----------------------------------------------------------------------------
+
+    @classmethod
+    def file_word_count(cls, file_name: str) -> int:
+        """
+
+        :param file_name: The file name to include the path link
+        :return words: The number of words in a file.  A word is defined
+                       as a continuous string of characters with no empty
+                       spaces in the string.
+
+        This function returns the number of words in an ASCII based document.
+        As an example lets assume the file listed below, titled ``test.txt``;
+
+        .. code-block:: text
+
+           This is a text file, all
+           of the information in this
+           file is specifically for
+           the purpose of testing file file
+
+        The following code will count the occurrence of the word ``file``
+
+        .. code-block:: python
+
+           > num = util.file_word_count('test.txt')
+           > print(num)
+           21
+
+        """
+        file = open(file_name, "rt")
+        data = file.read()
+        return len(data.split())
 # ================================================================================
 # ================================================================================
 # eof
