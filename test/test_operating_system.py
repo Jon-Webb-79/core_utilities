@@ -310,6 +310,28 @@ def test_move_directory():
     assert os.path.isfile(file3)
     if os.path.isdir(file2):
         util.move_directory(file2, file1)
+# ------------------------------------------------------------------------------
+
+
+def test_move_file():
+    """
+
+    This function test the OSUtilities.move_file_or_directory function to ensure that it
+    successfully moves files between different locations
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        file1 = '../data/test/move_test.txt'
+        file2 = '../data/test/move_directory1/move_test2.txt'
+    else:
+        file1 = r'..\data\test\move_test.txt'
+        file2 = r'..\data\test\move_directory1\move_test2.txt'
+    util.move_file(file1, file2)
+    assert os.path.isfile(file2)
+    if os.path.isfile(file2):
+        util.move_file(file2, file1)
 # ================================================================================
 # ================================================================================
  # eof

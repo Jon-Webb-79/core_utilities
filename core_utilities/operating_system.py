@@ -497,6 +497,56 @@ class OSUtilities:
             print('{}{}'.format(destination, ' already exists'))
         else:
             shutil.move(source, destination)
+# ----------------------------------------------------------------------------
+
+    @classmethod
+    def move_file(cls, source: str, destination: str) -> None:
+        """
+
+        :param source: The name of the file being moved to include the
+                       path-link
+        :param destination: The name of the file at its new destination
+                            to include the path link
+        :return None:
+
+        This function will move a file to a new location and give it a
+        different or identical user define name.  The original file
+        and location will be deleted. As an example lets assume the
+        following directory structure;
+
+        .. code-block:: text
+
+           directory_1
+              |
+              text_file.txt
+              directory_2
+              directory_3
+                 |
+                 another_text_file.txt
+
+        The following command will create the updated directory structure.
+
+        .. code-block:: python
+
+           > util.move_file('text_file.txt', 'directory_2')
+
+        .. code-block:: text
+
+           directory_1
+              |
+              directory_2
+                 |
+                 text_file.txt
+              directory_3
+                 |
+                 another_text_file.txt
+        """
+        if not os.path.isfile(source):
+            print('{}{}'.format(source, ' does not exist'))
+        elif os.path.isfile(destination):
+            print('{}{}'.format(destination, ' already exists'))
+        else:
+            shutil.move(source, destination)
 # ================================================================================
 # ================================================================================
 # eof
