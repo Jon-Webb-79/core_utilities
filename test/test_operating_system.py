@@ -360,6 +360,33 @@ def test_list_contents():
     expected_result = ['test1.txt', 'test2.txt', 'test3.txt', 'test', 'test.py']
     for i in contents:
         assert i in expected_result
+# ------------------------------------------------------------------------------
+
+
+def test_copy_files_files():
+    """
+
+    This function tests the OSUtilities.copy_files function to ensure that it
+    correctly copies text file contents of a directory to a new directory
+    """
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        source = '../data/test/move_directory3'
+        destination = '../data/test/move_directory2'
+        file1 = '../data/test/move_directory2/test1.txt'
+        file2 = '../data/test/move_directory2/test2.txt'
+    else:
+        source = r'..\data\test\move_directory3'
+        destination = r'..\data\test\move_directory2'
+        file1 = r'..\data\test\move_directory2\test1.txt'
+        file2 = r'..\data\test\move_directory2\test2.txt'
+    util = OSUtilities()
+    util.copy_files(destination, source, '.txt')
+    assert os.path.isfile(file1)
+    assert os.path.isfile(file2)
+    os.remove(file1)
+    os.remove(file2)
 # ================================================================================
 # ================================================================================
  # eof

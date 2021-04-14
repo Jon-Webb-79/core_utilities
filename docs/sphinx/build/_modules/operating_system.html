@@ -612,7 +612,114 @@
             <span class="n">new_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">extension</span> <span class="ow">in</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="n">length</span><span class="p">:]]</span>
             <span class="k">return</span> <span class="n">new_data</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span></div></div>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span></div>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="OSUtilities.copy_files"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.copy_files">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">copy_files</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span>
+                   <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">,</span> <span class="n">dirs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param destination: The destination directory to include</span>
+<span class="sd">                            path-links</span>
+<span class="sd">        :param source: The source directory to include path-links,</span>
+<span class="sd">                       defaulted to current working directory</span>
+<span class="sd">        :param extension: Specific file extension to be copied.</span>
+<span class="sd">        :param dirs: `True` if user only wants to copy directories,</span>
+<span class="sd">                     `False` otherwise</span>
+
+<span class="sd">        :return None:</span>
+
+<span class="sd">        This function will copy all of the contents of a directory</span>
+<span class="sd">        to another directory, or all of a specific type of file to</span>
+<span class="sd">        another directory, or all directories to another directory.</span>
+<span class="sd">        As an example lets assume the following directory structure;</span>
+
+<span class="sd">        .. code-block:: text</span>
+
+<span class="sd">           directory_1</span>
+<span class="sd">              |</span>
+<span class="sd">              text_file.txt</span>
+<span class="sd">              directory_2</span>
+<span class="sd">              directory_3</span>
+<span class="sd">                 |</span>
+<span class="sd">                 another_text_file.txt</span>
+<span class="sd">                 more_data.doc</span>
+<span class="sd">                 new_dir</span>
+
+<span class="sd">        assuming we are in ``directory_3``</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">           &gt; # Copies everything</span>
+<span class="sd">           &gt; util.copy_files(&#39;../directory_2&#39;)</span>
+
+<span class="sd">        .. code-block:: text</span>
+
+<span class="sd">           directory_1</span>
+<span class="sd">              |</span>
+<span class="sd">              text_file.txt</span>
+<span class="sd">              directory_2</span>
+<span class="sd">                 |</span>
+<span class="sd">                 another_text_file.txt</span>
+<span class="sd">                 more_data.doc</span>
+<span class="sd">                 new_dir</span>
+<span class="sd">              directory_3</span>
+<span class="sd">                 |</span>
+<span class="sd">                 another_text_file.txt</span>
+<span class="sd">                 more_data.doc</span>
+<span class="sd">                 new_dir</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">           &gt; # Copies text files</span>
+<span class="sd">           &gt; util.copy_files(&#39;../directory_2&#39;, extension=&#39;.txt&#39;)</span>
+
+<span class="sd">        .. code-block:: text</span>
+
+<span class="sd">           directory_1</span>
+<span class="sd">              |</span>
+<span class="sd">              text_file.txt</span>
+<span class="sd">              directory_2</span>
+<span class="sd">                 |</span>
+<span class="sd">                 another_text_file.txt</span>
+<span class="sd">              directory_3</span>
+<span class="sd">                 |</span>
+<span class="sd">                 another_text_file.txt</span>
+<span class="sd">                 more_data.doc</span>
+<span class="sd">                 new_dir</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">           &gt; # Copies directories</span>
+<span class="sd">           &gt; util.copy_files(&#39;../directory_2&#39;, dirs=True)</span>
+
+<span class="sd">        .. code-block:: text</span>
+
+<span class="sd">           directory_1</span>
+<span class="sd">              |</span>
+<span class="sd">              text_file.txt</span>
+<span class="sd">              directory_2</span>
+<span class="sd">                 |</span>
+<span class="sd">                 new_dir</span>
+<span class="sd">              directory_3</span>
+<span class="sd">                 |</span>
+<span class="sd">                 another_text_file.txt</span>
+<span class="sd">                 more_data.doc</span>
+<span class="sd">                 new_dir</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">dirs</span> <span class="ow">and</span> <span class="n">extension</span> <span class="o">!=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;extension must be null when dirs is True&#39;</span><span class="p">))</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">OSUtilities</span><span class="o">.</span><span class="n">list_contents</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
+        <span class="n">directories</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">fls</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">dirs</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fls</span><span class="p">:</span>
+                <span class="n">src</span> <span class="o">=</span> <span class="n">source</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">i</span>
+                <span class="n">OSUtilities</span><span class="o">.</span><span class="n">copy_file</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">directories</span><span class="p">:</span>
+            <span class="n">src</span> <span class="o">=</span> <span class="n">source</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">j</span>
+            <span class="n">OSUtilities</span><span class="o">.</span><span class="n">copy_directory</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">destination</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span></div></div>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># eof</span>
