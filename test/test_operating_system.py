@@ -492,11 +492,48 @@ def test_directory_existence_not_verified():
     """
     util = OSUtilities()
     plat = platform.system()
-    if plat == 'Darwin':
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
         file = '../data/test/no_directory'
     else:
         file = r'..\data\test\no_directory'
     status = util.verify_directory_existence(file)
+    assert not status
+# ------------------------------------------------------------------------------
+
+
+def test_verify_file_existence():
+    """
+
+    This function tests the OSUtilities.verify_file_existence function to
+    ensure it can correctly identify that a file does exist
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        file = '../data/test/text_file.txt'
+    else:
+        file = r'..\data\test\text_file.txt'
+    status = util.verify_file_existence(file)
+    assert status
+# ------------------------------------------------------------------------------
+
+
+def test_file_existence_not_verified():
+    """
+
+    This function tests the OSUtilities.verify_file_existence function to
+    ensure that it can correctly identify when a file does not exist
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        file = '../data/test/no_text_file.txt'
+    else:
+        file = r'..\data\test\no_text_file.txt'
+    status = util.verify_file_existence(file)
     assert not status
 # ================================================================================
 # ================================================================================

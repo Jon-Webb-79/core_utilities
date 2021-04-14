@@ -804,6 +804,24 @@ class OSUtilities:
            True
         """
         return os.path.isdir(directory_name)
+# ----------------------------------------------------------------------------
+
+    @classmethod
+    def verify_file_existence(cls, file_name: str) -> bool:
+        """
+
+        :param file_name: The file name to include the path-link
+        :return status: True or false if the file does or does not
+                        exist
+
+        This function verifies whether or not a file exists
+
+        .. code-block:: python
+
+           > print(util.verify_file_existence('new_file.txt'))
+           False
+        """
+        return os.path.isfile(file_name)
 # ================================================================================
 # ================================================================================
 # eof
