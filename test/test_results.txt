@@ -2,25 +2,26 @@
 platform linux -- Python 3.9.2, pytest-6.2.3, py-1.10.0, pluggy-0.13.1 -- /home/jonwebb/Code_Dev/Python/core_utilities/.venv/bin/python3
 cachedir: .pytest_cache
 rootdir: /home/jonwebb/Code_Dev/Python/core_utilities
-collecting ... collected 17 items
+collecting ... collected 18 items
 
 test_operating_system.py::test_change_directory PASSED                   [  5%]
 test_operating_system.py::test_copy_directory PASSED                     [ 11%]
-test_operating_system.py::test_copy_file PASSED                          [ 17%]
-test_operating_system.py::test_count_word_occurrence PASSED              [ 23%]
-test_operating_system.py::test_create_directory PASSED                   [ 29%]
-test_operating_system.py::test_create_file PASSED                        [ 35%]
-test_operating_system.py::test_current_working_directory PASSED          [ 41%]
-test_operating_system.py::test_delete_directory PASSED                   [ 47%]
-test_operating_system.py::test_delete_file PASSED                        [ 52%]
-test_operating_system.py::test_remove_populated_directory PASSED         [ 58%]
-test_operating_system.py::test_determine_file_size PASSED                [ 64%]
-test_operating_system.py::test_determine_file_line_count PASSED          [ 70%]
-test_operating_system.py::test_file_word_count PASSED                    [ 76%]
-test_operating_system.py::test_move_directory PASSED                     [ 82%]
-test_operating_system.py::test_move_file PASSED                          [ 88%]
-test_operating_system.py::test_list_contents PASSED                      [ 94%]
-test_operating_system.py::test_copy_files_files PASSED                   [100%]
+test_operating_system.py::test_copy_file PASSED                          [ 16%]
+test_operating_system.py::test_count_word_occurrence PASSED              [ 22%]
+test_operating_system.py::test_create_directory PASSED                   [ 27%]
+test_operating_system.py::test_create_file PASSED                        [ 33%]
+test_operating_system.py::test_current_working_directory PASSED          [ 38%]
+test_operating_system.py::test_delete_directory PASSED                   [ 44%]
+test_operating_system.py::test_delete_file PASSED                        [ 50%]
+test_operating_system.py::test_remove_populated_directory PASSED         [ 55%]
+test_operating_system.py::test_determine_file_size PASSED                [ 61%]
+test_operating_system.py::test_determine_file_line_count PASSED          [ 66%]
+test_operating_system.py::test_file_word_count PASSED                    [ 72%]
+test_operating_system.py::test_move_directory PASSED                     [ 77%]
+test_operating_system.py::test_move_file PASSED                          [ 83%]
+test_operating_system.py::test_list_contents PASSED                      [ 88%]
+test_operating_system.py::test_copy_files_files PASSED                   [ 94%]
+test_operating_system.py::test_copy_files_dirs PASSED                    [100%]
 
-============================== 17 passed in 0.02s ==============================
-Tue Apr 13 08:09:40 PM MDT 2021
+============================== 18 passed in 0.02s ==============================
+Tue Apr 13 08:14:30 PM MDT 2021

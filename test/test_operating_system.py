@@ -387,6 +387,29 @@ def test_copy_files_files():
     assert os.path.isfile(file2)
     os.remove(file1)
     os.remove(file2)
+# ------------------------------------------------------------------------------
+
+
+def test_copy_files_dirs():
+    """
+
+    This function tests the OSUtilities.copy_files function to ensure that it
+    correctly copies all directories of a directory to a new directory
+    """
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        source = '../data/test/move_directory3'
+        destination = '../data/test/move_directory2'
+        direct = '../data/test/move_directory2/test'
+    else:
+        source = r'..\data\test\move_directory3'
+        destination = r'..\data\test\move_directory2'
+        direct = r'..\data\test\move_directory2/test'
+    util = OSUtilities()
+    util.copy_files(destination, source, dirs=True)
+    assert os.path.isdir(direct)
+    shutil.rmtree(direct)
 # ================================================================================
 # ================================================================================
  # eof
