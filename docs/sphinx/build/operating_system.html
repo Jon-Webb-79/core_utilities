@@ -620,6 +620,89 @@ following directory structure;</p>
 </div>
 </dd></dl>
 
+<dl class="py method">
+<dt id="operating_system.OSUtilities.move_files">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">move_files</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'/home/jonwebb/Code_Dev/Python/core_utilities/docs/sphinx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'NULL'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.move_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.move_files" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>destination</strong> – The destination directory to include
+path-links</p></li>
+<li><p><strong>source</strong> – The source directory to include path-links,
+defaulted to current working directory</p></li>
+<li><p><strong>extension</strong> – Specific file extension to be copied.</p></li>
+<li><p><strong>dirs</strong> – <cite>True</cite> if user only wants to copy directories,
+<cite>False</cite> otherwise</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p>This function will move all of the contents of a directory
+to another directory, or all of a specific type of file to
+another directory, or all directories to another directory
+As an example lets assume the following directory structure;</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
+   |
+   text_file.txt
+   directory_2
+   directory_3
+      |
+      another_text_file.txt
+      more_data.doc
+      new_dir
+</pre></div>
+</div>
+<p>assuming we are in <code class="docutils literal notranslate"><span class="pre">directory_3</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="c1"># Moves everything</span>
+<span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">move_files</span><span class="p">(</span><span class="s1">&#39;../directory_2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
+   |
+   text_file.txt
+   directory_2
+      |
+      another_text_file.txt
+      more_data.doc
+      new_dir
+   directory_3
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="c1"># Moves text files</span>
+<span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">move_files</span><span class="p">(</span><span class="s1">&#39;../directory_2&#39;</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="s1">&#39;.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
+   |
+   text_file.txt
+   directory_2
+      |
+      another_text_file.txt
+   directory_3
+      |
+      more_data.doc
+      new_dir
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="c1"># Moves directories</span>
+<span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">move_files</span><span class="p">(</span><span class="s1">&#39;../directory_2&#39;</span><span class="p">,</span> <span class="n">dirs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
+   |
+   text_file.txt
+   directory_2
+      |
+      new_dir
+   directory_3
+      |
+      another_text_file.txt
+      more_data.doc
+</pre></div>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </div>

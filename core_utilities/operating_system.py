@@ -685,6 +685,107 @@ class OSUtilities:
         for j in directories:
             src = source + "/" + j
             OSUtilities.copy_directory(src, destination + "/" + j)
+# ----------------------------------------------------------------------------
+
+    @classmethod
+    def move_files(cls, destination: str, source: str = os.getcwd(),
+                   extension: str = 'NULL', dirs: bool = False) -> None:
+        """
+
+        :param destination: The destination directory to include
+                            path-links
+        :param source: The source directory to include path-links,
+                       defaulted to current working directory
+        :param extension: Specific file extension to be copied.
+        :param dirs: `True` if user only wants to copy directories,
+                     `False` otherwise
+
+        :return None:
+
+        This function will move all of the contents of a directory
+        to another directory, or all of a specific type of file to
+        another directory, or all directories to another directory
+        As an example lets assume the following directory structure;
+
+        .. code-block:: text
+
+           directory_1
+              |
+              text_file.txt
+              directory_2
+              directory_3
+                 |
+                 another_text_file.txt
+                 more_data.doc
+                 new_dir
+
+        assuming we are in ``directory_3``
+
+        .. code-block:: python
+
+           > # Moves everything
+           > util.move_files('../directory_2')
+
+        .. code-block:: text
+
+           directory_1
+              |
+              text_file.txt
+              directory_2
+                 |
+                 another_text_file.txt
+                 more_data.doc
+                 new_dir
+              directory_3
+
+        .. code-block:: python
+
+           > # Moves text files
+           > util.move_files('../directory_2', extension='.txt')
+
+        .. code-block:: text
+
+           directory_1
+              |
+              text_file.txt
+              directory_2
+                 |
+                 another_text_file.txt
+              directory_3
+                 |
+                 more_data.doc
+                 new_dir
+
+        .. code-block:: python
+
+           > # Moves directories
+           > util.move_files('../directory_2', dirs=True)
+
+        .. code-block:: text
+
+           directory_1
+              |
+              text_file.txt
+              directory_2
+                 |
+                 new_dir
+              directory_3
+                 |
+                 another_text_file.txt
+                 more_data.doc
+        """
+        if dirs and extension != 'NULL':
+            print('{}'.format('extension must be null when dirs is True'))
+        files = OSUtilities.list_contents(source, extension)
+        directories = [i for i in files if '.' not in i]
+        fls = [i for i in files if '.' in i]
+        if not dirs:
+            for i in fls:
+                src = source + "/" + i
+                OSUtilities.move_file(src, destination)
+        for j in directories:
+            src = source + "/" + j
+            OSUtilities.move_directory(src, destination + "/" + j)
 # ================================================================================
 # ================================================================================
 # eof

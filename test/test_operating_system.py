@@ -410,6 +410,59 @@ def test_copy_files_dirs():
     util.copy_files(destination, source, dirs=True)
     assert os.path.isdir(direct)
     shutil.rmtree(direct)
+# ------------------------------------------------------------------------------
+
+
+def test_move_files_everything():
+    """
+
+    This function tests the OSUtilities.move_files function to ensure that it
+    correctly moves all contents of a directory to a new directory
+    """
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        source = '../data/test/move_directory3'
+        destination = '../data/test/move_directory2'
+        direct = '../data/test/move_directory2/test'
+        file1 = '../data/test/move_directory2/test1.txt'
+        file2 = '../data/test/move_directory2/test2.txt'
+    else:
+        source = r'..\data\test\move_directory3'
+        destination = r'..\data\test\move_directory2'
+        direct = r'..\data\test\move_directory2\test'
+        file1 = r'..\data\test\move_directory2\test1.txt'
+        file2 = r'..\data\test\move_directory2\test2.txt'
+
+    util = OSUtilities()
+    util.move_files(destination, source)
+    assert os.path.isfile(file1)
+    assert os.path.isfile(file2)
+    assert os.path.isdir(direct)
+    util.move_files(source, destination)
+# ------------------------------------------------------------------------------
+
+
+def test_move_files_dirs():
+    """
+
+    This function tests the OSUtilities.copy_files function to ensure that it
+    correctly moves all directories of a directory to a new directory
+    """
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        source = '../data/test/move_directory3'
+        destination = '../data/test/move_directory2'
+        direct = '../data/test/move_directory2/test'
+    else:
+        source = r'..\data\test\move_directory3'
+        destination = r'..\data\test\move_directory2'
+        direct = r'..\data\test\move_directory2\test'
+    util = OSUtilities()
+    util.move_files(destination, source, dirs=True)
+    assert os.path.isdir(direct)
+    util.move_files(source, destination, dirs=True)
 # ================================================================================
 # ================================================================================
  # eof
