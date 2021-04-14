@@ -332,6 +332,34 @@ def test_move_file():
     assert os.path.isfile(file2)
     if os.path.isfile(file2):
         util.move_file(file2, file1)
+# ------------------------------------------------------------------------------
+
+
+def test_list_contents():
+    """
+    This function tests the OSUtilities.list_contents function to ensure it returns the
+    correct files and directories
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        directory = '../data/test/list_dir'
+    else:
+        directory = r'..\data\test\list_dir'
+    contents = util.list_contents(directory=directory, extension='.py')
+    assert 'test.py' in contents
+
+    contents = util.list_contents(directory=directory, extension='.txt')
+    expected_result = ['test1.txt', 'test2.txt', 'test3.txt']
+    for i in contents:
+        assert i in expected_result
+
+    contents = util.list_contents(directory=directory)
+    expected_result = ['test1.txt', 'test2.txt', 'test3.txt', 'test', 'test.py']
+    for i in contents:
+        assert i in expected_result
 # ================================================================================
 # ================================================================================
  # eof

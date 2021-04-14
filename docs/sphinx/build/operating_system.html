@@ -421,6 +421,30 @@ the purpose of testing file file
 </dd></dl>
 
 <dl class="py method">
+<dt id="operating_system.OSUtilities.list_contents">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">list_contents</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'NULL'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.list_contents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.list_contents" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> – The directory where the contents are
+desired</p></li>
+<li><p><strong>extension</strong> – A file extension such as <cite>.txt</cite> or <cite>.csv</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p>This function will return a list containing the contents of
+a specific directory.  The user can enter the directory of
+interest or default to the current working directory.  The
+user can also specify the type of file they wish listed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">list_contents</span><span class="p">())</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="s1">&#39;Files&#39;</span><span class="p">,</span> <span class="s1">&#39;Code_Dev&#39;</span><span class="p">,</span> <span class="s1">&#39;word_document.doc&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt id="operating_system.OSUtilities.move_directory">
 <em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">move_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.move_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.move_directory" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
