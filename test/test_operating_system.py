@@ -463,6 +463,41 @@ def test_move_files_dirs():
     util.move_files(destination, source, dirs=True)
     assert os.path.isdir(direct)
     util.move_files(source, destination, dirs=True)
+# ------------------------------------------------------------------------------
+
+
+def test_verify_directory_existence():
+    """
+
+    This function tests the OSUtilities.verify_directory_existence function to
+    ensure it can correctly identify that a file does exist
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    lin_plat = ['Darwin', 'Linux']
+    if plat in lin_plat:
+        file = '../data/test/test_directory'
+    else:
+        file = r'..\data\test\test_directory'
+    status = util.verify_directory_existence(file)
+    assert status
+# ------------------------------------------------------------------------------
+
+
+def test_directory_existence_not_verified():
+    """
+
+    This function tests the OSUtilities.verify_directory_existence function to
+    ensure it can correctly identify that a file does exist
+    """
+    util = OSUtilities()
+    plat = platform.system()
+    if plat == 'Darwin':
+        file = '../data/test/no_directory'
+    else:
+        file = r'..\data\test\no_directory'
+    status = util.verify_directory_existence(file)
+    assert not status
 # ================================================================================
 # ================================================================================
  # eof

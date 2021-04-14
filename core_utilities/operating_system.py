@@ -786,6 +786,24 @@ class OSUtilities:
         for j in directories:
             src = source + "/" + j
             OSUtilities.move_directory(src, destination + "/" + j)
+# ----------------------------------------------------------------------------
+
+    @classmethod
+    def verify_directory_existence(cls, directory_name: str) -> bool:
+        """
+
+        :param directory_name: The directory name to include the path-link
+        :return status: True or false if the directory does or does not
+                        exist
+
+        This function verifies whether or not a directory exists.
+
+        .. code-block:: python
+
+           > print(util.verify_directory_existence('directory'))
+           True
+        """
+        return os.path.isdir(directory_name)
 # ================================================================================
 # ================================================================================
 # eof

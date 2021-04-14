@@ -820,7 +820,25 @@
                 <span class="n">OSUtilities</span><span class="o">.</span><span class="n">move_file</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">directories</span><span class="p">:</span>
             <span class="n">src</span> <span class="o">=</span> <span class="n">source</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">j</span>
-            <span class="n">OSUtilities</span><span class="o">.</span><span class="n">move_directory</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">destination</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span></div></div>
+            <span class="n">OSUtilities</span><span class="o">.</span><span class="n">move_directory</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">destination</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span></div>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="OSUtilities.verify_directory_existence"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.verify_directory_existence">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">verify_directory_existence</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param directory_name: The directory name to include the path-link</span>
+<span class="sd">        :return status: True or false if the directory does or does not</span>
+<span class="sd">                        exist</span>
+
+<span class="sd">        This function verifies whether or not a directory exists.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">           &gt; print(util.verify_directory_existence(&#39;directory&#39;))</span>
+<span class="sd">           True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">)</span></div></div>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># eof</span>
