@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OSUtilities &#8212; Core Utilities 0.1.0 documentation</title>
+    <title>operating_system &#8212; Core Utilities 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -26,7 +26,7 @@
           <a href="Introduction.html" title="Introduction"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Core Utilities 0.1.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">OSUtilities</a></li> 
+        <li class="nav-item nav-item-this"><a href="">operating_system</a></li> 
       </ul>
     </div>  
 
@@ -35,30 +35,20 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="osutilities">
-<h1>OSUtilities<a class="headerlink" href="#osutilities" title="Permalink to this headline">¶</a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">OSUtilities</span></code> class is stored in the <code class="docutils literal notranslate"><span class="pre">operating_system</span></code> package.  This
-class contains many functions that allow a user to access comman line features
-from the Python console or from a Python script encoded to a text file.  This class is
-written with class methods that simplify or augment many of the utilities offered in
+  <div class="section" id="operating-system">
+<h1>operating_system<a class="headerlink" href="#operating-system" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">operating_system</span></code> module contains methods that allow a user to access common functions
+from the Python console or from a Python script to enable file reading, plotting, and also
+provides a Command Line Interface (CLI) for the Python interpreter. These functions are
+to simplify or augment many of the utilities offered in
 <a class="reference external" href="https://docs.python.org/3/library/os.html">os</a> and <a class="reference external" href="https://docs.python.org/3/library/sys.html">sys</a> packages</p>
-<dl class="py class">
-<dt id="operating_system.OSUtilities">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">OSUtilities</span></code><a class="reference internal" href="_modules/operating_system.html#OSUtilities"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities" title="Permalink to this definition">¶</a></dt>
-<dd><p>This set of functions were written as class methods in order
-to ensure that they can be passed in bulk via decorator patters
-or through inheritance.  This class provides file analysis
-capabilities and a user interface for file and directory management
-similar to Bash and DOS functionality, although with different
-syntax</p>
-<p>All code examples are predicated on the instantiation of this class
-with the following command</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">util</span> <span class="o">=</span> <span class="n">OSUtilities</span><span class="p">()</span>
+<p>The operating_system module contains the following functions</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="kn">from</span> <span class="nn">core_utilities</span> <span class="kn">import</span> <span class="n">operating_system</span> <span class="k">as</span> <span class="n">util</span>
 </pre></div>
 </div>
-<dl class="py method">
-<dt id="operating_system.OSUtilities.change_directory">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">change_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_directory</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.change_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.change_directory" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.change_directory">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">change_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_directory</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#change_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.change_directory" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>new_directory</strong> – The desired directory to include
@@ -89,9 +79,9 @@ command;</p>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.copy_directory">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">copy_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.copy_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.copy_directory" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.copy_directory">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">copy_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#copy_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.copy_directory" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -128,9 +118,9 @@ we are in the <code class="docutils literal notranslate"><span class="pre">direc
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.copy_file">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">copy_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.copy_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.copy_file" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.copy_file">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">copy_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#copy_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.copy_file" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -165,98 +155,9 @@ we are in the <code class="docutils literal notranslate"><span class="pre">direc
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.copy_files">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">copy_files</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'/home/jonwebb/Code_Dev/Python/core_utilities/docs/sphinx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'NULL'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.copy_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.copy_files" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>destination</strong> – The destination directory to include
-path-links</p></li>
-<li><p><strong>source</strong> – The source directory to include path-links,
-defaulted to current working directory</p></li>
-<li><p><strong>extension</strong> – Specific file extension to be copied.</p></li>
-<li><p><strong>dirs</strong> – <cite>True</cite> if user only wants to copy directories,
-<cite>False</cite> otherwise</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return None</dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<p>This function will copy all of the contents of a directory
-to another directory, or all of a specific type of file to
-another directory, or all directories to another directory.
-As an example lets assume the following directory structure;</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
-   |
-   text_file.txt
-   directory_2
-   directory_3
-      |
-      another_text_file.txt
-      more_data.doc
-      new_dir
-</pre></div>
-</div>
-<p>assuming we are in <code class="docutils literal notranslate"><span class="pre">directory_3</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="c1"># Copies everything</span>
-<span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">copy_files</span><span class="p">(</span><span class="s1">&#39;../directory_2&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
-   |
-   text_file.txt
-   directory_2
-      |
-      another_text_file.txt
-      more_data.doc
-      new_dir
-   directory_3
-      |
-      another_text_file.txt
-      more_data.doc
-      new_dir
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="c1"># Copies text files</span>
-<span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">copy_files</span><span class="p">(</span><span class="s1">&#39;../directory_2&#39;</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="s1">&#39;.txt&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
-   |
-   text_file.txt
-   directory_2
-      |
-      another_text_file.txt
-   directory_3
-      |
-      another_text_file.txt
-      more_data.doc
-      new_dir
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="c1"># Copies directories</span>
-<span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">copy_files</span><span class="p">(</span><span class="s1">&#39;../directory_2&#39;</span><span class="p">,</span> <span class="n">dirs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
-   |
-   text_file.txt
-   directory_2
-      |
-      new_dir
-   directory_3
-      |
-      another_text_file.txt
-      more_data.doc
-      new_dir
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="operating_system.OSUtilities.count_occurrence_of_word_in_file">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">count_occurrence_of_word_in_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.count_occurrence_of_word_in_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.count_occurrence_of_word_in_file" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.count_occurrence_of_word_in_file">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">count_occurrence_of_word_in_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="_modules/operating_system.html#count_occurrence_of_word_in_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.count_occurrence_of_word_in_file" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -290,9 +191,9 @@ the purpose of testing file file
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.create_directory">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">create_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.create_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.create_directory" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.create_directory">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">create_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#create_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.create_directory" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>directory_name</strong> – The name of the directory to be created
@@ -306,14 +207,14 @@ to include the path-link</p>
 <span class="p">[</span><span class="s1">&#39;data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;document.doc&#39;</span><span class="p">]</span>
 <span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">create_directory</span><span class="p">(</span><span class="s1">&#39;new_directory&#39;</span><span class="p">)</span>
 <span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">list_contents</span><span class="p">())</span>
-<span class="p">[</span><span class="s1">&#39;data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;document.doc&#39;</span><span class="p">,</span> <span class="s1">&#39;new_directory&#39;</span><span class="p">]</span>
+    <span class="p">[</span><span class="s1">&#39;data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;document.doc&#39;</span><span class="p">,</span> <span class="s1">&#39;new_directory&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.create_file">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">create_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.create_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.create_file" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.create_file">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">create_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#create_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.create_file" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>file_name</strong> – The name of the file to be created to
@@ -328,14 +229,14 @@ command in Linux.</p>
 <span class="p">[</span><span class="s1">&#39;data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;document.doc&#39;</span><span class="p">]</span>
 <span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">create_file</span><span class="p">(</span><span class="s1">&#39;new_text.txt&#39;</span><span class="p">)</span>
 <span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">list_contents</span><span class="p">())</span>
-<span class="p">[</span><span class="s1">&#39;data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;document.doc&#39;</span><span class="p">,</span> <span class="s1">&#39;new_text.txt&#39;</span><span class="p">]</span>
+    <span class="p">[</span><span class="s1">&#39;data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;document.doc&#39;</span><span class="p">,</span> <span class="s1">&#39;new_text.txt&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.current_working_directory">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">current_working_directory</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.current_working_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.current_working_directory" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.current_working_directory">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">current_working_directory</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="reference internal" href="_modules/operating_system.html#current_working_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.current_working_directory" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return cwd</dt>
 <dd class="field-odd"><p>A string describing the current working directory</p>
@@ -349,9 +250,9 @@ working directory.</p>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.delete_directory">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">delete_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.delete_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.delete_directory" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.delete_directory">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">delete_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#delete_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.delete_directory" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>directory_name</strong> – The name of the directory to be deleted to
@@ -380,9 +281,9 @@ an example lets assume the following directory structure;</p>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.delete_file">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">delete_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.delete_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.delete_file" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.delete_file">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">delete_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#delete_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.delete_file" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>file_name</strong> – The name of the file to be deleted to include
@@ -401,9 +302,9 @@ the path link</p>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.delete_populated_directory">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">delete_populated_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.delete_populated_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.delete_populated_directory" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.delete_populated_directory">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">delete_populated_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#delete_populated_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.delete_populated_directory" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>directory_name</strong> – The name of the directory to be deleted to
@@ -433,9 +334,9 @@ directory structure;</p>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.determine_file_size">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">determine_file_size</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.determine_file_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.determine_file_size" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.determine_file_size">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">determine_file_size</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="reference internal" href="_modules/operating_system.html#determine_file_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.determine_file_size" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>file_name</strong> – The file name to include path length</p>
@@ -452,9 +353,9 @@ directory structure;</p>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.file_line_count">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">file_line_count</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.file_line_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.file_line_count" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.file_line_count">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">file_line_count</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="_modules/operating_system.html#file_line_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.file_line_count" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>file_name</strong> – The file name to include the path-link</p>
@@ -480,9 +381,9 @@ the purpose of testing file file
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.file_word_count">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">file_word_count</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.file_word_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.file_word_count" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.file_word_count">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">file_word_count</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="_modules/operating_system.html#file_word_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.file_word_count" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>file_name</strong> – The file name to include the path link</p>
@@ -509,33 +410,9 @@ the purpose of testing file file
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.list_contents">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">list_contents</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'NULL'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.list_contents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.list_contents" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>directory</strong> – The directory where the contents are
-desired</p></li>
-<li><p><strong>extension</strong> – A file extension such as <cite>.txt</cite> or <cite>.csv</cite></p></li>
-</ul>
-</dd>
-<dt class="field-even">Return None</dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<p>This function will return a list containing the contents of
-a specific directory.  The user can enter the directory of
-interest or default to the current working directory.  The
-user can also specify the type of file they wish listed.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">list_contents</span><span class="p">())</span>
-<span class="o">&gt;</span> <span class="p">[</span><span class="s1">&#39;Files&#39;</span><span class="p">,</span> <span class="s1">&#39;Code_Dev&#39;</span><span class="p">,</span> <span class="s1">&#39;word_document.doc&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="operating_system.OSUtilities.move_directory">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">move_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.move_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.move_directory" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.move_directory">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">move_directory</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#move_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.move_directory" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -576,9 +453,9 @@ following directory structure;</p>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.move_file">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">move_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.move_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.move_file" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.move_file">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">move_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#move_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.move_file" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -613,16 +490,129 @@ following directory structure;</p>
    directory_2
       |
       text_file.txt
-   directory_3
-      |
-      another_text_file.txt
+      directory_3
+         |
+         another_text_file.txt
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.move_files">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">move_files</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'/home/jonwebb/Code_Dev/Python/core_utilities/docs/sphinx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'NULL'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.move_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.move_files" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.list_contents">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">list_contents</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'NULL'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/operating_system.html#list_contents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.list_contents" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> – The directory where the contents are
+desired</p></li>
+<li><p><strong>extension</strong> – A file extension such as <cite>.txt</cite> or <cite>.csv</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p>This function will return a list containing the contents of
+a specific directory.  The user can enter the directory of
+interest or default to the current working directory.  The
+user can also specify the type of file they wish listed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">list_contents</span><span class="p">())</span>
+<span class="o">&gt;</span> <span class="p">[</span><span class="s1">&#39;Files&#39;</span><span class="p">,</span> <span class="s1">&#39;Code_Dev&#39;</span><span class="p">,</span> <span class="s1">&#39;word_document.doc&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="operating_system.copy_files">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">copy_files</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'/home/jonwebb/Code_Dev/Python/core_utilities/docs/sphinx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'NULL'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#copy_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.copy_files" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>destination</strong> – The destination directory to include
+path-links</p></li>
+<li><p><strong>source</strong> – The source directory to include path-links,
+defaulted to current working directory</p></li>
+<li><p><strong>extension</strong> – Specific file extension to be copied.</p></li>
+<li><p><strong>dirs</strong> – <cite>True</cite> if user only wants to copy directories,
+<cite>False</cite> otherwise</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<p>This function will copy all of the contents of a directory
+to another directory, or all of a specific type of file to
+another directory, or all directories to another directory.
+As an example lets assume the following directory structure;</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
+   |
+   text_file.txt
+   directory_2
+   directory_3
+      |
+      another_text_file.txt
+      more_data.doc
+      new_dir
+</pre></div>
+</div>
+<p>assuming we are in <code class="docutils literal notranslate"><span class="pre">directory_3</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="c1"># Copies everything</span>
+<span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">copy_files</span><span class="p">(</span><span class="s1">&#39;../directory_2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
+   |
+   text_file.txt
+  directory_2
+     |
+     another_text_file.txt
+     more_data.doc
+     new_dir
+     directory_3
+        |
+        another_text_file.txt
+        more_data.doc
+        new_dir
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="c1"># Copies text files</span>
+<span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">copy_files</span><span class="p">(</span><span class="s1">&#39;../directory_2&#39;</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="s1">&#39;.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
+   |
+   text_file.txt
+   directory_2
+      |
+      another_text_file.txt
+      directory_3
+         |
+         another_text_file.txt
+         more_data.doc
+         new_dir
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="c1"># Copies directories</span>
+<span class="o">&gt;</span> <span class="n">util</span><span class="o">.</span><span class="n">copy_files</span><span class="p">(</span><span class="s1">&#39;../directory_2&#39;</span><span class="p">,</span> <span class="n">dirs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>directory_1
+   |
+   text_file.txt
+   directory_2
+      |
+      new_dir
+      directory_3
+         |
+         another_text_file.txt
+         more_data.doc
+         new_dir
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="operating_system.move_files">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">move_files</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destination</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'/home/jonwebb/Code_Dev/Python/core_utilities/docs/sphinx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'NULL'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/operating_system.html#move_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.move_files" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -666,7 +656,7 @@ As an example lets assume the following directory structure;</p>
       another_text_file.txt
       more_data.doc
       new_dir
-   directory_3
+      directory_3
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="c1"># Moves text files</span>
@@ -679,10 +669,10 @@ As an example lets assume the following directory structure;</p>
    directory_2
       |
       another_text_file.txt
-   directory_3
-      |
-      more_data.doc
-      new_dir
+      directory_3
+         |
+         more_data.doc
+         new_dir
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="c1"># Moves directories</span>
@@ -695,17 +685,17 @@ As an example lets assume the following directory structure;</p>
    directory_2
       |
       new_dir
-   directory_3
-      |
-      another_text_file.txt
-      more_data.doc
+      directory_3
+         |
+         another_text_file.txt
+         more_data.doc
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.verify_directory_existence">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">verify_directory_existence</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">bool</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.verify_directory_existence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.verify_directory_existence" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.verify_directory_existence">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">verify_directory_existence</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">bool</span><a class="reference internal" href="_modules/operating_system.html#verify_directory_existence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.verify_directory_existence" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>directory_name</strong> – The directory name to include the path-link</p>
@@ -722,9 +712,9 @@ exist</p>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="operating_system.OSUtilities.verify_file_existence">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">verify_file_existence</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">bool</span><a class="reference internal" href="_modules/operating_system.html#OSUtilities.verify_file_existence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.OSUtilities.verify_file_existence" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="operating_system.verify_file_existence">
+<code class="sig-prename descclassname"><span class="pre">operating_system.</span></code><code class="sig-name descname"><span class="pre">verify_file_existence</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">bool</span><a class="reference internal" href="_modules/operating_system.html#verify_file_existence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#operating_system.verify_file_existence" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>file_name</strong> – The file name to include the path-link</p>
@@ -739,8 +729,6 @@ exist</p>
 <span class="kc">False</span>
 </pre></div>
 </div>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -786,7 +774,7 @@ exist</p>
           <a href="Introduction.html" title="Introduction"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Core Utilities 0.1.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">OSUtilities</a></li> 
+        <li class="nav-item nav-item-this"><a href="">operating_system</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

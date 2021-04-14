@@ -52,811 +52,800 @@
 <span class="c1"># Insert Code here</span>
 
 
-<div class="viewcode-block" id="OSUtilities"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities">[docs]</a><span class="k">class</span> <span class="nc">OSUtilities</span><span class="p">:</span>
+
+<div class="viewcode-block" id="change_directory"><a class="viewcode-back" href="../operating_system.html#operating_system.change_directory">[docs]</a><span class="k">def</span> <span class="nf">change_directory</span><span class="p">(</span><span class="n">new_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">    This set of functions were written as class methods in order</span>
-<span class="sd">    to ensure that they can be passed in bulk via decorator patters</span>
-<span class="sd">    or through inheritance.  This class provides file analysis</span>
-<span class="sd">    capabilities and a user interface for file and directory management</span>
-<span class="sd">    similar to Bash and DOS functionality, although with different</span>
-<span class="sd">    syntax</span>
+<span class="sd">    :param new_directory: The desired directory to include</span>
+<span class="sd">                          path link</span>
+<span class="sd">    :return None:</span>
 
-<span class="sd">    All code examples are predicated on the instantiation of this class</span>
-<span class="sd">    with the following command</span>
+<span class="sd">    This function will change the directory in the same manner as</span>
+<span class="sd">    the `cd` DOS and Linux command.  For example, if you are</span>
+<span class="sd">    in the `dir1` directory within the following chain;</span>
+
+<span class="sd">    `home/dir1/dir2/`</span>
+
+<span class="sd">    You can use the following python script to change to the `dir2`</span>
+<span class="sd">    directory.</span>
 
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">       &gt; util = OSUtilities()</span>
+<span class="sd">       &gt; print(util.current_working_directory())</span>
+<span class="sd">       &#39;/home/dir1&#39;</span>
+<span class="sd">       &gt; util.change_directory(&#39;dir2&#39;)</span>
+<span class="sd">       &gt; print(util.current_working_directory())</span>
+<span class="sd">       &#39;/home/dir1/dir2&#39;</span>
+
+<span class="sd">    You can change back to the `home` directory with the following</span>
+<span class="sd">    command;</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       &gt; util.change_directory(&#39;../..&#39;)</span>
+<span class="sd">       &gt; print(util.current_working_directory())</span>
+<span class="sd">       &#39;/home&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="OSUtilities.change_directory"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.change_directory">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">change_directory</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">new_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="c1">#.. code-block:: python</span>
 
-<span class="sd">        :param new_directory: The desired directory to include</span>
-<span class="sd">                              path link</span>
-<span class="sd">        :return None:</span>
-
-<span class="sd">        This function will change the directory in the same manner as</span>
-<span class="sd">        the `cd` DOS and Linux command.  For example, if you are</span>
-<span class="sd">        in the `dir1` directory within the following chain;</span>
-
-<span class="sd">        `home/dir1/dir2/`</span>
-
-<span class="sd">        You can use the following python script to change to the `dir2`</span>
-<span class="sd">        directory.</span>
-
-<span class="sd">        .. code-block:: python</span>
-
-<span class="sd">           &gt; print(util.current_working_directory())</span>
-<span class="sd">           &#39;/home/dir1&#39;</span>
-<span class="sd">           &gt; util.change_directory(&#39;dir2&#39;)</span>
-<span class="sd">           &gt; print(util.current_working_directory())</span>
-<span class="sd">           &#39;/home/dir1/dir2&#39;</span>
-
-<span class="sd">        You can change back to the `home` directory with the following</span>
-<span class="sd">        command;</span>
-
-<span class="sd">        .. code-block:: python</span>
-
-<span class="sd">           &gt; util.change_directory(&#39;../..&#39;)</span>
-<span class="sd">           &gt; print(util.current_working_directory())</span>
-<span class="sd">           &#39;/home&#39;</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">new_directory</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_directory</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">new_directory</span><span class="p">)</span></div>
-<span class="c1"># --------------------------------------------------------------------------------</span>
-
-<div class="viewcode-block" id="OSUtilities.copy_directory"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.copy_directory">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">copy_directory</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        :param source: The name and path-link of the directory to</span>
-<span class="sd">                       be copied</span>
-<span class="sd">        :param destination: The name and path-link for the directory</span>
-<span class="sd">                            copy</span>
-<span class="sd">        :return None:</span>
-
-<span class="sd">        This function creates a copy of a directory and assigns</span>
-<span class="sd">        it to the directory of the users choosing.  This function</span>
-<span class="sd">        will copy populated and un-populated directories.  As</span>
-<span class="sd">        an example lets assume the following directory structure;</span>
-
-<span class="sd">        .. code-block:: text</span>
-
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_2</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
-
-<span class="sd">        The following command will make  copy of ``directory_2`` in</span>
-<span class="sd">        the ``directory_3`` titled ``dir2_copy``, directory assuming</span>
-<span class="sd">        we are in the ``directory_1`` directory</span>
-
-<span class="sd">        .. code-block:: python</span>
-
-<span class="sd">           &gt; copy_directory(&#39;directory_2&#39;, &#39;directory_3/dir2_copy&#39;)</span>
-<span class="sd">           &gt; change_directory(&#39;directory_3&#39;)</span>
-<span class="sd">           &gt; print(list_contents())</span>
-<span class="sd">           [&#39;&#39;another_text_file.txt&#39;, &#39;dir2_copy&#39;]</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s1">&#39; already exists&#39;</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span></div>
+    <span class="c1">#   &gt; print(util.current_working_directory())</span>
+    <span class="c1">#   &#39;/home/dir1&#39;</span>
+    <span class="c1">#   &gt; util.change_directory(&#39;dir2&#39;)</span>
+    <span class="c1">#   &gt; print(util.current_working_directory())</span>
+    <span class="c1">#   &#39;/home/dir1/dir2&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">new_directory</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_directory</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">new_directory</span><span class="p">)</span></div>
 <span class="c1"># --------------------------------------------------------------------------------</span>
 
 
-<div class="viewcode-block" id="OSUtilities.copy_file"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.copy_file">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">copy_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param source: The name and path-link of the file to be</span>
-<span class="sd">                       copied</span>
-<span class="sd">        :param destination: The name and path-link for the file copy</span>
-<span class="sd">        :return None:</span>
+<div class="viewcode-block" id="copy_directory"><a class="viewcode-back" href="../operating_system.html#operating_system.copy_directory">[docs]</a><span class="k">def</span> <span class="nf">copy_directory</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        This function creates a copy of a file and assigns it to the</span>
-<span class="sd">        name and directory of the users choosing.  As</span>
-<span class="sd">        an example lets assume the following directory structure;</span>
+<span class="sd">    :param source: The name and path-link of the directory to</span>
+<span class="sd">                   be copied</span>
+<span class="sd">    :param destination: The name and path-link for the directory</span>
+<span class="sd">                        copy</span>
+<span class="sd">    :return None:</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    This function creates a copy of a directory and assigns</span>
+<span class="sd">    it to the directory of the users choosing.  This function</span>
+<span class="sd">    will copy populated and un-populated directories.  As</span>
+<span class="sd">    an example lets assume the following directory structure;</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_2</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">        The following command will make  copy of ``text_file.txt`` in</span>
-<span class="sd">        the ``directory_3`` titled ``text_copy.txt``, directory assuming</span>
-<span class="sd">        we are in the ``directory_1`` directory</span>
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">          directory_2</span>
+<span class="sd">          directory_3</span>
+<span class="sd">             |</span>
+<span class="sd">             another_text_file.txt</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    The following command will make  copy of ``directory_2`` in</span>
+<span class="sd">    the ``directory_3`` titled ``dir2_copy``, directory assuming</span>
+<span class="sd">    we are in the ``directory_1`` directory</span>
 
-<span class="sd">           &gt; copy_file(&#39;text_file.txt&#39;, &#39;directory_3/text_copy.txt&#39;)</span>
-<span class="sd">           &gt; change_directory(&#39;directory_3&#39;)</span>
-<span class="sd">           &gt; print(list_contents())</span>
-<span class="sd">           [&#39;&#39;another_text_file.txt&#39;, &#39;text_copy.txt&#39;]</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s1">&#39; already exists&#39;</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span></div>
+<span class="sd">       &gt; copy_directory(&#39;directory_2&#39;, &#39;directory_3/dir2_copy&#39;)</span>
+<span class="sd">       &gt; change_directory(&#39;directory_3&#39;)</span>
+<span class="sd">       &gt; print(list_contents())</span>
+<span class="sd">       [&#39;&#39;another_text_file.txt&#39;, &#39;dir2_copy&#39;]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s1">&#39; already exists&#39;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span></div>
+<span class="c1"># --------------------------------------------------------------------------------</span>
+
+
+
+<div class="viewcode-block" id="copy_file"><a class="viewcode-back" href="../operating_system.html#operating_system.copy_file">[docs]</a><span class="k">def</span> <span class="nf">copy_file</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param source: The name and path-link of the file to be</span>
+<span class="sd">                   copied</span>
+<span class="sd">    :param destination: The name and path-link for the file copy</span>
+<span class="sd">    :return None:</span>
+
+<span class="sd">    This function creates a copy of a file and assigns it to the</span>
+<span class="sd">    name and directory of the users choosing.  As</span>
+<span class="sd">    an example lets assume the following directory structure;</span>
+
+<span class="sd">    .. code-block:: text</span>
+
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">          directory_2</span>
+<span class="sd">          directory_3</span>
+<span class="sd">             |</span>
+<span class="sd">             another_text_file.txt</span>
+
+<span class="sd">    The following command will make  copy of ``text_file.txt`` in</span>
+<span class="sd">    the ``directory_3`` titled ``text_copy.txt``, directory assuming</span>
+<span class="sd">    we are in the ``directory_1`` directory</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       &gt; copy_file(&#39;text_file.txt&#39;, &#39;directory_3/text_copy.txt&#39;)</span>
+<span class="sd">       &gt; change_directory(&#39;directory_3&#39;)</span>
+<span class="sd">       &gt; print(list_contents())</span>
+<span class="sd">       [&#39;&#39;another_text_file.txt&#39;, &#39;text_copy.txt&#39;]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s1">&#39; already exists&#39;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span></div>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.count_occurrence_of_word_in_file"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.count_occurrence_of_word_in_file">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">count_occurrence_of_word_in_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+ 
+<div class="viewcode-block" id="count_occurrence_of_word_in_file"><a class="viewcode-back" href="../operating_system.html#operating_system.count_occurrence_of_word_in_file">[docs]</a><span class="k">def</span> <span class="nf">count_occurrence_of_word_in_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param file_name: The file name to include the path link</span>
-<span class="sd">        :param word: the word for which the number of occurrences in</span>
-<span class="sd">                     a file is desired.</span>
-<span class="sd">        :return num: The number of times a specific word occurs in a</span>
-<span class="sd">                     file.</span>
+<span class="sd">    :param file_name: The file name to include the path link</span>
+<span class="sd">    :param word: the word for which the number of occurrences in</span>
+<span class="sd">                 a file is desired.</span>
+<span class="sd">    :return num: The number of times a specific word occurs in a</span>
+<span class="sd">                 file.</span>
 
-<span class="sd">        This function excludes the effects of punctuation.  For example</span>
-<span class="sd">        if the user defined word is `book` and the file contains the</span>
-<span class="sd">        word `book.` with a period following it indicating the end of a</span>
-<span class="sd">        sentence, this function will count that word.  The same is true</span>
-<span class="sd">        for commas.  As an example lets assume the file listed below,</span>
-<span class="sd">        titled ``test.txt``;</span>
+<span class="sd">    This function excludes the effects of punctuation.  For example</span>
+<span class="sd">    if the user defined word is `book` and the file contains the</span>
+<span class="sd">    word `book.` with a period following it indicating the end of a</span>
+<span class="sd">    sentence, this function will count that word.  The same is true</span>
+<span class="sd">    for commas.  As an example lets assume the file listed below,</span>
+<span class="sd">    titled ``test.txt``;</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">           This is a text file, all</span>
-<span class="sd">           of the information in this</span>
-<span class="sd">           file is specifically for</span>
-<span class="sd">           the purpose of testing file file</span>
+<span class="sd">       This is a text file, all</span>
+<span class="sd">       of the information in this</span>
+<span class="sd">       file is specifically for</span>
+<span class="sd">       the purpose of testing file file</span>
 
-<span class="sd">        The following code will count the occurrence of the word ``file``</span>
+<span class="sd">    The following code will count the occurrence of the word ``file``</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">           &gt; num = util.count_occurrence_of_word_in_file(&#39;test.txt&#39;, &#39;file&#39;)</span>
-<span class="sd">           &gt; print(num)</span>
-<span class="sd">           4</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">word</span><span class="p">:</span>
-                <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">word</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span><span class="p">:</span>
-                <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">word</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span><span class="p">:</span>
-                <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">counter</span></div>
+<span class="sd">       &gt; num = util.count_occurrence_of_word_in_file(&#39;test.txt&#39;, &#39;file&#39;)</span>
+<span class="sd">       &gt; print(num)</span>
+<span class="sd">       4</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">word</span><span class="p">:</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">word</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span><span class="p">:</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">word</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span><span class="p">:</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">counter</span></div>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.create_directory"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.create_directory">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">create_directory</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param directory_name: The name of the directory to be created</span>
-<span class="sd">                               to include the path-link</span>
-<span class="sd">        :return None:</span>
+<div class="viewcode-block" id="create_directory"><a class="viewcode-back" href="../operating_system.html#operating_system.create_directory">[docs]</a><span class="k">def</span> <span class="nf">create_directory</span><span class="p">(</span><span class="n">directory_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        This function creates a directory in the following manner</span>
+<span class="sd">    :param directory_name: The name of the directory to be created</span>
+<span class="sd">                           to include the path-link</span>
+<span class="sd">    :return None:</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    This function creates a directory in the following manner</span>
 
-<span class="sd">           &gt; print(util.list_contents())</span>
-<span class="sd">           [&#39;data.txt&#39;, &#39;document.doc&#39;]</span>
-<span class="sd">           &gt; util.create_directory(&#39;new_directory&#39;)</span>
-<span class="sd">           &gt; print(util.list_contents())</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       &gt; print(util.list_contents())</span>
+<span class="sd">       [&#39;data.txt&#39;, &#39;document.doc&#39;]</span>
+<span class="sd">       &gt; util.create_directory(&#39;new_directory&#39;)</span>
+<span class="sd">       &gt; print(util.list_contents())</span>
 <span class="sd">           [&#39;data.txt&#39;, &#39;document.doc&#39;, &#39;new_directory&#39;]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory_name</span><span class="p">,</span> <span class="s1">&#39; already exists&#39;</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">)</span></div>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory_name</span><span class="p">,</span> <span class="s1">&#39; already exists&#39;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">)</span></div>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.create_file"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.create_file">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">create_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param file_name: The name of the file to be created to</span>
-<span class="sd">                          include the path link</span>
-<span class="sd">        :return None:</span>
+<div class="viewcode-block" id="create_file"><a class="viewcode-back" href="../operating_system.html#operating_system.create_file">[docs]</a><span class="k">def</span> <span class="nf">create_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        This function creates a file in a method that mimics the touch</span>
-<span class="sd">        command in Linux.</span>
+<span class="sd">    :param file_name: The name of the file to be created to</span>
+<span class="sd">                     include the path link</span>
+<span class="sd">    :return None:</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    This function creates a file in a method that mimics the touch</span>
+<span class="sd">    command in Linux.</span>
 
-<span class="sd">           &gt; print(util.list_contents())</span>
-<span class="sd">           [&#39;data.txt&#39;, &#39;document.doc&#39;]</span>
-<span class="sd">           &gt; util.create_file(&#39;new_text.txt&#39;)</span>
-<span class="sd">           &gt; print(util.list_contents())</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       &gt; print(util.list_contents())</span>
+<span class="sd">       [&#39;data.txt&#39;, &#39;document.doc&#39;]</span>
+<span class="sd">       &gt; util.create_file(&#39;new_text.txt&#39;)</span>
+<span class="sd">       &gt; print(util.list_contents())</span>
 <span class="sd">           [&#39;data.txt&#39;, &#39;document.doc&#39;, &#39;new_text.txt&#39;]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">):</span>
-            <span class="k">pass</span></div>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">):</span>
+        <span class="k">pass</span></div>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.current_working_directory"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.current_working_directory">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">current_working_directory</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :return cwd: A string describing the current working directory</span>
+<div class="viewcode-block" id="current_working_directory"><a class="viewcode-back" href="../operating_system.html#operating_system.current_working_directory">[docs]</a><span class="k">def</span> <span class="nf">current_working_directory</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        This function returns a string describing the current</span>
-<span class="sd">        working directory.</span>
+<span class="sd">    :return cwd: A string describing the current working directory</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    This function returns a string describing the current</span>
+<span class="sd">    working directory.</span>
 
-<span class="sd">           &gt; print(util.current_working_directory())</span>
-<span class="sd">           &#39;/users/computername/Desktop/Code_Dev/Python/core_utilities&#39;</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span></div>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       &gt; print(util.current_working_directory())</span>
+<span class="sd">       &#39;/users/computername/Desktop/Code_Dev/Python/core_utilities&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span></div>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.delete_directory"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.delete_directory">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">delete_directory</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param directory_name: The name of the directory to be deleted to</span>
-<span class="sd">                               include path links</span>
-<span class="sd">        :return None:</span>
+<div class="viewcode-block" id="delete_directory"><a class="viewcode-back" href="../operating_system.html#operating_system.delete_directory">[docs]</a><span class="k">def</span> <span class="nf">delete_directory</span><span class="p">(</span><span class="n">directory_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        This function deletes an  un-populated directory.  As</span>
-<span class="sd">        an example lets assume the following directory structure;</span>
+<span class="sd">    :param directory_name: The name of the directory to be deleted to</span>
+<span class="sd">                           include path links</span>
+<span class="sd">    :return None:</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    This function deletes an  un-populated directory.  As</span>
+<span class="sd">    an example lets assume the following directory structure;</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_2</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">          directory_2</span>
+<span class="sd">          directory_3</span>
+<span class="sd">             |</span>
+<span class="sd">             another_text_file.txt</span>
 
-<span class="sd">           &gt; print(util.list_contents())</span>
-<span class="sd">           [&#39;text_file.txt&#39;, &#39;directory_2&#39;, &#39;directory_3&#39;]</span>
-<span class="sd">           &gt; util.delete_directory(&#39;directory_2&#39;)</span>
-<span class="sd">           &gt; print(util.list_contents())</span>
-<span class="sd">           [&#39;text_file.txt&#39;, &#39;directory_3&#39;]</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory_name</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">rmdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">)</span></div>
+<span class="sd">       &gt; print(util.list_contents())</span>
+<span class="sd">       [&#39;text_file.txt&#39;, &#39;directory_2&#39;, &#39;directory_3&#39;]</span>
+<span class="sd">       &gt; util.delete_directory(&#39;directory_2&#39;)</span>
+<span class="sd">       &gt; print(util.list_contents())</span>
+<span class="sd">       [&#39;text_file.txt&#39;, &#39;directory_3&#39;]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory_name</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">rmdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">)</span></div>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.delete_file"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.delete_file">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">delete_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param file_name: The name of the file to be deleted to include</span>
-<span class="sd">                          the path link</span>
-<span class="sd">        :return None:</span>
+<span class="k">def</span> <span class="nf">delete_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        This function deletes a file.</span>
+<span class="sd">    :param file_name: The name of the file to be deleted to include</span>
+<span class="sd">                     the path link</span>
+<span class="sd">    :return None:</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    This function deletes a file.</span>
 
-<span class="sd">           &gt; print(util.list_contents())</span>
-<span class="sd">           [&#39;test_file.txt&#39;, &#39;test2.txt&#39;, &#39;word_document.doc&#39;]</span>
-<span class="sd">           &gt; util.delete_file(&#39;word_document.doc&#39;)</span>
-<span class="sd">           print(util.list_contents())</span>
-<span class="sd">           [&#39;test_file.txt&#39;, &#39;test2.txt&#39;]</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span></div>
+<span class="sd">       &gt; print(util.list_contents())</span>
+<span class="sd">       [&#39;test_file.txt&#39;, &#39;test2.txt&#39;, &#39;word_document.doc&#39;]</span>
+<span class="sd">       &gt; util.delete_file(&#39;word_document.doc&#39;)</span>
+<span class="sd">       print(util.list_contents())</span>
+<span class="sd">       [&#39;test_file.txt&#39;, &#39;test2.txt&#39;]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.delete_populated_directory"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.delete_populated_directory">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">delete_populated_directory</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param directory_name: The name of the directory to be deleted to</span>
-<span class="sd">                               include path links</span>
-<span class="sd">        :return None:</span>
+<div class="viewcode-block" id="delete_populated_directory"><a class="viewcode-back" href="../operating_system.html#operating_system.delete_populated_directory">[docs]</a><span class="k">def</span> <span class="nf">delete_populated_directory</span><span class="p">(</span><span class="n">directory_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        This function deletes a directory that is populated with files</span>
-<span class="sd">        and other directories.  As an example lets assume the following</span>
-<span class="sd">        directory structure;</span>
+<span class="sd">    :param directory_name: The name of the directory to be deleted to</span>
+<span class="sd">                           include path links</span>
+<span class="sd">    :return None:</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    This function deletes a directory that is populated with files</span>
+<span class="sd">    and other directories.  As an example lets assume the following</span>
+<span class="sd">    directory structure;</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_2</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">          directory_2</span>
+<span class="sd">          directory_3</span>
+<span class="sd">             |</span>
+<span class="sd">             another_text_file.txt</span>
 
-<span class="sd">           &gt; print(util.list_contents())</span>
-<span class="sd">           [&#39;text_file.txt&#39;, &#39;directory_2&#39;, &#39;directory_3&#39;]</span>
-<span class="sd">           &gt; util.delete_directory(&#39;directory_3&#39;)</span>
-<span class="sd">           &gt; print(util.list_contents())</span>
-<span class="sd">           [&#39;text_file.txt&#39;, &#39;directory_2&#39;]</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory_name</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">directory_name</span><span class="p">)</span></div>
+<span class="sd">       &gt; print(util.list_contents())</span>
+<span class="sd">       [&#39;text_file.txt&#39;, &#39;directory_2&#39;, &#39;directory_3&#39;]</span>
+<span class="sd">       &gt; util.delete_directory(&#39;directory_3&#39;)</span>
+<span class="sd">       &gt; print(util.list_contents())</span>
+<span class="sd">       [&#39;text_file.txt&#39;, &#39;directory_2&#39;]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory_name</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">directory_name</span><span class="p">)</span></div>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.determine_file_size"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.determine_file_size">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">determine_file_size</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param file_name: The file name to include path length</span>
-<span class="sd">        :return kb_size: The size of a file in kilo-bites</span>
+<span class="k">def</span> <span class="nf">determine_file_size</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        This function returns the size of a file in units of kb.</span>
+<span class="sd">    :param file_name: The file name to include path length</span>
+<span class="sd">    :return kb_size: The size of a file in kilo-bites</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    This function returns the size of a file in units of kb.</span>
 
-<span class="sd">           &gt; num = util.determine_file_size(&#39;photo.jpg&#39;)</span>
-<span class="sd">           &gt; print(num)</span>
-<span class="sd">           3450.5</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">byte_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span><span class="o">.</span><span class="n">st_size</span>
-        <span class="k">return</span> <span class="n">byte_size</span> <span class="o">/</span> <span class="mf">1024.0</span></div>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       &gt; num = util.determine_file_size(&#39;photo.jpg&#39;)</span>
+<span class="sd">       &gt; print(num)</span>
+<span class="sd">       3450.5</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">byte_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span><span class="o">.</span><span class="n">st_size</span>
+    <span class="k">return</span> <span class="n">byte_size</span> <span class="o">/</span> <span class="mf">1024.0</span>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.file_line_count"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.file_line_count">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">file_line_count</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param file_name: The file name to include the path-link</span>
-<span class="sd">        :return lines: The number of lines in a file</span>
+<span class="k">def</span> <span class="nf">file_line_count</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        This function returns the number of lines in an ASCII</span>
-<span class="sd">        based file.  As an example lets assume the file listed below,</span>
-<span class="sd">        titled ``test.txt``;</span>
+<span class="sd">    :param file_name: The file name to include the path-link</span>
+<span class="sd">    :return lines: The number of lines in a file</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    This function returns the number of lines in an ASCII</span>
+<span class="sd">    based file.  As an example lets assume the file listed below,</span>
+<span class="sd">    titled ``test.txt``;</span>
 
-<span class="sd">           This is a text file, all</span>
-<span class="sd">           of the information in this</span>
-<span class="sd">           file is specifically for</span>
-<span class="sd">           the purpose of testing file file</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">        The following code will count the occurrence of the word ``file``</span>
+<span class="sd">       This is a text file, all</span>
+<span class="sd">       of the information in this</span>
+<span class="sd">       file is specifically for</span>
+<span class="sd">       the purpose of testing file file</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    The following code will count the occurrence of the word ``file``</span>
 
-<span class="sd">           &gt; num = util.file_line_count(&#39;test.txt&#39;)</span>
-<span class="sd">           &gt; print(num)</span>
-<span class="sd">           4</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span></div>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       &gt; num = util.file_line_count(&#39;test.txt&#39;)</span>
+<span class="sd">       &gt; print(num)</span>
+<span class="sd">       4</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.file_word_count"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.file_word_count">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">file_word_count</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param file_name: The file name to include the path link</span>
-<span class="sd">        :return words: The number of words in a file.  A word is defined</span>
-<span class="sd">                       as a continuous string of characters with no empty</span>
-<span class="sd">                       spaces in the string.</span>
+<span class="k">def</span> <span class="nf">file_word_count</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        This function returns the number of words in an ASCII based document.</span>
-<span class="sd">        As an example lets assume the file listed below, titled ``test.txt``;</span>
+<span class="sd">    :param file_name: The file name to include the path link</span>
+<span class="sd">    :return words: The number of words in a file.  A word is defined</span>
+<span class="sd">                   as a continuous string of characters with no empty</span>
+<span class="sd">                   spaces in the string.</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    This function returns the number of words in an ASCII based document.</span>
+<span class="sd">    As an example lets assume the file listed below, titled ``test.txt``;</span>
 
-<span class="sd">           This is a text file, all</span>
-<span class="sd">           of the information in this</span>
-<span class="sd">           file is specifically for</span>
-<span class="sd">           the purpose of testing file file</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">        The following code will count the occurrence of the word ``file``</span>
+<span class="sd">       This is a text file, all</span>
+<span class="sd">       of the information in this</span>
+<span class="sd">       file is specifically for</span>
+<span class="sd">       the purpose of testing file file</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    The following code will count the occurrence of the word ``file``</span>
 
-<span class="sd">           &gt; num = util.file_word_count(&#39;test.txt&#39;)</span>
-<span class="sd">           &gt; print(num)</span>
-<span class="sd">           21</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">())</span></div>
+<span class="sd">       &gt; num = util.file_word_count(&#39;test.txt&#39;)</span>
+<span class="sd">       &gt; print(num)</span>
+<span class="sd">       21</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.move_directory"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.move_directory">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">move_directory</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param source: The name of the file being moved to include the</span>
-<span class="sd">                       path-link</span>
-<span class="sd">        :param destination: The name of the file at its new destination</span>
-<span class="sd">                            to include the path link</span>
-<span class="sd">        :return None:</span>
+<span class="k">def</span> <span class="nf">move_directory</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        This function will move a file to a new location and give it a</span>
-<span class="sd">        different or identical user define name.  The original file</span>
-<span class="sd">        and location will be deleted.  As an example lets assume the</span>
-<span class="sd">        following directory structure;</span>
+<span class="sd">    :param source: The name of the file being moved to include the</span>
+<span class="sd">                   path-link</span>
+<span class="sd">    :param destination: The name of the file at its new destination</span>
+<span class="sd">                        to include the path link</span>
+<span class="sd">    :return None:</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    This function will move a file to a new location and give it a</span>
+<span class="sd">    different or identical user define name.  The original file</span>
+<span class="sd">    and location will be deleted.  As an example lets assume the</span>
+<span class="sd">    following directory structure;</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_2</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">        The following command will create the updated directory structure.</span>
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">          directory_2</span>
+<span class="sd">          directory_3</span>
+<span class="sd">             |</span>
+<span class="sd">             another_text_file.txt</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    The following command will create the updated directory structure.</span>
 
-<span class="sd">           &gt; util.move_directory(&#39;directory_2&#39;, &#39;directory_3/new_dir&#39;)</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">       &gt; util.move_directory(&#39;directory_2&#39;, &#39;directory_3/new_dir&#39;)</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 new_dir</span>
-<span class="sd">                 another_text_file.txt</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s1">&#39; already exists&#39;</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span></div>
+<span class="sd">    .. code-block:: text</span>
+
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">          directory_3</span>
+<span class="sd">             |</span>
+<span class="sd">             new_dir</span>
+<span class="sd">             another_text_file.txt</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s1">&#39; already exists&#39;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.move_file"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.move_file">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">move_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param source: The name of the file being moved to include the</span>
-<span class="sd">                       path-link</span>
-<span class="sd">        :param destination: The name of the file at its new destination</span>
-<span class="sd">                            to include the path link</span>
-<span class="sd">        :return None:</span>
+<span class="k">def</span> <span class="nf">move_file</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        This function will move a file to a new location and give it a</span>
-<span class="sd">        different or identical user define name.  The original file</span>
-<span class="sd">        and location will be deleted. As an example lets assume the</span>
-<span class="sd">        following directory structure;</span>
+<span class="sd">    :param source: The name of the file being moved to include the</span>
+<span class="sd">                   path-link</span>
+<span class="sd">    :param destination: The name of the file at its new destination</span>
+<span class="sd">                        to include the path link</span>
+<span class="sd">    :return None:</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    This function will move a file to a new location and give it a</span>
+<span class="sd">    different or identical user define name.  The original file</span>
+<span class="sd">    and location will be deleted. As an example lets assume the</span>
+<span class="sd">    following directory structure;</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_2</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">        The following command will create the updated directory structure.</span>
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">          directory_2</span>
+<span class="sd">          directory_3</span>
+<span class="sd">             |</span>
+<span class="sd">             another_text_file.txt</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    The following command will create the updated directory structure.</span>
 
-<span class="sd">           &gt; util.move_file(&#39;text_file.txt&#39;, &#39;directory_2&#39;)</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">       &gt; util.move_file(&#39;text_file.txt&#39;, &#39;directory_2&#39;)</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              directory_2</span>
-<span class="sd">                 |</span>
-<span class="sd">                 text_file.txt</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s1">&#39; already exists&#39;</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span></div>
+<span class="sd">    .. code-block:: text</span>
+
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          directory_2</span>
+<span class="sd">             |</span>
+<span class="sd">             text_file.txt</span>
+<span class="sd">             directory_3</span>
+<span class="sd">                |</span>
+<span class="sd">                another_text_file.txt</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s1">&#39; already exists&#39;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.list_contents"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.list_contents">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">list_contents</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
-                      <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :param directory: The directory where the contents are</span>
-<span class="sd">                          desired</span>
-<span class="sd">        :param extension: A file extension such as `.txt` or `.csv`</span>
-<span class="sd">        :return None:</span>
 
-<span class="sd">        This function will return a list containing the contents of</span>
-<span class="sd">        a specific directory.  The user can enter the directory of</span>
-<span class="sd">        interest or default to the current working directory.  The</span>
-<span class="sd">        user can also specify the type of file they wish listed.</span>
+<span class="k">def</span> <span class="nf">list_contents</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
+                  <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param directory: The directory where the contents are</span>
+<span class="sd">                      desired</span>
+<span class="sd">    :param extension: A file extension such as `.txt` or `.csv`</span>
+<span class="sd">    :return None:</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    This function will return a list containing the contents of</span>
+<span class="sd">    a specific directory.  The user can enter the directory of</span>
+<span class="sd">    interest or default to the current working directory.  The</span>
+<span class="sd">    user can also specify the type of file they wish listed.</span>
 
-<span class="sd">           &gt; print(util.list_contents())</span>
-<span class="sd">           &gt; [&#39;Files&#39;, &#39;Code_Dev&#39;, &#39;word_document.doc&#39;]</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">       &gt; print(util.list_contents())</span>
+<span class="sd">       &gt; [&#39;Files&#39;, &#39;Code_Dev&#39;, &#39;word_document.doc&#39;]</span>
 
-        <span class="k">if</span> <span class="n">extension</span> <span class="o">!=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">:</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
-            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">extension</span><span class="p">)</span>
-            <span class="n">new_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">extension</span> <span class="ow">in</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="n">length</span><span class="p">:]]</span>
-            <span class="k">return</span> <span class="n">new_data</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span></div>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">extension</span> <span class="o">!=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">extension</span><span class="p">)</span>
+        <span class="n">new_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">extension</span> <span class="ow">in</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="n">length</span><span class="p">:]]</span>
+        <span class="k">return</span> <span class="n">new_data</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.copy_files"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.copy_files">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">copy_files</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span>
-                   <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">,</span> <span class="n">dirs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param destination: The destination directory to include</span>
-<span class="sd">                            path-links</span>
-<span class="sd">        :param source: The source directory to include path-links,</span>
-<span class="sd">                       defaulted to current working directory</span>
-<span class="sd">        :param extension: Specific file extension to be copied.</span>
-<span class="sd">        :param dirs: `True` if user only wants to copy directories,</span>
-<span class="sd">                     `False` otherwise</span>
+<span class="k">def</span> <span class="nf">copy_files</span><span class="p">(</span><span class="n">destination</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span>
+               <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">,</span> <span class="n">dirs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :return None:</span>
+<span class="sd">    :param destination: The destination directory to include</span>
+<span class="sd">                        path-links</span>
+<span class="sd">    :param source: The source directory to include path-links,</span>
+<span class="sd">                   defaulted to current working directory</span>
+<span class="sd">    :param extension: Specific file extension to be copied.</span>
+<span class="sd">    :param dirs: `True` if user only wants to copy directories,</span>
+<span class="sd">                 `False` otherwise</span>
+<span class="sd">    :return None:</span>
 
-<span class="sd">        This function will copy all of the contents of a directory</span>
-<span class="sd">        to another directory, or all of a specific type of file to</span>
-<span class="sd">        another directory, or all directories to another directory.</span>
-<span class="sd">        As an example lets assume the following directory structure;</span>
+<span class="sd">    This function will copy all of the contents of a directory</span>
+<span class="sd">    to another directory, or all of a specific type of file to</span>
+<span class="sd">    another directory, or all directories to another directory.</span>
+<span class="sd">    As an example lets assume the following directory structure;</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_2</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
-<span class="sd">                 more_data.doc</span>
-<span class="sd">                 new_dir</span>
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">          directory_2</span>
+<span class="sd">          directory_3</span>
+<span class="sd">             |</span>
+<span class="sd">             another_text_file.txt</span>
+<span class="sd">             more_data.doc</span>
+<span class="sd">             new_dir</span>
 
-<span class="sd">        assuming we are in ``directory_3``</span>
+<span class="sd">    assuming we are in ``directory_3``</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">           &gt; # Copies everything</span>
-<span class="sd">           &gt; util.copy_files(&#39;../directory_2&#39;)</span>
+<span class="sd">       &gt; # Copies everything</span>
+<span class="sd">       &gt; util.copy_files(&#39;../directory_2&#39;)</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_2</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
-<span class="sd">                 more_data.doc</span>
-<span class="sd">                 new_dir</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
-<span class="sd">                 more_data.doc</span>
-<span class="sd">                 new_dir</span>
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">         directory_2</span>
+<span class="sd">            |</span>
+<span class="sd">            another_text_file.txt</span>
+<span class="sd">            more_data.doc</span>
+<span class="sd">            new_dir</span>
+<span class="sd">            directory_3</span>
+<span class="sd">               |</span>
+<span class="sd">               another_text_file.txt</span>
+<span class="sd">               more_data.doc</span>
+<span class="sd">               new_dir</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">           &gt; # Copies text files</span>
-<span class="sd">           &gt; util.copy_files(&#39;../directory_2&#39;, extension=&#39;.txt&#39;)</span>
+<span class="sd">       &gt; # Copies text files</span>
+<span class="sd">       &gt; util.copy_files(&#39;../directory_2&#39;, extension=&#39;.txt&#39;)</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_2</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
-<span class="sd">                 more_data.doc</span>
-<span class="sd">                 new_dir</span>
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">          directory_2</span>
+<span class="sd">             |</span>
+<span class="sd">             another_text_file.txt</span>
+<span class="sd">             directory_3</span>
+<span class="sd">                |</span>
+<span class="sd">                another_text_file.txt</span>
+<span class="sd">                more_data.doc</span>
+<span class="sd">                new_dir</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">           &gt; # Copies directories</span>
-<span class="sd">           &gt; util.copy_files(&#39;../directory_2&#39;, dirs=True)</span>
+<span class="sd">       &gt; # Copies directories</span>
+<span class="sd">       &gt; util.copy_files(&#39;../directory_2&#39;, dirs=True)</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_2</span>
-<span class="sd">                 |</span>
-<span class="sd">                 new_dir</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
-<span class="sd">                 more_data.doc</span>
-<span class="sd">                 new_dir</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">dirs</span> <span class="ow">and</span> <span class="n">extension</span> <span class="o">!=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;extension must be null when dirs is True&#39;</span><span class="p">))</span>
-        <span class="n">files</span> <span class="o">=</span> <span class="n">OSUtilities</span><span class="o">.</span><span class="n">list_contents</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
-        <span class="n">directories</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
-        <span class="n">fls</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">dirs</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fls</span><span class="p">:</span>
-                <span class="n">src</span> <span class="o">=</span> <span class="n">source</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">i</span>
-                <span class="n">OSUtilities</span><span class="o">.</span><span class="n">copy_file</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">directories</span><span class="p">:</span>
-            <span class="n">src</span> <span class="o">=</span> <span class="n">source</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">j</span>
-            <span class="n">OSUtilities</span><span class="o">.</span><span class="n">copy_directory</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">destination</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span></div>
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">          directory_2</span>
+<span class="sd">             |</span>
+<span class="sd">             new_dir</span>
+<span class="sd">             directory_3</span>
+<span class="sd">                |</span>
+<span class="sd">                another_text_file.txt</span>
+<span class="sd">                more_data.doc</span>
+<span class="sd">                new_dir</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">dirs</span> <span class="ow">and</span> <span class="n">extension</span> <span class="o">!=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;extension must be null when dirs is True&#39;</span><span class="p">))</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="n">list_contents</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
+    <span class="n">directories</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+    <span class="n">fls</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dirs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fls</span><span class="p">:</span>
+            <span class="n">src</span> <span class="o">=</span> <span class="n">source</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">i</span>
+            <span class="n">copy_file</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">directories</span><span class="p">:</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">source</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">j</span>
+        <span class="n">copy_directory</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">destination</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.move_files"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.move_files">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">move_files</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span>
-                   <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">,</span> <span class="n">dirs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param destination: The destination directory to include</span>
-<span class="sd">                            path-links</span>
-<span class="sd">        :param source: The source directory to include path-links,</span>
-<span class="sd">                       defaulted to current working directory</span>
-<span class="sd">        :param extension: Specific file extension to be copied.</span>
-<span class="sd">        :param dirs: `True` if user only wants to copy directories,</span>
-<span class="sd">                     `False` otherwise</span>
+<span class="k">def</span> <span class="nf">move_files</span><span class="p">(</span><span class="n">destination</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span>
+               <span class="n">extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">,</span> <span class="n">dirs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :return None:</span>
+<span class="sd">    :param destination: The destination directory to include</span>
+<span class="sd">                        path-links</span>
+<span class="sd">    :param source: The source directory to include path-links,</span>
+<span class="sd">                   defaulted to current working directory</span>
+<span class="sd">    :param extension: Specific file extension to be copied.</span>
+<span class="sd">    :param dirs: `True` if user only wants to copy directories,</span>
+<span class="sd">                 `False` otherwise</span>
+<span class="sd">    :return None:</span>
 
-<span class="sd">        This function will move all of the contents of a directory</span>
-<span class="sd">        to another directory, or all of a specific type of file to</span>
-<span class="sd">        another directory, or all directories to another directory</span>
-<span class="sd">        As an example lets assume the following directory structure;</span>
+<span class="sd">    This function will move all of the contents of a directory</span>
+<span class="sd">    to another directory, or all of a specific type of file to</span>
+<span class="sd">    another directory, or all directories to another directory</span>
+<span class="sd">    As an example lets assume the following directory structure;</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_2</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
-<span class="sd">                 more_data.doc</span>
-<span class="sd">                 new_dir</span>
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">          directory_2</span>
+<span class="sd">          directory_3</span>
+<span class="sd">             |</span>
+<span class="sd">             another_text_file.txt</span>
+<span class="sd">             more_data.doc</span>
+<span class="sd">             new_dir</span>
 
-<span class="sd">        assuming we are in ``directory_3``</span>
+<span class="sd">    assuming we are in ``directory_3``</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">           &gt; # Moves everything</span>
-<span class="sd">           &gt; util.move_files(&#39;../directory_2&#39;)</span>
+<span class="sd">       &gt; # Moves everything</span>
+<span class="sd">       &gt; util.move_files(&#39;../directory_2&#39;)</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_2</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
-<span class="sd">                 more_data.doc</span>
-<span class="sd">                 new_dir</span>
-<span class="sd">              directory_3</span>
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">          directory_2</span>
+<span class="sd">             |</span>
+<span class="sd">             another_text_file.txt</span>
+<span class="sd">             more_data.doc</span>
+<span class="sd">             new_dir</span>
+<span class="sd">             directory_3</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">           &gt; # Moves text files</span>
-<span class="sd">           &gt; util.move_files(&#39;../directory_2&#39;, extension=&#39;.txt&#39;)</span>
+<span class="sd">       &gt; # Moves text files</span>
+<span class="sd">       &gt; util.move_files(&#39;../directory_2&#39;, extension=&#39;.txt&#39;)</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_2</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 more_data.doc</span>
-<span class="sd">                 new_dir</span>
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">          directory_2</span>
+<span class="sd">             |</span>
+<span class="sd">             another_text_file.txt</span>
+<span class="sd">             directory_3</span>
+<span class="sd">                |</span>
+<span class="sd">                more_data.doc</span>
+<span class="sd">                new_dir</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    .. code-block:: python</span>
 
-<span class="sd">           &gt; # Moves directories</span>
-<span class="sd">           &gt; util.move_files(&#39;../directory_2&#39;, dirs=True)</span>
+<span class="sd">       &gt; # Moves directories</span>
+<span class="sd">       &gt; util.move_files(&#39;../directory_2&#39;, dirs=True)</span>
 
-<span class="sd">        .. code-block:: text</span>
+<span class="sd">    .. code-block:: text</span>
 
-<span class="sd">           directory_1</span>
-<span class="sd">              |</span>
-<span class="sd">              text_file.txt</span>
-<span class="sd">              directory_2</span>
-<span class="sd">                 |</span>
-<span class="sd">                 new_dir</span>
-<span class="sd">              directory_3</span>
-<span class="sd">                 |</span>
-<span class="sd">                 another_text_file.txt</span>
-<span class="sd">                 more_data.doc</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">dirs</span> <span class="ow">and</span> <span class="n">extension</span> <span class="o">!=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;extension must be null when dirs is True&#39;</span><span class="p">))</span>
-        <span class="n">files</span> <span class="o">=</span> <span class="n">OSUtilities</span><span class="o">.</span><span class="n">list_contents</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
-        <span class="n">directories</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
-        <span class="n">fls</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">dirs</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fls</span><span class="p">:</span>
-                <span class="n">src</span> <span class="o">=</span> <span class="n">source</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">i</span>
-                <span class="n">OSUtilities</span><span class="o">.</span><span class="n">move_file</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">directories</span><span class="p">:</span>
-            <span class="n">src</span> <span class="o">=</span> <span class="n">source</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">j</span>
-            <span class="n">OSUtilities</span><span class="o">.</span><span class="n">move_directory</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">destination</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span></div>
+<span class="sd">       directory_1</span>
+<span class="sd">          |</span>
+<span class="sd">          text_file.txt</span>
+<span class="sd">          directory_2</span>
+<span class="sd">             |</span>
+<span class="sd">             new_dir</span>
+<span class="sd">             directory_3</span>
+<span class="sd">                |</span>
+<span class="sd">                another_text_file.txt</span>
+<span class="sd">                more_data.doc</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">dirs</span> <span class="ow">and</span> <span class="n">extension</span> <span class="o">!=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;extension must be null when dirs is True&#39;</span><span class="p">))</span>
+    <span class="n">files</span> <span class="o">=</span><span class="n">list_contents</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
+    <span class="n">directories</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+    <span class="n">fls</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dirs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fls</span><span class="p">:</span>
+            <span class="n">src</span> <span class="o">=</span> <span class="n">source</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">i</span>
+            <span class="n">move_file</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">directories</span><span class="p">:</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">source</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">j</span>
+        <span class="n">move_directory</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">destination</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.verify_directory_existence"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.verify_directory_existence">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">verify_directory_existence</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">directory_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param directory_name: The directory name to include the path-link</span>
-<span class="sd">        :return status: True or false if the directory does or does not</span>
-<span class="sd">                        exist</span>
+<span class="k">def</span> <span class="nf">verify_directory_existence</span><span class="p">(</span><span class="n">directory_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        This function verifies whether or not a directory exists.</span>
+<span class="sd">    :param directory_name: The directory name to include the path-link</span>
+<span class="sd">    :return status: True or false if the directory does or does not</span>
+<span class="sd">                    exist</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    This function verifies whether or not a directory exists.</span>
 
-<span class="sd">           &gt; print(util.verify_directory_existence(&#39;directory&#39;))</span>
-<span class="sd">           True</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">)</span></div>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       &gt; print(util.verify_directory_existence(&#39;directory&#39;))</span>
+<span class="sd">       True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">directory_name</span><span class="p">)</span>
 <span class="c1"># ----------------------------------------------------------------------------</span>
 
-<div class="viewcode-block" id="OSUtilities.verify_file_existence"><a class="viewcode-back" href="../operating_system.html#operating_system.OSUtilities.verify_file_existence">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">verify_file_existence</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param file_name: The file name to include the path-link</span>
-<span class="sd">        :return status: True or false if the file does or does not</span>
-<span class="sd">                        exist</span>
+<span class="k">def</span> <span class="nf">verify_file_existence</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        This function verifies whether or not a file exists</span>
+<span class="sd">    :param file_name: The file name to include the path-link</span>
+<span class="sd">    :return status: True or false if the file does or does not</span>
+<span class="sd">                    exist</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">    This function verifies whether or not a file exists</span>
 
-<span class="sd">           &gt; print(util.verify_file_existence(&#39;new_file.txt&#39;))</span>
-<span class="sd">           False</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span></div></div>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       &gt; print(util.verify_file_existence(&#39;new_file.txt&#39;))</span>
+<span class="sd">       False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># eof</span>
