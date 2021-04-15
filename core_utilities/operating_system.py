@@ -42,15 +42,22 @@ def change_directory(new_directory: str) -> None:
        > print(util.current_working_directory())
        '/home/dir1/dir2'
 
-       You can change back to the `home` directory with the following
-       command;
+    You can change back to the `home` directory with the following
+    command;
 
-       .. code-block:: python
+    .. code-block:: python
 
        > util.change_directory('../..')
        > print(util.current_working_directory())
        '/home'
     """
+    #.. code-block:: python
+
+    #   > print(util.current_working_directory())
+    #   '/home/dir1'
+    #   > util.change_directory('dir2')
+    #   > print(util.current_working_directory())
+    #   '/home/dir1/dir2'
     if not os.path.isdir(new_directory):
         print('{}{}'.format(new_directory, ' does not exist'))
     else:

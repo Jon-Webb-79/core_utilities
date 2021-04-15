@@ -12,6 +12,7 @@ Welcome to Core Utilities's documentation!
 
    Introduction
    operating_system
+   read_files
 
 
 Indices and tables
