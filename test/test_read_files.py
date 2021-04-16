@@ -15,7 +15,7 @@ from core_utilities.read_files import read_text_columns_by_index
 from core_utilities.read_files import read_excel_columns_by_headers
 from core_utilities.read_files import read_excel_columns_by_index
 from core_utilities.read_files import ManageSQLiteDB
-from core_utilities.read_files import simple_sqlite_query
+from core_utilities.read_files import simple_sqlite_query, read_json_file
 # ================================================================================
 # ================================================================================
 # Date:    Month Day, Year
@@ -692,6 +692,11 @@ def test_read_database_from_class():
 
 
 def test_simple_sqlite_query():
+    """
+
+    This function tests simple_sqlite_query to ensure it returns
+    the proper results
+    """
     if plat in lin_plat:
         file = '../data/test/Maintenance.db'
     else:
@@ -700,6 +705,21 @@ def test_simple_sqlite_query():
     df = simple_sqlite_query(file, query)
     assert df['Date'][0] == '2020-02-04'
     assert isclose(df['Cost'][0], 27.88, rel_tol=1.0e-3)
+# --------------------------------------------------------------------------------
+
+
+def test_read_json():
+    """
+
+    This function tests the read_json_file function to ensure it returns
+    the correct results
+    """
+    if plat in lin_plat:
+        file = '../data/test/json.json'
+    else:
+        file = r'..\data\test\json.json'
+    dat = read_json_file(file)
+    assert dat['widget']['debug'] == 'on'
 # ================================================================================
 # ================================================================================
 # eof

@@ -3,8 +3,9 @@ import os
 import sys
 import numpy as np
 import pandas as pd
-from typing import List
+from typing import List, Dict
 import sqlite3
+import json
 # - If a package and a module within the package is to be imported
 #   uncomment the following lines where dir is the directory containing
 #   the source files.  These lines should go above the module imports
@@ -1215,6 +1216,23 @@ def simple_sqlite_query(database: str, query: str) -> pd.DataFrame:
     df = db.query_db(query)
     db.close_database_connection()
     return df
+# ================================================================================
+# ================================================================================
+# read misc files
+
+
+def read_json_file(file_name: str) -> Dict:
+    """
+
+    param file_name: The name of the file being read to include the path-length
+    :return db: The json string
+
+    This function reads a .json file and captures its contents as a dictionary
+    of dictionaries
+    """
+    with open(file_name) as file:
+        db = json.load(file)
+    return db
 # ================================================================================
 # ================================================================================
 # eof
