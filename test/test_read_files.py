@@ -16,7 +16,7 @@ from core_utilities.read_files import read_excel_columns_by_headers
 from core_utilities.read_files import read_excel_columns_by_index
 from core_utilities.read_files import ManageSQLiteDB
 from core_utilities.read_files import simple_sqlite_query, read_json_file
-from core_utilities.read_files import read_xml_file
+from core_utilities.read_files import read_xml_file, read_yaml_file
 # ================================================================================
 # ================================================================================
 # Date:    Month Day, Year
@@ -732,6 +732,21 @@ def test_read_xml():
     db = read_xml_file(file)
     img_name =db.find(src="Images/Sun.png").get_text()
     assert img_name[0:4] == '\n250'
+# --------------------------------------------------------------------------------
+
+
+def test_read_yaml_file():
+    if plat in lin_plat:
+        file = '../data/test/test.yaml'
+    else:
+        file = r'..\data\test\test.yaml'
+    db = read_yaml_file(file)
+    assert db['apples'] == 20
+    assert db['oranges'] == 10
+    assert db['bananas'] == 3
+    dat_list = ['soccer', 'football', 'baseball', 'cricket', 'hockey', 'table tennis']
+    for i in  enumerate(dat_list):
+        assert i[1] == db['sports'][i[0]]
 # ================================================================================
 # ================================================================================
 # eof

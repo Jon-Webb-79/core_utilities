@@ -7,6 +7,7 @@ from typing import List, Dict
 import sqlite3
 import json
 from bs4 import BeautifulSoup
+import yaml
 #from lxml import objectify
 # - If a package and a module within the package is to be imported
 #   uncomment the following lines where dir is the directory containing
@@ -1327,6 +1328,43 @@ def read_xml_file(file_name: str):
         data = f.read()
     bs_data = BeautifulSoup(data, "xml")
     return bs_data
+# --------------------------------------------------------------------------------
+
+
+def read_yaml_file(file_name: str):
+    """
+
+    :param file_name: The name of the taml file to include the path length
+    :return data: The data extracted from the yaml file
+
+    Assume a yaml file titled test.yaml with the following structure.
+
+    .. code-block:: text
+
+       apples: 20
+       oranges: 10
+       bananas: 3
+       sports:
+         - soccer
+         - football
+         - baseball
+         - cricket
+         - hockey
+         - table tennis
+    
+    The file can be read with the following code
+
+    .. code-block:: python
+
+        > db = read_yaml_file('test.yaml')
+        > print(db['apples']
+        20
+        > print(db['sports'])
+        ['soccer', 'football', 'baseball', 'cricket', 'hockey', 'tabble tennis']
+    """
+    with open(file_name) as file:
+        data = yaml.load(file, Loader=yaml.FullLoader)
+    return data
 # ================================================================================
 # ================================================================================
 # eof

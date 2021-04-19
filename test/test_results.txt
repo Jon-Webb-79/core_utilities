@@ -2,7 +2,7 @@
 platform linux -- Python 3.9.2, pytest-6.2.3, py-1.10.0, pluggy-0.13.1 -- /home/jonwebb/Code_Dev/Python/core_utilities/.venv/bin/python3
 cachedir: .pytest_cache
 rootdir: /home/jonwebb/Code_Dev/Python/core_utilities
-collecting ... collected 51 items
+collecting ... collected 52 items
 
 test_operating_system.py::test_change_directory PASSED                   [  1%]
 test_operating_system.py::test_copy_directory PASSED                     [  3%]
@@ -17,44 +17,60 @@ test_operating_system.py::test_remove_populated_directory PASSED         [ 19%]
 test_operating_system.py::test_determine_file_size PASSED                [ 21%]
 test_operating_system.py::test_determine_file_line_count PASSED          [ 23%]
 test_operating_system.py::test_file_word_count PASSED                    [ 25%]
-test_operating_system.py::test_move_directory PASSED                     [ 27%]
-test_operating_system.py::test_move_file PASSED                          [ 29%]
-test_operating_system.py::test_list_contents PASSED                      [ 31%]
-test_operating_system.py::test_copy_files_files PASSED                   [ 33%]
-test_operating_system.py::test_copy_files_dirs PASSED                    [ 35%]
-test_operating_system.py::test_move_files_everything PASSED              [ 37%]
-test_operating_system.py::test_move_files_dirs PASSED                    [ 39%]
-test_operating_system.py::test_verify_directory_existence PASSED         [ 41%]
-test_operating_system.py::test_directory_existence_not_verified PASSED   [ 43%]
-test_operating_system.py::test_verify_file_existence PASSED              [ 45%]
-test_operating_system.py::test_file_existence_not_verified PASSED        [ 47%]
-test_read_files.py::test_file_not_found PASSED                           [ 49%]
+test_operating_system.py::test_move_directory PASSED                     [ 26%]
+test_operating_system.py::test_move_file PASSED                          [ 28%]
+test_operating_system.py::test_list_contents PASSED                      [ 30%]
+test_operating_system.py::test_copy_files_files PASSED                   [ 32%]
+test_operating_system.py::test_copy_files_dirs PASSED                    [ 34%]
+test_operating_system.py::test_move_files_everything PASSED              [ 36%]
+test_operating_system.py::test_move_files_dirs PASSED                    [ 38%]
+test_operating_system.py::test_verify_directory_existence PASSED         [ 40%]
+test_operating_system.py::test_directory_existence_not_verified PASSED   [ 42%]
+test_operating_system.py::test_verify_file_existence PASSED              [ 44%]
+test_operating_system.py::test_file_existence_not_verified PASSED        [ 46%]
+test_read_files.py::test_file_not_found PASSED                           [ 48%]
 test_read_files.py::test_read_double PASSED                              [ 50%]
-test_read_files.py::test_read_double_list PASSED                         [ 52%]
-test_read_files.py::test_read_float PASSED                               [ 54%]
-test_read_files.py::test_float_list PASSED                               [ 56%]
-test_read_files.py::test_read_integer PASSED                             [ 58%]
-test_read_files.py::test_read_integer_list PASSED                        [ 60%]
-test_read_files.py::test_read_sentence PASSED                            [ 62%]
-test_read_files.py::test_read_string PASSED                              [ 64%]
-test_read_files.py::test_read_string_list PASSED                         [ 66%]
-test_read_files.py::test_read_csv_by_headers PASSED                      [ 68%]
-test_read_files.py::test_read_csv_by_headers_below_start PASSED          [ 70%]
-test_read_files.py::test_read_csv_by_index PASSED                        [ 72%]
-test_read_files.py::test_read_csv_by_index_below_start PASSED            [ 74%]
-test_read_files.py::test_read_text_by_header PASSED                      [ 76%]
-test_read_files.py::test_read_text_by_header_below_start PASSED          [ 78%]
-test_read_files.py::test_read_text_by_index PASSED                       [ 80%]
-test_read_files.py::test_read_text_by_index_below_start PASSED           [ 82%]
-test_read_files.py::test_read_excel_by_header PASSED                     [ 84%]
-test_read_files.py::test_read_excel_by_header_below_start PASSED         [ 86%]
-test_read_files.py::test_read_excel_by_index PASSED                      [ 88%]
-test_read_files.py::test_read_excel_by_index_below_start PASSED          [ 90%]
-test_read_files.py::test_no_db_exists PASSED                             [ 92%]
-test_read_files.py::test_read_database_from_class PASSED                 [ 94%]
-test_read_files.py::test_simple_sqlite_query PASSED                      [ 96%]
-test_read_files.py::test_read_json PASSED                                [ 98%]
-test_read_files.py::test_read_xml PASSED                                 [100%]
+test_read_files.py::test_read_double_list PASSED                         [ 51%]
+test_read_files.py::test_read_float PASSED                               [ 53%]
+test_read_files.py::test_float_list PASSED                               [ 55%]
+test_read_files.py::test_read_integer PASSED                             [ 57%]
+test_read_files.py::test_read_integer_list PASSED                        [ 59%]
+test_read_files.py::test_read_sentence PASSED                            [ 61%]
+test_read_files.py::test_read_string PASSED                              [ 63%]
+test_read_files.py::test_read_string_list PASSED                         [ 65%]
+test_read_files.py::test_read_csv_by_headers PASSED                      [ 67%]
+test_read_files.py::test_read_csv_by_headers_below_start PASSED          [ 69%]
+test_read_files.py::test_read_csv_by_index PASSED                        [ 71%]
+test_read_files.py::test_read_csv_by_index_below_start PASSED            [ 73%]
+test_read_files.py::test_read_text_by_header PASSED                      [ 75%]
+test_read_files.py::test_read_text_by_header_below_start PASSED          [ 76%]
+test_read_files.py::test_read_text_by_index PASSED                       [ 78%]
+test_read_files.py::test_read_text_by_index_below_start PASSED           [ 80%]
+test_read_files.py::test_read_excel_by_header PASSED                     [ 82%]
+test_read_files.py::test_read_excel_by_header_below_start PASSED         [ 84%]
+test_read_files.py::test_read_excel_by_index PASSED                      [ 86%]
+test_read_files.py::test_read_excel_by_index_below_start PASSED          [ 88%]
+test_read_files.py::test_no_db_exists PASSED                             [ 90%]
+test_read_files.py::test_read_database_from_class PASSED                 [ 92%]
+test_read_files.py::test_simple_sqlite_query PASSED                      [ 94%]
+test_read_files.py::test_read_json PASSED                                [ 96%]
+test_read_files.py::test_read_xml PASSED                                 [ 98%]
+test_read_files.py::test_read_yaml_file FAILED                           [100%]
 
-============================== 51 passed in 0.29s ==============================
-Sun Apr 18 07:43:58 PM MDT 2021
+=================================== FAILURES ===================================
+_____________________________ test_read_yaml_file ______________________________
+
+    def test_read_yaml_file():
+        if plat in lin_plat:
+            file = '../data/test/test.yaml'
+        else:
+            file = r'..\data\test\test.yaml'
+        db = read_yaml_file(file)
+>       assert db['apples'] == 20
+E       KeyError: 'apples'
+
+test_read_files.py:744: KeyError
+=========================== short test summary info ============================
+FAILED test_read_files.py::test_read_yaml_file - KeyError: 'apples'
+========================= 1 failed, 51 passed in 0.30s =========================
+Sun Apr 18 08:12:03 PM MDT 2021
