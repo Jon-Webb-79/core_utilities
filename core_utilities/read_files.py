@@ -6,6 +6,8 @@ import pandas as pd
 from typing import List, Dict
 import sqlite3
 import json
+from bs4 import BeautifulSoup
+#from lxml import objectify
 # - If a package and a module within the package is to be imported
 #   uncomment the following lines where dir is the directory containing
 #   the source files.  These lines should go above the module imports
@@ -1228,11 +1230,103 @@ def read_json_file(file_name: str) -> Dict:
     :return db: The json string
 
     This function reads a .json file and captures its contents as a dictionary
-    of dictionaries
+    of dictionaries.  An example might look like the code snipped below, assuming
+    a json file with the following information in a file titled json.json
+
+    .. code-block:: text
+
+        {"widget": {
+         "debug": "on",
+         "window": {
+         "title": "Sample Konfabulator Widget",
+         "name": "main_window",
+         "width": 500,
+         "height": 500
+        },
+        "image": {
+        "src": "Images/Sun.png",
+        "name": "sun1",
+        "hOffset": 250,
+        "vOffset": 250,
+        "alignment": "center"
+       },
+        "text": {
+        "data": "Click Here",
+        "size": 36,
+        "style": "bold",
+        "name": "text1",
+        "hOffset": 250,
+        "vOffset": 100,
+        "alignment": "center",
+        "onMouseUp": "sun1.opacity = (sun1.opacity / 100) * 90;"
+         }}
+
+    .. code-block:: python
+
+       > file = json.json
+       > dat = read_json_file(file)
+       > print(dat['widget']['debug'])
+       'on'
     """
     with open(file_name) as file:
         db = json.load(file)
     return db
+# --------------------------------------------------------------------------------
+
+
+def read_xml_file(file_name: str):
+    """
+
+    :param file_name: The name of the xml file to be opened to include the
+                      path length
+    :return bs_data: The xml data as a beautiful soup object.  For more details
+                     on parsing beautiful soup data see 
+                     `beautiful soup <https://www.crummy.com/software/BeautifulSoup/bs4/doc/>_`
+
+    This function reads in a xml file and returns its contents as a text string that
+    can be parsed with a beautiful soup function.  Asume a file titled xml.xml
+    with the contents shown below.
+
+    .. code-block:: text
+
+       <widget>
+       <debug>on</debug>
+       <window title="Sample Konfabulator Widget">
+           <name>main_window</name>
+           <width>500</width>
+           <height>500</height>
+       </window>
+       <image src="Images/Sun.png" name="sun1">
+           <hOffset>250</hOffset>
+           <vOffset>250</vOffset>
+           <alignment>center</alignment>
+       </image>
+       <text data="Click Here" size="36" style="bold">
+           <name>text1</name>
+           <hOffset>250</hOffset>
+           <vOffset>100</vOffset>
+           <alignment>center</alignment>
+           <onMouseUp>
+               sun1.opacity = (sun1.opacity / 100) * 90;
+           </onMouseUp>
+       </text>
+       </widget>
+
+    .. code-block:: python
+
+       > file_name = 'xml.xml'
+       > db = read_xml_file(file_name)
+       > db = read_xml_file(file)
+       > img_name =db.find(src="Images/Sun.png").get_text()
+       > print(img_name)
+       250
+       250
+       center
+    """
+    with open(file_name, 'r') as f:
+        data = f.read()
+    bs_data = BeautifulSoup(data, "xml")
+    return bs_data
 # ================================================================================
 # ================================================================================
 # eof

@@ -16,6 +16,7 @@ from core_utilities.read_files import read_excel_columns_by_headers
 from core_utilities.read_files import read_excel_columns_by_index
 from core_utilities.read_files import ManageSQLiteDB
 from core_utilities.read_files import simple_sqlite_query, read_json_file
+from core_utilities.read_files import read_xml_file
 # ================================================================================
 # ================================================================================
 # Date:    Month Day, Year
@@ -720,6 +721,17 @@ def test_read_json():
         file = r'..\data\test\json.json'
     dat = read_json_file(file)
     assert dat['widget']['debug'] == 'on'
+# --------------------------------------------------------------------------------
+
+
+def test_read_xml():
+    if plat in lin_plat:
+        file = '../data/test/xml.xml'
+    else:
+        file = r'..\data\test\xml.xml'
+    db = read_xml_file(file)
+    img_name =db.find(src="Images/Sun.png").get_text()
+    assert img_name[0:4] == '\n250'
 # ================================================================================
 # ================================================================================
 # eof
