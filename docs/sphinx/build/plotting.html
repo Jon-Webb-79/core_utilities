@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plotting &#8212; Core Utilities 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="read_files" href="read_files.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="read_files.html" title="read_files"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Core Utilities 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Plotting</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="plotting">
+<h1>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h1>
+<p>This module contains classes that can be used to simplify the process of plotting
+data contained in a pandas dataframe for static and web based plots.</p>
+<div class="section" id="matplotdataframe">
+<h2>MatPlotDataFrame<a class="headerlink" href="#matplotdataframe" title="Permalink to this headline">¶</a></h2>
+<p>This class contains methods that can be used to plot data in a pandas dataframe.  This class
+was written to accomodate data that is organized in different ways within the dataframe.</p>
+<dl class="py class">
+<dt id="plotting.MatPlotDataFrame">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">plotting.</span></code><code class="sig-name descname"><span class="pre">MatPlotDataFrame</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncols</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sharex</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sharey</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subplot_kw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gridspec_kw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/plotting.html#MatPlotDataFrame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plotting.MatPlotDataFrame" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nrows</strong> – Number of rows of the subplot grid, defaulted to 1</p></li>
+<li><p><strong>ncols</strong> – Number of columns of the subplot grid, defaulted to 1</p></li>
+<li><p><strong>sharex/sharey</strong> – Controls sharing of properties among x (sharex)
+or y (sharey) axes.
+* True or ‘all’, x or y axis will be shared among all
+subplots
+* False or ‘none’, each subplot x or y-axis will be
+independent
+* ‘row’ each subplot row will share an x or y axis
+* ‘col’ each subplot column will share an x or y axis</p></li>
+<li><p><strong>squeeze</strong> – If true, extra dimensions are squeezed out from the returned
+array of Axes.</p></li>
+<li><p><strong>subplot_kw</strong> – Dictionary with keywords bassed to the
+add_subplot call</p></li>
+<li><p><strong>gridspec_kw</strong> – Dict with keywords passed to the GridSpec
+constructor</p></li>
+</ul>
+</dd>
+</dl>
+<p>This class allows a user to plot data from within one or multiple data
+frame in different ways.  In addition, this class allows a user to mix
+different plotting methods into one plot</p>
+<dl class="py method">
+<dt id="plotting.MatPlotDataFrame.scatter_plot_parse_column">
+<code class="sig-name descname"><span class="pre">scatter_plot_parse_column</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_header</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_header</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parsing_header</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_values</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker_colors</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">['None']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker_style</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">['None']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_alpha</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.float32</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'black'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_pos</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'upper</span> <span class="pre">right'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_scale</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'LIN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_scale</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'LIN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_font_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">18</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_font_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">18</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_font_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">24</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">35</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker_edge_width</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.float32</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_style</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'grey'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/plotting.html#MatPlotDataFrame.scatter_plot_parse_column"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plotting.MatPlotDataFrame.scatter_plot_parse_column" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – A pandas dataframe containing data to be plotted</p></li>
+<li><p><strong>x_header</strong> – The column header containing data to be plotted in the
+x-axis</p></li>
+<li><p><strong>y_header</strong> – The column header containing data to be plotted in the
+y-axis</p></li>
+<li><p><strong>parsing_header</strong> – The column container containing key words that are used
+to determine what data is plotted</p></li>
+<li><p><strong>column_values</strong> – The keywords that exist within the column defined by parsing
+header.  The function will filter the dataframe to only
+contain rows where this keyword is present</p></li>
+<li><p><strong>style_name</strong> – The plot style, defaulted to ‘default’.
+See :href <cite>styles&lt;https://matplotlib.org/stable/api/style_api.html&gt;</cite></p></li>
+<li><p><strong>marker_colors</strong> – A list of marker colors, where each marker color
+corresponds to each data set.  This parameter has a
+default color lists that can accomodate 18 different
+data sets.  The user can override the default colors
+with a list of their own.  Potential colors can be
+found at :href <cite>colors&lt;https://matplotlib.org/stable/gallery/color/named_colors.html&gt;</cite></p></li>
+<li><p><strong>marker_style</strong> – A list of marker styles, where each marker style corresponds
+to a data set.  This parameter has a default list of 18 circle
+marker styles that the user can override.  Marker styles
+can be found at :href <cite>marker style&lt;https://matplotlib.org/stable/api/markers_api.html&gt;</cite></p></li>
+<li><p><strong>fill_alpha</strong> – The density of the marker fill.  Defaulted to 0.7</p></li>
+<li><p><strong>edge_color</strong> – The color of the line surrounding the marker</p></li>
+<li><p><strong>x_label</strong> – The x-axis label, defaulted to ‘’</p></li>
+<li><p><strong>y_label</strong> – The y-axis label, defaulted to ‘’</p></li>
+<li><p><strong>title</strong> – The plot title, defaulted to ‘’</p></li>
+<li><p><strong>x_scale</strong> – ‘LOG’ or ‘LIN’, defaulted to ‘LIN’</p></li>
+<li><p><strong>y_scale</strong> – ‘LOG’ or ‘LIN’, defaulted to ‘LIN’</p></li>
+<li><p><strong>label_pos</strong> – The position of the legend in the plot.  Defaulted to upper right</p></li>
+<li><p><strong>label_font_size</strong> – The label font size, defaulted to 18</p></li>
+<li><p><strong>tick_font_size</strong> – The tick font size, defaulted to 18</p></li>
+<li><p><strong>marker_size</strong> – The size of the markers, defaulted to 35</p></li>
+<li><p><strong>marker_edge_width</strong> – The width of the line surrounding each marker.
+Defaulted to 0.8</p></li>
+<li><p><strong>grid</strong> – True if a grid is desired.  Defaulted to False</p></li>
+<li><p><strong>row</strong> – The row within the plot grid where this plot will be
+placed.  Defaulted to 1</p></li>
+<li><p><strong>col</strong> – The column within the plot grid where this plot will
+be placed.  Defaulted to 1</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">length</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">length</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">linear</span> <span class="o">=</span> <span class="n">x</span>
+<span class="o">&gt;</span> <span class="n">squared</span> <span class="o">=</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">2.0</span>
+<span class="o">&gt;</span> <span class="n">lin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="s1">&#39;squared&#39;</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="c1"># Combine arrays into one</span>
+<span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<span class="o">&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">linear</span><span class="p">,</span> <span class="n">squared</span><span class="p">))</span>
+<span class="o">&gt;</span> <span class="n">power</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">lin</span><span class="p">,</span> <span class="n">sq</span><span class="p">))</span>
+<span class="o">&gt;</span> <span class="c1"># Create dataframe</span>
+<span class="o">&gt;</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;power&#39;</span><span class="p">:</span> <span class="n">power</span><span class="p">}</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="c1"># Plot data</span>
+<span class="o">&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">MatPlotDataFrame</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">parsing_header</span> <span class="o">=</span> <span class="s1">&#39;power&#39;</span>
+<span class="o">&gt;</span> <span class="n">column_values</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="s1">&#39;squared&#39;</span><span class="p">]</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">scatter_plot_filter_column</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">parsing_header</span><span class="p">,</span>
+                               <span class="n">column_values</span><span class="p">,</span>
+                               <span class="n">marker_colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">],</span>
+                               <span class="n">marker_style</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;^&#39;</span><span class="p">],</span>
+                               <span class="n">label_pos</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">show_plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/mat_scatter_test1.eps" class="align-center" src="_images/mat_scatter_test1.eps" />
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plotting</a><ul>
+<li><a class="reference internal" href="#matplotdataframe">MatPlotDataFrame</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="read_files.html"
+                        title="previous chapter">read_files</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/plotting.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="read_files.html" title="read_files"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Core Utilities 0.1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Plotting</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Jonathan A. Webb.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+    </div>
+  </body>
+</html>

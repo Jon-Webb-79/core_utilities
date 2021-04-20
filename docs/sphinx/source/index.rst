@@ -13,6 +13,7 @@ Welcome to Core Utilities's documentation!
    Introduction
    operating_system
    read_files
+   plotting
 
 
 Indices and tables

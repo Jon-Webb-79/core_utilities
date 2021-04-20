@@ -32,23 +32,18 @@ class MatPlotDataFrame:
     :param ncols: Number of columns of the subplot grid, defaulted to 1
     :param sharex/sharey: Controls sharing of properties among x (sharex)
                           or y (sharey) axes.
-                          * True or 'all': x or y-axis will be shared among all
-                            subplots
-                          * False or 'none': each subplot x or y-axis will be
-                            independent
+                          * True or 'all', x or y axis will be shared among all
+                          subplots
+                          * False or 'none', each subplot x or y-axis will be
+                          independent
                           * 'row' each subplot row will share an x or y axis
-                          * 'col' each subplot column will share an x or y axis.
-                          When  subplots have a shared x-axis along a column, only the
-                          x tick labels of the bottom subplot are created. Similarly
-                          when subplots have a shared y axis along a row, only the
-                          y tick labels of the first column are created.
-
+                          * 'col' each subplot column will share an x or y axis
     :param squeeze: If true, extra dimensions are squeezed out from the returned
                     array of Axes.
-                    :param subplot_kw: Dictionary  with keywords bassed to the
-                                       add_subplot call
-                    :param gridspec_kw: Dict with keywords passed to the GridSpec
-                                        constructor
+    :param subplot_kw: Dictionary with keywords bassed to the
+                       add_subplot call
+    :param gridspec_kw: Dict with keywords passed to the GridSpec
+                        constructor
 
     This class allows a user to plot data from within one or multiple data
     frame in different ways.  In addition, this class allows a user to mix
