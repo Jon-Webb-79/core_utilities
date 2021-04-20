@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test &#8212; Core Utilities 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Core Utilities 0.1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">test</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for test</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Import packages here</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="c1"># ================================================================================</span>
+<span class="c1"># ================================================================================</span>
+<span class="c1"># Date:    Month Day, Year</span>
+<span class="c1"># Purpose: Describe the purpose of functions of this file</span>
+
+<span class="c1"># Source Code Metadata</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Jonathan A. Webb&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2021, Jon Webb Inc.&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;1.0&quot;</span>
+<span class="c1"># ================================================================================</span>
+<span class="c1"># ================================================================================</span>
+<span class="c1"># Insert Code here</span>
+
+
+<div class="viewcode-block" id="ReadTextFileKeywords"><a class="viewcode-back" href="../read_files.html#test.ReadTextFileKeywords">[docs]</a><span class="k">class</span> <span class="nc">ReadTextFileKeywords</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class to find keywords in a text file and the the variable(s)</span>
+<span class="sd">    to the right of the key word.  This class must inherit the</span>
+<span class="sd">    ``FileUtilities`` class</span>
+
+
+<span class="sd">    :param file_name: The name of the file being read to include the</span>
+<span class="sd">                      path-link</span>
+
+<span class="sd">    For the purposes of demonstrating the use of this class, assume</span>
+<span class="sd">    a text file titled ``test_file.txt`` with the following contents.</span>
+
+
+<span class="sd">    .. code-block:: text</span>
+
+<span class="sd">        sentence: This is a short sentence!</span>
+<span class="sd">        float: 3.1415 # this is a float comment</span>
+<span class="sd">        double: 3.141596235941 # this is a double comment</span>
+<span class="sd">        String: test # this is a string comment</span>
+<span class="sd">        Integer Value: 3 # This is an integer comment</span>
+<span class="sd">        float list: 1.2 3.4 4.5 5.6 6.7</span>
+<span class="sd">        double list: 1.12321 344.3454453 21.434553</span>
+<span class="sd">        integer list: 1 2 3 4 5 6 7</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="n">file_name</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;FATAL ERROR: &#39;</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="ReadTextFileKeywords.read_double"><a class="viewcode-back" href="../read_files.html#test.ReadTextFileKeywords.read_double">[docs]</a>    <span class="k">def</span> <span class="nf">read_double</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_words</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param key_words: The key word that proceeds the data to be</span>
+<span class="sd">                          read</span>
+<span class="sd">        :return data: The float value following the **key_word** on the</span>
+<span class="sd">                      text file.  This variable is returned as a</span>
+<span class="sd">                      np.float64 data type</span>
+
+<span class="sd">        This function reads a text file and searches for a key word which</span>
+<span class="sd">        can be a single word or a string of words.  This function will read</span>
+<span class="sd">        the first data point following the key word(s) on the text file as a float value.</span>
+<span class="sd">        The text file can also contain a comment line following the variable</span>
+<span class="sd">        being read.  For example we could use this class to read the double</span>
+<span class="sd">        value 3.141596235941 in the following manner.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            &gt; dat = ReadTextFileKeywords(&#39;test_file.txt&#39;)</span>
+<span class="sd">            &gt; double_data = dat.read_double(&#39;double:&#39;)</span>
+<span class="sd">            &gt; print(double_data)</span>
+<span class="sd">            3.141596235941</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_sentence</span><span class="p">(</span><span class="n">key_words</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="ReadTextFileKeywords.read_double_list"><a class="viewcode-back" href="../read_files.html#test.ReadTextFileKeywords.read_double_list">[docs]</a>    <span class="k">def</span> <span class="nf">read_double_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_words</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param key_words: The key word that proceeds the data to be</span>
+<span class="sd">                          read</span>
+<span class="sd">        :return data: The string values following the **key_word** on the</span>
+<span class="sd">                      text file.  This variable is returned as a List of</span>
+<span class="sd">                      string values</span>
+
+<span class="sd">        This function reads a text file and searches for a key word which</span>
+<span class="sd">        can be a single word or a string of words.  This function will read</span>
+<span class="sd">        the the data points following the key word(s) on the text file as a</span>
+<span class="sd">        numpy.float64 value. The text file can also contain a comment line following</span>
+<span class="sd">        the variable being read.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            &gt; dat = ReadTextFileKeywords(&#39;test_file.txt&#39;)</span>
+<span class="sd">            &gt; str_data = dat.read_double_list(&#39;double list:&#39;)</span>
+<span class="sd">            &gt; print(str_data)</span>
+<span class="sd">            [1.12321, 344.3454453, 21.434553]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_sentence</span><span class="p">(</span><span class="n">key_words</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">values</span></div>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="ReadTextFileKeywords.read_float"><a class="viewcode-back" href="../read_files.html#test.ReadTextFileKeywords.read_float">[docs]</a>    <span class="k">def</span> <span class="nf">read_float</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_words</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param key_words: The key word that proceeds the data to be</span>
+<span class="sd">                          read</span>
+<span class="sd">        :return data: The float value following the **key_word** on the</span>
+<span class="sd">                      text file.  This variable is returned as a</span>
+<span class="sd">                      np.float32 data type</span>
+
+<span class="sd">        This function reads a text file and searches for a key word which</span>
+<span class="sd">        can be a single word or a string of words.  This function will read</span>
+<span class="sd">        the first data point following the key word(s) on the text file as a float value.</span>
+<span class="sd">        The text file can also contain a comment line following the variable</span>
+<span class="sd">        being read.  For example we could use this class to read the float</span>
+<span class="sd">        value 3.1415 in the following manner.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">           &gt; dat = ReadTextFileKeywords(&#39;test_file.txt&#39;)</span>
+<span class="sd">           &gt; float_data = dat.read_float(&#39;float data:&#39;)</span>
+<span class="sd">           &gt; print(float_data)</span>
+<span class="sd">           3.1415</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_sentence</span><span class="p">(</span><span class="n">key_words</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="ReadTextFileKeywords.read_float_list"><a class="viewcode-back" href="../read_files.html#test.ReadTextFileKeywords.read_float_list">[docs]</a>    <span class="k">def</span> <span class="nf">read_float_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_words</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param key_words: The key word that proceeds the data to be</span>
+<span class="sd">                          read</span>
+<span class="sd">        :return data: The string values following the **key_word** on the</span>
+<span class="sd">                      text file.  This variable is returned as a List of</span>
+<span class="sd">                      numpy.float32 values</span>
+
+<span class="sd">        This function reads a text file and searches for a key word which</span>
+<span class="sd">        can be a single word or a string of words.  This function will read</span>
+<span class="sd">        the the data points following the key word(s) on the text file as a</span>
+<span class="sd">        float value. The text file can also contain a comment line following</span>
+<span class="sd">        the variable being read.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            &gt; dat = ReadTextFileKeywords(&#39;test_file.txt&#39;)</span>
+<span class="sd">            &gt; float_data = dat.read_float_list(&#39;float list&#39;)</span>
+<span class="sd">            &gt; print(float_data)</span>
+<span class="sd">            [1.2, 3.4, 4.5, 5.6, 6.7]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_sentence</span><span class="p">(</span><span class="n">key_words</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">values</span></div>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="ReadTextFileKeywords.read_integer"><a class="viewcode-back" href="../read_files.html#test.ReadTextFileKeywords.read_integer">[docs]</a>    <span class="k">def</span> <span class="nf">read_integer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_words</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param key_words: The key word that proceeds the data to be</span>
+<span class="sd">                          read</span>
+<span class="sd">        :return data: The integer value following the **key_word** on the</span>
+<span class="sd">                      text file.  This variable is returned as a np.int32</span>
+<span class="sd">                      data type</span>
+
+<span class="sd">        This function reads a text file and searches for a key word which</span>
+<span class="sd">        can be a single word or a string of words.  This function will read</span>
+<span class="sd">        the the first data point following the key word(s) on the text file as a</span>
+<span class="sd">        integer value. The text file can also contain a comment line following</span>
+<span class="sd">        the variable being read.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">           &gt; dat = ReadTextFileKeywords(&#39;test_file.txt&#39;)</span>
+<span class="sd">           &gt; int_data = dat.read_float(&#39;Integer Value&#39;)</span>
+<span class="sd">           &gt; print(int_data)</span>
+<span class="sd">           3</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_sentence</span><span class="p">(</span><span class="n">key_words</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="ReadTextFileKeywords.read_integer_list"><a class="viewcode-back" href="../read_files.html#test.ReadTextFileKeywords.read_integer_list">[docs]</a>    <span class="k">def</span> <span class="nf">read_integer_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_words</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param key_words: The key word that proceeds the data to be</span>
+<span class="sd">                          read</span>
+<span class="sd">        :return data: The string values following the **key_word** on the</span>
+<span class="sd">                      text file.  This variable is returned as a List of</span>
+<span class="sd">                      numpy.float32 values</span>
+
+<span class="sd">        This function reads a text file and searches for a key word which</span>
+<span class="sd">        can be a single word or a string of words.  This function will read</span>
+<span class="sd">        the the data points following the key word(s) on the text file as an</span>
+<span class="sd">        integer value. The text file can also contain a comment line following</span>
+<span class="sd">        the variable being read.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            &gt; dat = ReadTextFileKeywords(&#39;test_file.txt&#39;)</span>
+<span class="sd">            &gt; float_data = dat.read_integer_list(&#39;integer list:&#39;)</span>
+<span class="sd">            &gt; print(float_data)</span>
+<span class="sd">            [1, 2, 3, 4, 5, 6, 7]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_sentence</span><span class="p">(</span><span class="n">key_words</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">values</span></div>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="ReadTextFileKeywords.read_sentence"><a class="viewcode-back" href="../read_files.html#test.ReadTextFileKeywords.read_sentence">[docs]</a>    <span class="k">def</span> <span class="nf">read_sentence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_words</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param key_words: The key word that proceeds the data to be</span>
+<span class="sd">                          read</span>
+<span class="sd">        :return data: The data following the **key_word** on the text file.</span>
+<span class="sd">                      The data is returned as a continuous string value</span>
+
+<span class="sd">        This function reads a text file and searches for a key word which</span>
+<span class="sd">        can be a single word or a string of words.  This function will read</span>
+<span class="sd">        the data following the key word(s) on the text file as a continuous string.</span>
+<span class="sd">        The text file can also contain a comment line following the variable</span>
+<span class="sd">        being read.  For example we could use this class to read the integer</span>
+<span class="sd">        value `This is a short sentence!` in the following manner.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">           &gt; dat = ReadTextFileKeywords(&#39;test_file.txt&#39;)</span>
+<span class="sd">           &gt; str_data = dat.read_float(&#39;sentence:&#39;)</span>
+<span class="sd">           &gt; print(str_data)</span>
+<span class="sd">           &#39;This is a short sentence!&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">input_words</span> <span class="o">=</span> <span class="n">key_words</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">Input_File</span><span class="p">:</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="n">Input_File</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                <span class="n">variable</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">input_words</span><span class="p">)):</span>
+                    <span class="k">if</span> <span class="n">input_words</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">variable</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                        <span class="k">break</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">counter</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_words</span><span class="p">):</span>
+                    <span class="n">start</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_words</span><span class="p">)</span>
+                    <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
+                    <span class="n">word</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+                        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">variable</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="k">return</span> <span class="n">word</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key_words</span><span class="p">,</span> <span class="s2">&quot; Keywords not found in &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">))</span></div>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="ReadTextFileKeywords.read_string"><a class="viewcode-back" href="../read_files.html#test.ReadTextFileKeywords.read_string">[docs]</a>    <span class="k">def</span> <span class="nf">read_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_words</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param key_words: The key word that proceeds the data to be</span>
+<span class="sd">                          read</span>
+<span class="sd">        :return data: The string value following the **key_word** on the</span>
+<span class="sd">                      text file.  This variable is returned as a str</span>
+<span class="sd">                      data type</span>
+
+<span class="sd">        This function reads a text file and searches for a key word which</span>
+<span class="sd">        can be a single word or a string of words.  This function will read</span>
+<span class="sd">        the the first data point following the key word(s) on the text file as a</span>
+<span class="sd">        string value. The text file can also contain a comment line following</span>
+<span class="sd">        the variable being read.  For example we could use this class to</span>
+<span class="sd">        read the string value `test` in the following manner.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">           &gt; dat = ReadTextFileKeywords(&#39;test_file.txt&#39;)</span>
+<span class="sd">           &gt; str_data = dat.read_float(&#39;String:&#39;)</span>
+<span class="sd">           &gt; print(str_data)</span>
+<span class="sd">           &#39;test&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_sentence</span><span class="p">(</span><span class="n">key_words</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="ReadTextFileKeywords.read_string_list"><a class="viewcode-back" href="../read_files.html#test.ReadTextFileKeywords.read_string_list">[docs]</a>    <span class="k">def</span> <span class="nf">read_string_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_words</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param key_words: The key word that proceeds the data to be</span>
+<span class="sd">                          read</span>
+<span class="sd">        :return data: The string values following the **key_word** on the</span>
+<span class="sd">                      text file.  This variable is returned as a List of</span>
+<span class="sd">                      string values</span>
+
+<span class="sd">        This function reads a text file and searches for a key word which</span>
+<span class="sd">        can be a single word or a string of words.  This function will read</span>
+<span class="sd">        the the data points following the key word(s) on the text file as a</span>
+<span class="sd">        string value. The text file can also contain a comment line following</span>
+<span class="sd">        the variable being read.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            &gt; dat = ReadTextFileKeywords(&#39;test_file.txt&#39;)</span>
+<span class="sd">            &gt; str_data = dat.read_string_list(&#39;sentence:&#39;)</span>
+<span class="sd">            &gt; print(str_data)</span>
+<span class="sd">            [&#39;This&#39;, &#39;is&#39;, &#39;a&#39;, &#39;short&#39;, &#39;sentence!&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_sentence</span><span class="p">(</span><span class="n">key_words</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">values</span></div></div>
+<span class="c1"># ================================================================================</span>
+<span class="c1"># ================================================================================</span>
+
+
+<span class="k">def</span> <span class="nf">read_csv_columns_by_headers</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+                                <span class="n">data_type</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">type</span><span class="p">],</span>
+                                <span class="n">skip</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param file_name: The file name to include path-link</span>
+<span class="sd">    :param headers: A list of the names of the headers that contain</span>
+<span class="sd">                    columns which will be read</span>
+<span class="sd">    :param data_type: A list containing the data type of each column.  Data</span>
+<span class="sd">                      types are limited to ``numpy.int64``, ``numpy.float64``,</span>
+<span class="sd">                      and ``str``</span>
+<span class="sd">    :param skip: The number of lines to be skipped before reading data</span>
+<span class="sd">    :return df: A pandas dataframe containing all relevant information</span>
+
+<span class="sd">    This function assumes the file has a comma (i.e. ,) delimiter, if</span>
+<span class="sd">    it does not, then it is not a true .csv file and should be transformed</span>
+<span class="sd">    to a text function and read by the xx function.  Assume we have a .csv</span>
+<span class="sd">    file titled ``test.csv`` with the following format.</span>
+
+<span class="sd">    .. list-table:: test.csv</span>
+<span class="sd">      :widths: 6 10 6 6</span>
+<span class="sd">      :header-rows: 1</span>
+
+<span class="sd">      * - ID,</span>
+<span class="sd">        - Inventory,</span>
+<span class="sd">        - Weight_per,</span>
+<span class="sd">        - Number</span>
+<span class="sd">      * - 1,</span>
+<span class="sd">        - Shoes,</span>
+<span class="sd">        - 1.5,</span>
+<span class="sd">        - 5</span>
+<span class="sd">      * - 2,</span>
+<span class="sd">        - t-shirt,</span>
+<span class="sd">        - 1.8,</span>
+<span class="sd">        - 3,</span>
+<span class="sd">      * - 3,</span>
+<span class="sd">        - coffee,</span>
+<span class="sd">        - 2.1,</span>
+<span class="sd">        - 15</span>
+<span class="sd">      * - 4,</span>
+<span class="sd">        - books,</span>
+<span class="sd">        - 3.2,</span>
+<span class="sd">        - 48</span>
+
+<span class="sd">    This file can be read via the following command</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       &gt; file_name = &#39;test.csv&#39;</span>
+<span class="sd">       &gt; headers = [&#39;ID&#39;, &#39;Inventory&#39;, &#39;Weight_per&#39;, &#39;Number&#39;]</span>
+<span class="sd">       &gt; dat = [int, str, float, int]</span>
+<span class="sd">       &gt; df = read_csv_columns_by_headers(file_name, headers, dat)</span>
+<span class="sd">       &gt; print(df)</span>
+<span class="sd">           ID Inventory Weight_per Number</span>
+<span class="sd">        0  1  shoes     1.5        5</span>
+<span class="sd">        1  2  t-shirt   1.8        3</span>
+<span class="sd">        2  3  coffee    2.1        15</span>
+<span class="sd">        3  4  books     3.2        40</span>
+
+<span class="sd">    This function can also use the `skip` attributed read data when the</span>
+<span class="sd">    headers are not on the first line.  For instance, assume the following csv file;</span>
+
+<span class="sd">    .. list-table:: test1.csv</span>
+<span class="sd">      :widths: 16 8 5 5</span>
+<span class="sd">      :header-rows: 0</span>
+
+<span class="sd">      * - This line is used to provide metadata for the csv file</span>
+<span class="sd">        -</span>
+<span class="sd">        -</span>
+<span class="sd">        -</span>
+<span class="sd">      * - This line is as well</span>
+<span class="sd">        -</span>
+<span class="sd">        -</span>
+<span class="sd">        -</span>
+<span class="sd">      * - ID,</span>
+<span class="sd">        - Inventory,</span>
+<span class="sd">        - Weight_per,</span>
+<span class="sd">        - Number</span>
+<span class="sd">      * - 1,</span>
+<span class="sd">        - Shoes,</span>
+<span class="sd">        - 1.5,</span>
+<span class="sd">        - 5</span>
+<span class="sd">      * - 2,</span>
+<span class="sd">        - t-shirt,</span>
+<span class="sd">        - 1.8,</span>
+<span class="sd">        - 3,</span>
+<span class="sd">      * - 3,</span>
+<span class="sd">        - coffee,</span>
+<span class="sd">        - 2.1,</span>
+<span class="sd">        - 15</span>
+<span class="sd">      * - 4,</span>
+<span class="sd">        - books,</span>
+<span class="sd">        - 3.2,</span>
+<span class="sd">        - 48</span>
+
+<span class="sd">    This file can be read via the following command</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       &gt; file_name = &#39;test1.csv&#39;</span>
+<span class="sd">       &gt; headers = [&#39;ID&#39;, &#39;Inventory&#39;, &#39;Weight_per&#39;, &#39;Number&#39;]</span>
+<span class="sd">       &gt; dat = [int, str, float, int]</span>
+<span class="sd">       &gt; df = read_csv_columns_by_headers(file_name, headers, dat, skip=2)</span>
+<span class="sd">       &gt; print(df)</span>
+<span class="sd">           ID Inventory Weight_per Number</span>
+<span class="sd">        0  1  shoes     1.5        5</span>
+<span class="sd">        1  2  t-shirt   1.8        3</span>
+<span class="sd">        2  3  coffee    2.1        15</span>
+<span class="sd">        3  4  books     3.2        40</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;FATAL ERROR: &#39;</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39; does not exist&#39;</span><span class="p">))</span>
+    <span class="n">dat</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="n">data_type</span><span class="p">))</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dat</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="n">skip</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Core Utilities 0.1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">test</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Jonathan A. Webb.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+    </div>
+  </body>
+</html>

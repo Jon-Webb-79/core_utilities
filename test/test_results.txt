@@ -55,22 +55,7 @@ test_read_files.py::test_read_database_from_class PASSED                 [ 92%]
 test_read_files.py::test_simple_sqlite_query PASSED                      [ 94%]
 test_read_files.py::test_read_json PASSED                                [ 96%]
 test_read_files.py::test_read_xml PASSED                                 [ 98%]
-test_read_files.py::test_read_yaml_file FAILED                           [100%]
+test_read_files.py::test_read_yaml_file PASSED                           [100%]
 
-=================================== FAILURES ===================================
-_____________________________ test_read_yaml_file ______________________________
-
-    def test_read_yaml_file():
-        if plat in lin_plat:
-            file = '../data/test/test.yaml'
-        else:
-            file = r'..\data\test\test.yaml'
-        db = read_yaml_file(file)
->       assert db['apples'] == 20
-E       KeyError: 'apples'
-
-test_read_files.py:744: KeyError
-=========================== short test summary info ============================
-FAILED test_read_files.py::test_read_yaml_file - KeyError: 'apples'
-========================= 1 failed, 51 passed in 0.30s =========================
-Sun Apr 18 08:12:03 PM MDT 2021
+============================== 52 passed in 0.26s ==============================
+Mon Apr 19 06:24:59 PM MDT 2021

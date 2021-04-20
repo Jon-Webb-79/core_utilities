@@ -798,57 +798,6 @@ def read_text_columns_by_index(file_name: str, col_index: List[int],
         2  3  coffee    2.1        15
         3  4  books     3.2        40
 
-    This function can also use the `skip` attributed read data when the
-    headers are not on the first line.  For instance, assume the following csv file;
-
-    .. list-table:: test.xls
-      :widths: 16 8 5 5
-      :header-rows: 0
-
-      * - This line is used to provide metadata for the csv file
-        -
-        -
-        -
-      * - This line is as well
-        -
-        -
-        -
-      * - ID
-        - Inventory
-        - Weight_per
-        - Number
-      * - 1
-        - Shoes
-        - 1.5
-        - 5
-      * - 2
-        - t-shirt
-        - 1.8
-        - 3
-      * - 3
-        - coffee
-        - 2.1
-        - 15
-      * - 4
-        - books
-        - 3.2
-        - 48
-
-    This file can be read via the following command
-
-    .. code-block:: python
-
-       > file_name = 'test.txt'
-       > headers = ['ID', 'Inventory', 'Weight_per', 'Number']
-       > dat = [int, str, float, int]
-       > df = read_text_columns_by_index(file_name, headers,
-                                         dat, skip=2)
-       > print(df)
-           ID Inventory Weight_per Number
-        0  1  shoes     1.5        5
-        1  2  t-shirt   1.8        3
-        2  3  coffee    2.1        15
-        3  4  books     3.2        40
     """
     if not os.path.isfile(file_name):
         sys.exit('{}{}{}'.format('FATAL ERROR: ', file_name, ' does not exist'))
@@ -1284,9 +1233,9 @@ def read_xml_file(file_name: str):
                      on parsing beautiful soup data see 
                      `beautiful soup <https://www.crummy.com/software/BeautifulSoup/bs4/doc/>_`
 
-    This function reads in a xml file and returns its contents as a text string that
-    can be parsed with a beautiful soup function.  Asume a file titled xml.xml
-    with the contents shown below.
+    This function reads in a xml or an html file and returns its contents as a
+    text string that can be parsed with a beautiful soup function.  Asume a
+    file titled xml.xml with the contents shown below.
 
     .. code-block:: text
 

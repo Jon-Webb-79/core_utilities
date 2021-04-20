@@ -42,6 +42,1383 @@ types of files in different ways.  Within the module a user will find functional
 allows them to read text files and csv files by columns and keywords.  This module
 also contains functions to read sqlite databases, xml files, json files, yaml files,
 and html files</p>
+<div class="section" id="read-text-file-by-keywords">
+<h2>Read Text File by Keywords<a class="headerlink" href="#read-text-file-by-keywords" title="Permalink to this headline">¶</a></h2>
+<p>This class is used to open a text file.  The member functions will look for a specific keyword
+and then read the variable to the right of the keyword as a specific data type</p>
+<dl class="py class">
+<dt id="read_files.ReadTextFileKeywords">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">read_files.</span></code><code class="sig-name descname"><span class="pre">ReadTextFileKeywords</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/read_files.html#ReadTextFileKeywords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.ReadTextFileKeywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to find keywords in a text file and the the variable(s)
+to the right of the key word.  This class must inherit the
+<code class="docutils literal notranslate"><span class="pre">FileUtilities</span></code> class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_name</strong> – The name of the file being read to include the
+path-link</p>
+</dd>
+</dl>
+<p>For the purposes of demonstrating the use of this class, assume
+a text file titled <code class="docutils literal notranslate"><span class="pre">test_file.txt</span></code> with the following contents.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sentence: This is a short sentence!
+float: 3.1415 # this is a float comment
+double: 3.141596235941 # this is a double comment
+String: test # this is a string comment
+Integer Value: 3 # This is an integer comment
+float list: 1.2 3.4 4.5 5.6 6.7
+double list: 1.12321 344.3454453 21.434553
+integer list: 1 2 3 4 5 6 7
+</pre></div>
+</div>
+<dl class="py method">
+<dt id="read_files.ReadTextFileKeywords.read_double">
+<code class="sig-name descname"><span class="pre">read_double</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_words</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.float64</span><a class="reference internal" href="_modules/read_files.html#ReadTextFileKeywords.read_double"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.ReadTextFileKeywords.read_double" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key_words</strong> – The key word that proceeds the data to be
+read</p>
+</dd>
+<dt class="field-even">Return data</dt>
+<dd class="field-even"><p>The float value following the <strong>key_word</strong> on the
+text file.  This variable is returned as a
+np.float64 data type</p>
+</dd>
+</dl>
+<p>This function reads a text file and searches for a key word which
+can be a single word or a string of words.  This function will read
+the first data point following the key word(s) on the text file as a float value.
+The text file can also contain a comment line following the variable
+being read.  For example we could use this class to read the double
+value 3.141596235941 in the following manner.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="n">ReadTextFileKeywords</span><span class="p">(</span><span class="s1">&#39;test_file.txt&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">double_data</span> <span class="o">=</span> <span class="n">dat</span><span class="o">.</span><span class="n">read_double</span><span class="p">(</span><span class="s1">&#39;double:&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">double_data</span><span class="p">)</span>
+<span class="mf">3.141596235941</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="read_files.ReadTextFileKeywords.read_double_list">
+<code class="sig-name descname"><span class="pre">read_double_list</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_words</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float64</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/read_files.html#ReadTextFileKeywords.read_double_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.ReadTextFileKeywords.read_double_list" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key_words</strong> – The key word that proceeds the data to be
+read</p>
+</dd>
+<dt class="field-even">Return data</dt>
+<dd class="field-even"><p>The string values following the <strong>key_word</strong> on the
+text file.  This variable is returned as a List of
+string values</p>
+</dd>
+</dl>
+<p>This function reads a text file and searches for a key word which
+can be a single word or a string of words.  This function will read
+the the data points following the key word(s) on the text file as a
+numpy.float64 value. The text file can also contain a comment line following
+the variable being read.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="n">ReadTextFileKeywords</span><span class="p">(</span><span class="s1">&#39;test_file.txt&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">str_data</span> <span class="o">=</span> <span class="n">dat</span><span class="o">.</span><span class="n">read_double_list</span><span class="p">(</span><span class="s1">&#39;double list:&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">str_data</span><span class="p">)</span>
+<span class="p">[</span><span class="mf">1.12321</span><span class="p">,</span> <span class="mf">344.3454453</span><span class="p">,</span> <span class="mf">21.434553</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="read_files.ReadTextFileKeywords.read_float">
+<code class="sig-name descname"><span class="pre">read_float</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_words</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.float32</span><a class="reference internal" href="_modules/read_files.html#ReadTextFileKeywords.read_float"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.ReadTextFileKeywords.read_float" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key_words</strong> – The key word that proceeds the data to be
+read</p>
+</dd>
+<dt class="field-even">Return data</dt>
+<dd class="field-even"><p>The float value following the <strong>key_word</strong> on the
+text file.  This variable is returned as a
+np.float32 data type</p>
+</dd>
+</dl>
+<p>This function reads a text file and searches for a key word which
+can be a single word or a string of words.  This function will read
+the first data point following the key word(s) on the text file as a float value.
+The text file can also contain a comment line following the variable
+being read.  For example we could use this class to read the float
+value 3.1415 in the following manner.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="n">ReadTextFileKeywords</span><span class="p">(</span><span class="s1">&#39;test_file.txt&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">float_data</span> <span class="o">=</span> <span class="n">dat</span><span class="o">.</span><span class="n">read_float</span><span class="p">(</span><span class="s1">&#39;float data:&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">float_data</span><span class="p">)</span>
+<span class="mf">3.1415</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="read_files.ReadTextFileKeywords.read_float_list">
+<code class="sig-name descname"><span class="pre">read_float_list</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_words</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.float32</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/read_files.html#ReadTextFileKeywords.read_float_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.ReadTextFileKeywords.read_float_list" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key_words</strong> – The key word that proceeds the data to be
+read</p>
+</dd>
+<dt class="field-even">Return data</dt>
+<dd class="field-even"><p>The string values following the <strong>key_word</strong> on the
+text file.  This variable is returned as a List of
+numpy.float32 values</p>
+</dd>
+</dl>
+<p>This function reads a text file and searches for a key word which
+can be a single word or a string of words.  This function will read
+the the data points following the key word(s) on the text file as a
+float value. The text file can also contain a comment line following
+the variable being read.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="n">ReadTextFileKeywords</span><span class="p">(</span><span class="s1">&#39;test_file.txt&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">float_data</span> <span class="o">=</span> <span class="n">dat</span><span class="o">.</span><span class="n">read_float_list</span><span class="p">(</span><span class="s1">&#39;float list&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">float_data</span><span class="p">)</span>
+<span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">5.6</span><span class="p">,</span> <span class="mf">6.7</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="read_files.ReadTextFileKeywords.read_integer">
+<code class="sig-name descname"><span class="pre">read_integer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_words</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.int32</span><a class="reference internal" href="_modules/read_files.html#ReadTextFileKeywords.read_integer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.ReadTextFileKeywords.read_integer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key_words</strong> – The key word that proceeds the data to be
+read</p>
+</dd>
+<dt class="field-even">Return data</dt>
+<dd class="field-even"><p>The integer value following the <strong>key_word</strong> on the
+text file.  This variable is returned as a np.int32
+data type</p>
+</dd>
+</dl>
+<p>This function reads a text file and searches for a key word which
+can be a single word or a string of words.  This function will read
+the the first data point following the key word(s) on the text file as a
+integer value. The text file can also contain a comment line following
+the variable being read.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="n">ReadTextFileKeywords</span><span class="p">(</span><span class="s1">&#39;test_file.txt&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">int_data</span> <span class="o">=</span> <span class="n">dat</span><span class="o">.</span><span class="n">read_float</span><span class="p">(</span><span class="s1">&#39;Integer Value&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">int_data</span><span class="p">)</span>
+<span class="mi">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="read_files.ReadTextFileKeywords.read_integer_list">
+<code class="sig-name descname"><span class="pre">read_integer_list</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_words</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.int32</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/read_files.html#ReadTextFileKeywords.read_integer_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.ReadTextFileKeywords.read_integer_list" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key_words</strong> – The key word that proceeds the data to be
+read</p>
+</dd>
+<dt class="field-even">Return data</dt>
+<dd class="field-even"><p>The string values following the <strong>key_word</strong> on the
+text file.  This variable is returned as a List of
+numpy.float32 values</p>
+</dd>
+</dl>
+<p>This function reads a text file and searches for a key word which
+can be a single word or a string of words.  This function will read
+the the data points following the key word(s) on the text file as an
+integer value. The text file can also contain a comment line following
+the variable being read.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="n">ReadTextFileKeywords</span><span class="p">(</span><span class="s1">&#39;test_file.txt&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">float_data</span> <span class="o">=</span> <span class="n">dat</span><span class="o">.</span><span class="n">read_integer_list</span><span class="p">(</span><span class="s1">&#39;integer list:&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">float_data</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="read_files.ReadTextFileKeywords.read_sentence">
+<code class="sig-name descname"><span class="pre">read_sentence</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_words</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="reference internal" href="_modules/read_files.html#ReadTextFileKeywords.read_sentence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.ReadTextFileKeywords.read_sentence" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key_words</strong> – The key word that proceeds the data to be
+read</p>
+</dd>
+<dt class="field-even">Return data</dt>
+<dd class="field-even"><p>The data following the <strong>key_word</strong> on the text file.
+The data is returned as a continuous string value</p>
+</dd>
+</dl>
+<p>This function reads a text file and searches for a key word which
+can be a single word or a string of words.  This function will read
+the data following the key word(s) on the text file as a continuous string.
+The text file can also contain a comment line following the variable
+being read.  For example we could use this class to read the integer
+value <cite>This is a short sentence!</cite> in the following manner.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="n">ReadTextFileKeywords</span><span class="p">(</span><span class="s1">&#39;test_file.txt&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">str_data</span> <span class="o">=</span> <span class="n">dat</span><span class="o">.</span><span class="n">read_float</span><span class="p">(</span><span class="s1">&#39;sentence:&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">str_data</span><span class="p">)</span>
+<span class="s1">&#39;This is a short sentence!&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="read_files.ReadTextFileKeywords.read_string">
+<code class="sig-name descname"><span class="pre">read_string</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_words</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="reference internal" href="_modules/read_files.html#ReadTextFileKeywords.read_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.ReadTextFileKeywords.read_string" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key_words</strong> – The key word that proceeds the data to be
+read</p>
+</dd>
+<dt class="field-even">Return data</dt>
+<dd class="field-even"><p>The string value following the <strong>key_word</strong> on the
+text file.  This variable is returned as a str
+data type</p>
+</dd>
+</dl>
+<p>This function reads a text file and searches for a key word which
+can be a single word or a string of words.  This function will read
+the the first data point following the key word(s) on the text file as a
+string value. The text file can also contain a comment line following
+the variable being read.  For example we could use this class to
+read the string value <cite>test</cite> in the following manner.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="n">ReadTextFileKeywords</span><span class="p">(</span><span class="s1">&#39;test_file.txt&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">str_data</span> <span class="o">=</span> <span class="n">dat</span><span class="o">.</span><span class="n">read_float</span><span class="p">(</span><span class="s1">&#39;String:&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">str_data</span><span class="p">)</span>
+<span class="s1">&#39;test&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="read_files.ReadTextFileKeywords.read_string_list">
+<code class="sig-name descname"><span class="pre">read_string_list</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_words</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/read_files.html#ReadTextFileKeywords.read_string_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.ReadTextFileKeywords.read_string_list" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key_words</strong> – The key word that proceeds the data to be
+read</p>
+</dd>
+<dt class="field-even">Return data</dt>
+<dd class="field-even"><p>The string values following the <strong>key_word</strong> on the
+text file.  This variable is returned as a List of
+string values</p>
+</dd>
+</dl>
+<p>This function reads a text file and searches for a key word which
+can be a single word or a string of words.  This function will read
+the the data points following the key word(s) on the text file as a
+string value. The text file can also contain a comment line following
+the variable being read.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="n">ReadTextFileKeywords</span><span class="p">(</span><span class="s1">&#39;test_file.txt&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">str_data</span> <span class="o">=</span> <span class="n">dat</span><span class="o">.</span><span class="n">read_string_list</span><span class="p">(</span><span class="s1">&#39;sentence:&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">str_data</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;This&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;short&#39;</span><span class="p">,</span> <span class="s1">&#39;sentence!&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="read-columnar-data">
+<h2>Read Columnar Data<a class="headerlink" href="#read-columnar-data" title="Permalink to this headline">¶</a></h2>
+<p>These functions will read columnar data structures in csv, txt and xlsx files
+as a user defined data type.</p>
+<dl class="py function">
+<dt id="read_files.read_csv_columns_by_headers">
+<code class="sig-prename descclassname"><span class="pre">read_files.</span></code><code class="sig-name descname"><span class="pre">read_csv_columns_by_headers</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="_modules/read_files.html#read_csv_columns_by_headers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.read_csv_columns_by_headers" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> – The file name to include path-link</p></li>
+<li><p><strong>headers</strong> – A list of the names of the headers that contain
+columns which will be read</p></li>
+<li><p><strong>data_type</strong> – A list containing the data type of each column.  Data
+types are limited to <code class="docutils literal notranslate"><span class="pre">numpy.int64</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">str</span></code></p></li>
+<li><p><strong>skip</strong> – The number of lines to be skipped before reading data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return df</dt>
+<dd class="field-even"><p>A pandas dataframe containing all relevant information</p>
+</dd>
+</dl>
+<p>This function assumes the file has a comma (i.e. ,) delimiter, if
+it does not, then it is not a true .csv file and should be transformed
+to a text function and read by the xx function.  Assume we have a .csv
+file titled <code class="docutils literal notranslate"><span class="pre">test.csv</span></code> with the following format.</p>
+<table class="colwidths-given docutils align-default" id="id1">
+<caption><span class="caption-text">test.csv</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 36%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ID,</p></th>
+<th class="head"><p>Inventory,</p></th>
+<th class="head"><p>Weight_per,</p></th>
+<th class="head"><p>Number</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1,</p></td>
+<td><p>Shoes,</p></td>
+<td><p>1.5,</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>2,</p></td>
+<td><p>t-shirt,</p></td>
+<td><p>1.8,</p></td>
+<td><p>3,</p></td>
+</tr>
+<tr class="row-even"><td><p>3,</p></td>
+<td><p>coffee,</p></td>
+<td><p>2.1,</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-odd"><td><p>4,</p></td>
+<td><p>books,</p></td>
+<td><p>3.2,</p></td>
+<td><p>48</p></td>
+</tr>
+</tbody>
+</table>
+<p>This file can be read via the following command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;test.csv&#39;</span>
+<span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Inventory&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight_per&#39;</span><span class="p">,</span> <span class="s1">&#39;Number&#39;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">read_csv_columns_by_headers</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">dat</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">ID</span> <span class="n">Inventory</span> <span class="n">Weight_per</span> <span class="n">Number</span>
+ <span class="mi">0</span>  <span class="mi">1</span>  <span class="n">shoes</span>     <span class="mf">1.5</span>        <span class="mi">5</span>
+ <span class="mi">1</span>  <span class="mi">2</span>  <span class="n">t</span><span class="o">-</span><span class="n">shirt</span>   <span class="mf">1.8</span>        <span class="mi">3</span>
+ <span class="mi">2</span>  <span class="mi">3</span>  <span class="n">coffee</span>    <span class="mf">2.1</span>        <span class="mi">15</span>
+ <span class="mi">3</span>  <span class="mi">4</span>  <span class="n">books</span>     <span class="mf">3.2</span>        <span class="mi">40</span>
+</pre></div>
+</div>
+<p>This function can also use the <cite>skip</cite> attributed read data when the
+headers are not on the first line.  For instance, assume the following csv file;</p>
+<table class="colwidths-given docutils align-default" id="id2">
+<caption><span class="caption-text">test1.csv</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 24%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This line is used to provide metadata for the csv file</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>This line is as well</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ID,</p></td>
+<td><p>Inventory,</p></td>
+<td><p>Weight_per,</p></td>
+<td><p>Number</p></td>
+</tr>
+<tr class="row-even"><td><p>1,</p></td>
+<td><p>Shoes,</p></td>
+<td><p>1.5,</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>2,</p></td>
+<td><p>t-shirt,</p></td>
+<td><p>1.8,</p></td>
+<td><p>3,</p></td>
+</tr>
+<tr class="row-even"><td><p>3,</p></td>
+<td><p>coffee,</p></td>
+<td><p>2.1,</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-odd"><td><p>4,</p></td>
+<td><p>books,</p></td>
+<td><p>3.2,</p></td>
+<td><p>48</p></td>
+</tr>
+</tbody>
+</table>
+<p>This file can be read via the following command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;test1.csv&#39;</span>
+<span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Inventory&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight_per&#39;</span><span class="p">,</span> <span class="s1">&#39;Number&#39;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">read_csv_columns_by_headers</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">dat</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">ID</span> <span class="n">Inventory</span> <span class="n">Weight_per</span> <span class="n">Number</span>
+ <span class="mi">0</span>  <span class="mi">1</span>  <span class="n">shoes</span>     <span class="mf">1.5</span>        <span class="mi">5</span>
+ <span class="mi">1</span>  <span class="mi">2</span>  <span class="n">t</span><span class="o">-</span><span class="n">shirt</span>   <span class="mf">1.8</span>        <span class="mi">3</span>
+ <span class="mi">2</span>  <span class="mi">3</span>  <span class="n">coffee</span>    <span class="mf">2.1</span>        <span class="mi">15</span>
+ <span class="mi">3</span>  <span class="mi">4</span>  <span class="n">books</span>     <span class="mf">3.2</span>        <span class="mi">40</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="read_files.read_csv_columns_by_index">
+<code class="sig-prename descclassname"><span class="pre">read_files.</span></code><code class="sig-name descname"><span class="pre">read_csv_columns_by_index</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_names</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="_modules/read_files.html#read_csv_columns_by_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.read_csv_columns_by_index" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> – The file name to include path-link</p></li>
+<li><p><strong>col_index</strong> – A list of the columns to be read by number,
+starting with column 0 as the far left column</p></li>
+<li><p><strong>data_type</strong> – A list containing the data type of each column.  Data
+types are limited to <code class="docutils literal notranslate"><span class="pre">numpy.int64</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">str</span></code></p></li>
+<li><p><strong>col_names</strong> – A list containing the names to be given to
+each column</p></li>
+<li><p><strong>skip</strong> – The number of lines to be skipped before reading data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return df</dt>
+<dd class="field-even"><p>A pandas dataframe containing all relevant information</p>
+</dd>
+</dl>
+<p>This function assumes the file has a comma (i.e. ,) delimiter, if
+it does not, then it is not a true .csv file and should be transformed
+to a text function and read by the xx function.  Assume we have a .csv
+file titled <code class="docutils literal notranslate"><span class="pre">test.csv</span></code> with the following format.</p>
+<table class="colwidths-given docutils align-default" id="id3">
+<caption><span class="caption-text">test.csv</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 36%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>1,</p></td>
+<td><p>Shoes,</p></td>
+<td><p>1.5,</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-even"><td><p>2,</p></td>
+<td><p>t-shirt,</p></td>
+<td><p>1.8,</p></td>
+<td><p>3,</p></td>
+</tr>
+<tr class="row-odd"><td><p>3,</p></td>
+<td><p>coffee,</p></td>
+<td><p>2.1,</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-even"><td><p>4,</p></td>
+<td><p>books,</p></td>
+<td><p>3.2,</p></td>
+<td><p>48</p></td>
+</tr>
+</tbody>
+</table>
+<p>This file can be read via the following command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;test.csv&#39;</span>
+<span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Inventory&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight_per&#39;</span><span class="p">,</span> <span class="s1">&#39;Number&#39;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">read_csv_columns_by_index</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">dat</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">ID</span> <span class="n">Inventory</span> <span class="n">Weight_per</span> <span class="n">Number</span>
+ <span class="mi">0</span>  <span class="mi">1</span>  <span class="n">shoes</span>     <span class="mf">1.5</span>        <span class="mi">5</span>
+ <span class="mi">1</span>  <span class="mi">2</span>  <span class="n">t</span><span class="o">-</span><span class="n">shirt</span>   <span class="mf">1.8</span>        <span class="mi">3</span>
+ <span class="mi">2</span>  <span class="mi">3</span>  <span class="n">coffee</span>    <span class="mf">2.1</span>        <span class="mi">15</span>
+ <span class="mi">3</span>  <span class="mi">4</span>  <span class="n">books</span>     <span class="mf">3.2</span>        <span class="mi">40</span>
+</pre></div>
+</div>
+<p>This function can also use the <cite>skip</cite> attributed read data when the
+headers are not on the first line.  For instance, assume the following csv file;</p>
+<table class="colwidths-given docutils align-default" id="id4">
+<caption><span class="caption-text">test1.csv</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 24%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This line is used to provide metadata for the csv file</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>This line is as well</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1,</p></td>
+<td><p>Shoes,</p></td>
+<td><p>1.5,</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-even"><td><p>2,</p></td>
+<td><p>t-shirt,</p></td>
+<td><p>1.8,</p></td>
+<td><p>3,</p></td>
+</tr>
+<tr class="row-odd"><td><p>3,</p></td>
+<td><p>coffee,</p></td>
+<td><p>2.1,</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-even"><td><p>4,</p></td>
+<td><p>books,</p></td>
+<td><p>3.2,</p></td>
+<td><p>48</p></td>
+</tr>
+</tbody>
+</table>
+<p>This file can be read via the following command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;test1.csv&#39;</span>
+<span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Inventory&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight_per&#39;</span><span class="p">,</span> <span class="s1">&#39;Number&#39;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">read_csv_columns_by_index</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                 <span class="n">dat</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">ID</span> <span class="n">Inventory</span> <span class="n">Weight_per</span> <span class="n">Number</span>
+ <span class="mi">0</span>  <span class="mi">1</span>  <span class="n">shoes</span>     <span class="mf">1.5</span>        <span class="mi">5</span>
+ <span class="mi">1</span>  <span class="mi">2</span>  <span class="n">t</span><span class="o">-</span><span class="n">shirt</span>   <span class="mf">1.8</span>        <span class="mi">3</span>
+ <span class="mi">2</span>  <span class="mi">3</span>  <span class="n">coffee</span>    <span class="mf">2.1</span>        <span class="mi">15</span>
+ <span class="mi">3</span>  <span class="mi">4</span>  <span class="n">books</span>     <span class="mf">3.2</span>        <span class="mi">40</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="read_files.read_text_columns_by_headers">
+<code class="sig-prename descclassname"><span class="pre">read_files.</span></code><code class="sig-name descname"><span class="pre">read_text_columns_by_headers</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'\\s+'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="_modules/read_files.html#read_text_columns_by_headers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.read_text_columns_by_headers" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> – The file name to include path-link</p></li>
+<li><p><strong>headers</strong> – A list of the names of the headers that contain
+columns which will be read</p></li>
+<li><p><strong>data_type</strong> – A list containing the data type of each column.  Data
+types are limited to <code class="docutils literal notranslate"><span class="pre">numpy.int64</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">str</span></code></p></li>
+<li><p><strong>skip</strong> – The number of lines to be skipped before reading data</p></li>
+<li><p><strong>delimiter</strong> – The type of delimiter separating data in the text file.
+Defaulted to space delimited, where a space is one or
+more white spaces.  This function can use any delimiter,
+to include a comma separation; however, a comma delimiter
+should be a .csv file extension.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return df</dt>
+<dd class="field-even"><p>A pandas dataframe containing all relevant information</p>
+</dd>
+</dl>
+<p>This function assumes the file has a space delimiter, if
+Assume we have a .csv file titled <code class="docutils literal notranslate"><span class="pre">test.txt</span></code> with the following
+format.</p>
+<table class="colwidths-given docutils align-default" id="id5">
+<caption><span class="caption-text">test.txt</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 36%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ID</p></th>
+<th class="head"><p>Inventory</p></th>
+<th class="head"><p>Weight_per</p></th>
+<th class="head"><p>Number</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Shoes</p></td>
+<td><p>1.5</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>t-shirt</p></td>
+<td><p>1.8</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>coffee</p></td>
+<td><p>2.1</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>books</p></td>
+<td><p>3.2</p></td>
+<td><p>48</p></td>
+</tr>
+</tbody>
+</table>
+<p>This file can be read via the following command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;test.txt&#39;</span>
+<span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Inventory&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight_per&#39;</span><span class="p">,</span> <span class="s1">&#39;Number&#39;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">read_text_columns_by_headers</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">dat</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">ID</span> <span class="n">Inventory</span> <span class="n">Weight_per</span> <span class="n">Number</span>
+ <span class="mi">0</span>  <span class="mi">1</span>  <span class="n">shoes</span>     <span class="mf">1.5</span>        <span class="mi">5</span>
+ <span class="mi">1</span>  <span class="mi">2</span>  <span class="n">t</span><span class="o">-</span><span class="n">shirt</span>   <span class="mf">1.8</span>        <span class="mi">3</span>
+ <span class="mi">2</span>  <span class="mi">3</span>  <span class="n">coffee</span>    <span class="mf">2.1</span>        <span class="mi">15</span>
+ <span class="mi">3</span>  <span class="mi">4</span>  <span class="n">books</span>     <span class="mf">3.2</span>        <span class="mi">40</span>
+</pre></div>
+</div>
+<p>This function can also use the <cite>skip</cite> attributed read data when the
+headers are not on the first line.  For instance, assume the following csv file;</p>
+<table class="colwidths-given docutils align-default" id="id6">
+<caption><span class="caption-text">test.txt</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 24%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This line is used to provide metadata for the csv file</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>This line is as well</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ID</p></td>
+<td><p>Inventory</p></td>
+<td><p>Weight_per</p></td>
+<td><p>Number</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Shoes</p></td>
+<td><p>1.5</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>t-shirt</p></td>
+<td><p>1.8</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>coffee</p></td>
+<td><p>2.1</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>books</p></td>
+<td><p>3.2</p></td>
+<td><p>48</p></td>
+</tr>
+</tbody>
+</table>
+<p>This file can be read via the following command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;test.txt&#39;</span>
+<span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Inventory&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight_per&#39;</span><span class="p">,</span> <span class="s1">&#39;Number&#39;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">read_text_columns_by_headers</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                    <span class="n">dat</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">ID</span> <span class="n">Inventory</span> <span class="n">Weight_per</span> <span class="n">Number</span>
+ <span class="mi">0</span>  <span class="mi">1</span>  <span class="n">shoes</span>     <span class="mf">1.5</span>        <span class="mi">5</span>
+ <span class="mi">1</span>  <span class="mi">2</span>  <span class="n">t</span><span class="o">-</span><span class="n">shirt</span>   <span class="mf">1.8</span>        <span class="mi">3</span>
+ <span class="mi">2</span>  <span class="mi">3</span>  <span class="n">coffee</span>    <span class="mf">2.1</span>        <span class="mi">15</span>
+ <span class="mi">3</span>  <span class="mi">4</span>  <span class="n">books</span>     <span class="mf">3.2</span>        <span class="mi">40</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="read_files.read_text_columns_by_index">
+<code class="sig-prename descclassname"><span class="pre">read_files.</span></code><code class="sig-name descname"><span class="pre">read_text_columns_by_index</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_names</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'\\s+'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="_modules/read_files.html#read_text_columns_by_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.read_text_columns_by_index" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> – The file name to include path-link</p></li>
+<li><p><strong>col_index</strong> – A list of the columns to be read by number,
+starting with column 0 as the far left column</p></li>
+<li><p><strong>data_type</strong> – A list containing the data type of each column.  Data
+types are limited to <code class="docutils literal notranslate"><span class="pre">numpy.int64</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">str</span></code></p></li>
+<li><p><strong>col_names</strong> – A list containing the names to be given to
+each column</p></li>
+<li><p><strong>skip</strong> – The number of lines to be skipped before reading data</p></li>
+<li><p><strong>delimiter</strong> – The type of delimiter separating data in the text file.
+Defaulted to space delimited, where a space is one or
+more white spaces.  This function can use any delimiter,
+to include a comma separation; however, a comma delimiter
+should be a .csv file extension.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return df</dt>
+<dd class="field-even"><p>A pandas dataframe containing all relevant information</p>
+</dd>
+</dl>
+<p>Assume we have a .txt file titled <code class="docutils literal notranslate"><span class="pre">test.txt</span></code> with the following format.</p>
+<table class="colwidths-given docutils align-default" id="id7">
+<caption><span class="caption-text">test.txt</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 36%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Shoes</p></td>
+<td><p>1.5</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>t-shirt</p></td>
+<td><p>1.8</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>coffee</p></td>
+<td><p>2.1</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>books</p></td>
+<td><p>3.2</p></td>
+<td><p>48</p></td>
+</tr>
+</tbody>
+</table>
+<p>This file can be read via the following command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;test.txt&#39;</span>
+<span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Inventory&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight_per&#39;</span><span class="p">,</span> <span class="s1">&#39;Number&#39;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">read_text_columns_by_index</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">dat</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">ID</span> <span class="n">Inventory</span> <span class="n">Weight_per</span> <span class="n">Number</span>
+ <span class="mi">0</span>  <span class="mi">1</span>  <span class="n">shoes</span>     <span class="mf">1.5</span>        <span class="mi">5</span>
+ <span class="mi">1</span>  <span class="mi">2</span>  <span class="n">t</span><span class="o">-</span><span class="n">shirt</span>   <span class="mf">1.8</span>        <span class="mi">3</span>
+ <span class="mi">2</span>  <span class="mi">3</span>  <span class="n">coffee</span>    <span class="mf">2.1</span>        <span class="mi">15</span>
+ <span class="mi">3</span>  <span class="mi">4</span>  <span class="n">books</span>     <span class="mf">3.2</span>        <span class="mi">40</span>
+</pre></div>
+</div>
+<p>This function can also use the <cite>skip</cite> attributed read data when the
+headers are not on the first line.  For instance, assume the following csv file;</p>
+<table class="colwidths-given docutils align-default" id="id8">
+<caption><span class="caption-text">test.txt</span><a class="headerlink" href="#id8" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 24%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This line is used to provide metadata for the csv file</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>This line is as well</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ID</p></td>
+<td><p>Inventory</p></td>
+<td><p>Weight_per</p></td>
+<td><p>Number</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Shoes</p></td>
+<td><p>1.5</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>t-shirt</p></td>
+<td><p>1.8</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>coffee</p></td>
+<td><p>2.1</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>books</p></td>
+<td><p>3.2</p></td>
+<td><p>48</p></td>
+</tr>
+</tbody>
+</table>
+<p>This file can be read via the following command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;test.txt&#39;</span>
+<span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Inventory&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight_per&#39;</span><span class="p">,</span> <span class="s1">&#39;Number&#39;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">read_text_columns_by_index</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                 <span class="n">dat</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">ID</span> <span class="n">Inventory</span> <span class="n">Weight_per</span> <span class="n">Number</span>
+ <span class="mi">0</span>  <span class="mi">1</span>  <span class="n">shoes</span>     <span class="mf">1.5</span>        <span class="mi">5</span>
+ <span class="mi">1</span>  <span class="mi">2</span>  <span class="n">t</span><span class="o">-</span><span class="n">shirt</span>   <span class="mf">1.8</span>        <span class="mi">3</span>
+ <span class="mi">2</span>  <span class="mi">3</span>  <span class="n">coffee</span>    <span class="mf">2.1</span>        <span class="mi">15</span>
+ <span class="mi">3</span>  <span class="mi">4</span>  <span class="n">books</span>     <span class="mf">3.2</span>        <span class="mi">40</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="read_files.read_excel_columns_by_headers">
+<code class="sig-prename descclassname"><span class="pre">read_files.</span></code><code class="sig-name descname"><span class="pre">read_excel_columns_by_headers</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tab</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="_modules/read_files.html#read_excel_columns_by_headers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.read_excel_columns_by_headers" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> – The file name to include path-link.  Must be an
+.xls file format.  This code will <strong>not</strong> read .xlsx</p></li>
+<li><p><strong>tab</strong> – The tab or sheet name that data will be read from</p></li>
+<li><p><strong>headers</strong> – A list of the names of the headers that contain
+columns which will be read</p></li>
+<li><p><strong>data_type</strong> – A list containing the data type of each column.  Data
+types are limited to <code class="docutils literal notranslate"><span class="pre">numpy.int64</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">str</span></code></p></li>
+<li><p><strong>skip</strong> – The number of lines to be skipped before reading data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return df</dt>
+<dd class="field-even"><p>A pandas dataframe containing all relevant information</p>
+</dd>
+</dl>
+<p>Assume we have a .xls file titled <code class="docutils literal notranslate"><span class="pre">test.xls</span></code> with the following format
+in a tab titled <code class="docutils literal notranslate"><span class="pre">primary</span></code>.</p>
+<table class="colwidths-given docutils align-default" id="id9">
+<caption><span class="caption-text">test.xls</span><a class="headerlink" href="#id9" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 36%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ID</p></th>
+<th class="head"><p>Inventory</p></th>
+<th class="head"><p>Weight_per</p></th>
+<th class="head"><p>Number</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Shoes</p></td>
+<td><p>1.5</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>t-shirt</p></td>
+<td><p>1.8</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>coffee</p></td>
+<td><p>2.1</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>books</p></td>
+<td><p>3.2</p></td>
+<td><p>48</p></td>
+</tr>
+</tbody>
+</table>
+<p>This file can be read via the following command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;test.xls&#39;</span>
+<span class="o">&gt;</span> <span class="n">tab</span> <span class="o">=</span> <span class="s2">&quot;primary&quot;</span>
+<span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Inventory&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight_per&#39;</span><span class="p">,</span> <span class="s1">&#39;Number&#39;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">read_excel_columns_by_headers</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">tab</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">dat</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">ID</span> <span class="n">Inventory</span> <span class="n">Weight_per</span> <span class="n">Number</span>
+ <span class="mi">0</span>  <span class="mi">1</span>  <span class="n">shoes</span>     <span class="mf">1.5</span>        <span class="mi">5</span>
+ <span class="mi">1</span>  <span class="mi">2</span>  <span class="n">t</span><span class="o">-</span><span class="n">shirt</span>   <span class="mf">1.8</span>        <span class="mi">3</span>
+ <span class="mi">2</span>  <span class="mi">3</span>  <span class="n">coffee</span>    <span class="mf">2.1</span>        <span class="mi">15</span>
+ <span class="mi">3</span>  <span class="mi">4</span>  <span class="n">books</span>     <span class="mf">3.2</span>        <span class="mi">40</span>
+</pre></div>
+</div>
+<p>This function can also use the <cite>skip</cite> attributed read data when the
+headers are not on the first line.  For instance, assume the following csv file;</p>
+<table class="colwidths-given docutils align-default" id="id10">
+<caption><span class="caption-text">test.xls</span><a class="headerlink" href="#id10" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 24%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This line is used to provide metadata for the csv file</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>This line is as well</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ID</p></td>
+<td><p>Inventory</p></td>
+<td><p>Weight_per</p></td>
+<td><p>Number</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Shoes</p></td>
+<td><p>1.5</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>t-shirt</p></td>
+<td><p>1.8</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>coffee</p></td>
+<td><p>2.1</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>books</p></td>
+<td><p>3.2</p></td>
+<td><p>48</p></td>
+</tr>
+</tbody>
+</table>
+<p>This file can be read via the following command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;test.xls&#39;</span>
+<span class="o">&gt;</span> <span class="n">tab</span> <span class="o">=</span> <span class="s2">&quot;primary&quot;</span>
+<span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Inventory&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight_per&#39;</span><span class="p">,</span> <span class="s1">&#39;Number&#39;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">read_excel_columns_by_headers</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">tab</span><span class="p">,</span>
+                                     <span class="n">headers</span><span class="p">,</span> <span class="n">dat</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">ID</span> <span class="n">Inventory</span> <span class="n">Weight_per</span> <span class="n">Number</span>
+ <span class="mi">0</span>  <span class="mi">1</span>  <span class="n">shoes</span>     <span class="mf">1.5</span>        <span class="mi">5</span>
+ <span class="mi">1</span>  <span class="mi">2</span>  <span class="n">t</span><span class="o">-</span><span class="n">shirt</span>   <span class="mf">1.8</span>        <span class="mi">3</span>
+ <span class="mi">2</span>  <span class="mi">3</span>  <span class="n">coffee</span>    <span class="mf">2.1</span>        <span class="mi">15</span>
+ <span class="mi">3</span>  <span class="mi">4</span>  <span class="n">books</span>     <span class="mf">3.2</span>        <span class="mi">40</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="read_files.read_excel_columns_by_index">
+<code class="sig-prename descclassname"><span class="pre">read_files.</span></code><code class="sig-name descname"><span class="pre">read_excel_columns_by_index</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tab</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_index</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_names</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="_modules/read_files.html#read_excel_columns_by_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.read_excel_columns_by_index" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> – The file name to include path-link.  Must be an
+.xls file format.  This code will <strong>not</strong> read .xlsx</p></li>
+<li><p><strong>tab</strong> – The tab or sheet name that data will be read from</p></li>
+<li><p><strong>col_index</strong> – A list of the columns to be read by number,
+starting with column 0 as the far left column</p></li>
+<li><p><strong>col_names</strong> – A list containing the names to be given to
+each column</p></li>
+<li><p><strong>data_type</strong> – A list containing the data type of each column.  Data
+types are limited to <code class="docutils literal notranslate"><span class="pre">numpy.int64</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">str</span></code></p></li>
+<li><p><strong>skip</strong> – The number of lines to be skipped before reading data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return df</dt>
+<dd class="field-even"><p>A pandas dataframe containing all relevant information</p>
+</dd>
+</dl>
+<p>Assume we have a .txt file titled <code class="docutils literal notranslate"><span class="pre">test.xls</span></code> with the following format.</p>
+<table class="colwidths-given docutils align-default" id="id11">
+<caption><span class="caption-text">test.xls</span><a class="headerlink" href="#id11" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 36%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Shoes</p></td>
+<td><p>1.5</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>t-shirt</p></td>
+<td><p>1.8</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>coffee</p></td>
+<td><p>2.1</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>books</p></td>
+<td><p>3.2</p></td>
+<td><p>48</p></td>
+</tr>
+</tbody>
+</table>
+<p>This file can be read via the following command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;test.xls&#39;</span>
+<span class="o">&gt;</span> <span class="n">tab</span> <span class="o">=</span> <span class="s1">&#39;primary&#39;</span>
+<span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Inventory&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight_per&#39;</span><span class="p">,</span> <span class="s1">&#39;Number&#39;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">read_excel_columns_by_index</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">tab</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">dat</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">ID</span> <span class="n">Inventory</span> <span class="n">Weight_per</span> <span class="n">Number</span>
+ <span class="mi">0</span>  <span class="mi">1</span>  <span class="n">shoes</span>     <span class="mf">1.5</span>        <span class="mi">5</span>
+ <span class="mi">1</span>  <span class="mi">2</span>  <span class="n">t</span><span class="o">-</span><span class="n">shirt</span>   <span class="mf">1.8</span>        <span class="mi">3</span>
+ <span class="mi">2</span>  <span class="mi">3</span>  <span class="n">coffee</span>    <span class="mf">2.1</span>        <span class="mi">15</span>
+ <span class="mi">3</span>  <span class="mi">4</span>  <span class="n">books</span>     <span class="mf">3.2</span>        <span class="mi">40</span>
+</pre></div>
+</div>
+<p>This function can also use the <cite>skip</cite> attributed read data when the
+headers are not on the first line.  For instance, assume the following csv file;</p>
+<table class="colwidths-given docutils align-default" id="id12">
+<caption><span class="caption-text">test.xls</span><a class="headerlink" href="#id12" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 24%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This line is used to provide metadata for the csv file</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>This line is as well</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ID</p></td>
+<td><p>Inventory</p></td>
+<td><p>Weight_per</p></td>
+<td><p>Number</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Shoes</p></td>
+<td><p>1.5</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>t-shirt</p></td>
+<td><p>1.8</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>coffee</p></td>
+<td><p>2.1</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>books</p></td>
+<td><p>3.2</p></td>
+<td><p>48</p></td>
+</tr>
+</tbody>
+</table>
+<p>This file can be read via the following command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;test.xls&#39;</span>
+<span class="o">&gt;</span> <span class="n">tab</span> <span class="o">=</span> <span class="s2">&quot;primary&quot;</span>
+<span class="o">&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Inventory&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight_per&#39;</span><span class="p">,</span> <span class="s1">&#39;Number&#39;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">read_excel_columns_by_index</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">tab</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                   <span class="n">names</span><span class="p">,</span> <span class="n">dat</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">ID</span> <span class="n">Inventory</span> <span class="n">Weight_per</span> <span class="n">Number</span>
+ <span class="mi">0</span>  <span class="mi">1</span>  <span class="n">shoes</span>     <span class="mf">1.5</span>        <span class="mi">5</span>
+ <span class="mi">1</span>  <span class="mi">2</span>  <span class="n">t</span><span class="o">-</span><span class="n">shirt</span>   <span class="mf">1.8</span>        <span class="mi">3</span>
+ <span class="mi">2</span>  <span class="mi">3</span>  <span class="n">coffee</span>    <span class="mf">2.1</span>        <span class="mi">15</span>
+ <span class="mi">3</span>  <span class="mi">4</span>  <span class="n">books</span>     <span class="mf">3.2</span>        <span class="mi">40</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="read-databases">
+<h2>Read Databases<a class="headerlink" href="#read-databases" title="Permalink to this headline">¶</a></h2>
+<p>The following classes and functions allow a user to read information from structured
+databases</p>
+<dl class="py class">
+<dt id="read_files.ManageSQLiteDB">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">read_files.</span></code><code class="sig-name descname"><span class="pre">ManageSQLiteDB</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/read_files.html#ManageSQLiteDB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.ManageSQLiteDB" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>database</strong> – The database name to include its path-link</p>
+</dd>
+</dl>
+<p>This class allows users to interface with SQLite databases, open the
+database, close the database and input queries.</p>
+<dl class="py method">
+<dt id="read_files.ManageSQLiteDB.close_database_connection">
+<code class="sig-name descname"><span class="pre">close_database_connection</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/read_files.html#ManageSQLiteDB.close_database_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.ManageSQLiteDB.close_database_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function closes a database connection</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="read_files.ManageSQLiteDB.query_db">
+<code class="sig-name descname"><span class="pre">query_db</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="_modules/read_files.html#ManageSQLiteDB.query_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.ManageSQLiteDB.query_db" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>query</strong> – A SQLite query statement</p>
+</dd>
+<dt class="field-even">Return df</dt>
+<dd class="field-even"><p>A dataframe containing the results of the
+SQLite query</p>
+</dd>
+</dl>
+<p>This function will read a database in any way the user queries
+it.  Assume we have a database titled Maintenance.db which contains
+several tables, one of which is titled gas.  The gas table contains
+a history of all times a vehicle has been refueled to include how
+many gallons, the date, and the expense.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file</span> <span class="o">=</span> <span class="s1">&#39;../data/test/Maintenance.db&#39;</span>
+<span class="o">&gt;</span> <span class="n">db</span> <span class="o">=</span> <span class="n">ManageSQLiteDB</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;Select Date, Cost, Gallons FROM gas;&quot;</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query_db</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">db</span><span class="o">.</span><span class="n">close_database_connection</span><span class="p">()</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="colwidths-given docutils align-default" id="id13">
+<caption><span class="caption-text">dataframe</span><a class="headerlink" href="#id13" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Date</p></th>
+<th class="head"><p>Cost</p></th>
+<th class="head"><p>Gallons</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2020-02-04</p></td>
+<td><p>27.88</p></td>
+<td><p>9.961</p></td>
+</tr>
+<tr class="row-odd"><td><p>2020-02-06</p></td>
+<td><p>23.75</p></td>
+<td><p>9.619</p></td>
+</tr>
+<tr class="row-even"><td><p>2020-02-13</p></td>
+<td><p>28.30</p></td>
+<td><p>10.256</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="read_files.simple_sqlite_query">
+<code class="sig-prename descclassname"><span class="pre">read_files.</span></code><code class="sig-name descname"><span class="pre">simple_sqlite_query</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="_modules/read_files.html#simple_sqlite_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.simple_sqlite_query" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>database</strong> – The SQLite database name with path-link</p></li>
+<li><p><strong>query</strong> – The SQLite query</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return df</dt>
+<dd class="field-even"><p>A dataframe containing the query results</p>
+</dd>
+</dl>
+<p>This function allows a user to conduct a quick SQLite database query and
+handles class instantiation and database closure for the user.  This function
+will only query the database once and will close the database after
+the function exit.  If the user wishes to make multiple queries before
+closing the database, then they should directly interface with the
+ManageSQLite class.</p>
+<p>Assume we have a database titled Maintenance.db which contains
+several tables, one of which is titled gas.  The gas table contains
+a history of all times a vehicle has been refueled to include how
+many gallons, the date, and the expense.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file</span> <span class="o">=</span> <span class="s1">&#39;../data/test/Maintenance.db&#39;</span>
+<span class="o">&gt;</span> <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;Select Date, Cost, Gallons FROM gas;&quot;</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">simple_sqlite_query</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="colwidths-given docutils align-default" id="id14">
+<caption><span class="caption-text">dataframe</span><a class="headerlink" href="#id14" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Date</p></th>
+<th class="head"><p>Cost</p></th>
+<th class="head"><p>Gallons</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2020-02-04</p></td>
+<td><p>27.88</p></td>
+<td><p>9.961</p></td>
+</tr>
+<tr class="row-odd"><td><p>2020-02-06</p></td>
+<td><p>23.75</p></td>
+<td><p>9.619</p></td>
+</tr>
+<tr class="row-even"><td><p>2020-02-13</p></td>
+<td><p>28.30</p></td>
+<td><p>10.256</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="misc-files">
+<h2>Misc Files<a class="headerlink" href="#misc-files" title="Permalink to this headline">¶</a></h2>
+<p>This section describes funtions that can be used to read other file types to include
+<code class="docutils literal notranslate"><span class="pre">xml</span></code>, <code class="docutils literal notranslate"><span class="pre">html</span></code>, <code class="docutils literal notranslate"><span class="pre">json</span></code>, and <code class="docutils literal notranslate"><span class="pre">yaml</span></code> files</p>
+<dl class="py function">
+<dt id="read_files.read_json_file">
+<code class="sig-prename descclassname"><span class="pre">read_files.</span></code><code class="sig-name descname"><span class="pre">read_json_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><a class="reference internal" href="_modules/read_files.html#read_json_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.read_json_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>param file_name: The name of the file being read to include the path-length
+:return db: The json string</p>
+<p>This function reads a .json file and captures its contents as a dictionary
+of dictionaries.  An example might look like the code snipped below, assuming
+a json file with the following information in a file titled json.json</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> {&quot;widget&quot;: {
+  &quot;debug&quot;: &quot;on&quot;,
+  &quot;window&quot;: {
+  &quot;title&quot;: &quot;Sample Konfabulator Widget&quot;,
+  &quot;name&quot;: &quot;main_window&quot;,
+  &quot;width&quot;: 500,
+  &quot;height&quot;: 500
+ },
+ &quot;image&quot;: {
+ &quot;src&quot;: &quot;Images/Sun.png&quot;,
+ &quot;name&quot;: &quot;sun1&quot;,
+ &quot;hOffset&quot;: 250,
+ &quot;vOffset&quot;: 250,
+ &quot;alignment&quot;: &quot;center&quot;
+},
+ &quot;text&quot;: {
+ &quot;data&quot;: &quot;Click Here&quot;,
+ &quot;size&quot;: 36,
+ &quot;style&quot;: &quot;bold&quot;,
+ &quot;name&quot;: &quot;text1&quot;,
+ &quot;hOffset&quot;: 250,
+ &quot;vOffset&quot;: 100,
+ &quot;alignment&quot;: &quot;center&quot;,
+ &quot;onMouseUp&quot;: &quot;sun1.opacity = (sun1.opacity / 100) * 90;&quot;
+  }}
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">json</span>
+<span class="o">&gt;</span> <span class="n">dat</span> <span class="o">=</span> <span class="n">read_json_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">dat</span><span class="p">[</span><span class="s1">&#39;widget&#39;</span><span class="p">][</span><span class="s1">&#39;debug&#39;</span><span class="p">])</span>
+<span class="s1">&#39;on&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="read_files.read_xml_file">
+<code class="sig-prename descclassname"><span class="pre">read_files.</span></code><code class="sig-name descname"><span class="pre">read_xml_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/read_files.html#read_xml_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.read_xml_file" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_name</strong> – The name of the xml file to be opened to include the
+path length</p>
+</dd>
+<dt class="field-even">Return bs_data</dt>
+<dd class="field-even"><p>The xml data as a beautiful soup object.  For more details
+on parsing beautiful soup data see 
+<cite>beautiful soup &lt;https://www.crummy.com/software/BeautifulSoup/bs4/doc/&gt;_</cite></p>
+</dd>
+</dl>
+<p>This function reads in a xml or an html file and returns its contents as a
+text string that can be parsed with a beautiful soup function.  Asume a
+file titled xml.xml with the contents shown below.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;widget&gt;
+&lt;debug&gt;on&lt;/debug&gt;
+&lt;window title=&quot;Sample Konfabulator Widget&quot;&gt;
+    &lt;name&gt;main_window&lt;/name&gt;
+    &lt;width&gt;500&lt;/width&gt;
+    &lt;height&gt;500&lt;/height&gt;
+&lt;/window&gt;
+&lt;image src=&quot;Images/Sun.png&quot; name=&quot;sun1&quot;&gt;
+    &lt;hOffset&gt;250&lt;/hOffset&gt;
+    &lt;vOffset&gt;250&lt;/vOffset&gt;
+    &lt;alignment&gt;center&lt;/alignment&gt;
+&lt;/image&gt;
+&lt;text data=&quot;Click Here&quot; size=&quot;36&quot; style=&quot;bold&quot;&gt;
+    &lt;name&gt;text1&lt;/name&gt;
+    &lt;hOffset&gt;250&lt;/hOffset&gt;
+    &lt;vOffset&gt;100&lt;/vOffset&gt;
+    &lt;alignment&gt;center&lt;/alignment&gt;
+    &lt;onMouseUp&gt;
+        sun1.opacity = (sun1.opacity / 100) * 90;
+    &lt;/onMouseUp&gt;
+&lt;/text&gt;
+&lt;/widget&gt;
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;xml.xml&#39;</span>
+<span class="o">&gt;</span> <span class="n">db</span> <span class="o">=</span> <span class="n">read_xml_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">db</span> <span class="o">=</span> <span class="n">read_xml_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">img_name</span> <span class="o">=</span><span class="n">db</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="s2">&quot;Images/Sun.png&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">img_name</span><span class="p">)</span>
+<span class="mi">250</span>
+<span class="mi">250</span>
+<span class="n">center</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="read_files.read_yaml_file">
+<code class="sig-prename descclassname"><span class="pre">read_files.</span></code><code class="sig-name descname"><span class="pre">read_yaml_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/read_files.html#read_yaml_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#read_files.read_yaml_file" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_name</strong> – The name of the taml file to include the path length</p>
+</dd>
+<dt class="field-even">Return data</dt>
+<dd class="field-even"><p>The data extracted from the yaml file</p>
+</dd>
+</dl>
+<p>Assume a yaml file titled test.yaml with the following structure.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>apples: 20
+oranges: 10
+bananas: 3
+sports:
+  - soccer
+  - football
+  - baseball
+  - cricket
+  - hockey
+  - table tennis
+</pre></div>
+</div>
+<p>The file can be read with the following code</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">db</span> <span class="o">=</span> <span class="n">read_yaml_file</span><span class="p">(</span><span class="s1">&#39;test.yaml&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;apples&#39;</span><span class="p">]</span>
+<span class="mi">20</span>
+<span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;sports&#39;</span><span class="p">])</span>
+<span class="p">[</span><span class="s1">&#39;soccer&#39;</span><span class="p">,</span> <span class="s1">&#39;football&#39;</span><span class="p">,</span> <span class="s1">&#39;baseball&#39;</span><span class="p">,</span> <span class="s1">&#39;cricket&#39;</span><span class="p">,</span> <span class="s1">&#39;hockey&#39;</span><span class="p">,</span> <span class="s1">&#39;tabble tennis&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -51,6 +1428,17 @@ and html files</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">read_files</a><ul>
+<li><a class="reference internal" href="#read-text-file-by-keywords">Read Text File by Keywords</a></li>
+<li><a class="reference internal" href="#read-columnar-data">Read Columnar Data</a></li>
+<li><a class="reference internal" href="#read-databases">Read Databases</a></li>
+<li><a class="reference internal" href="#misc-files">Misc Files</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="operating_system.html"
                         title="previous chapter">operating_system</a></p>
