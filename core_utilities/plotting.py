@@ -464,6 +464,18 @@ class MatPlotDataFrame:
         This function will show a plot on the users screen without saving it
         """
         plt.show()
+# --------------------------------------------------------------------------------
+
+    def save_fig(self, file_name: str) -> None:
+        """
+
+        :param file_name: The name of the file to be saved to
+                          include the path length
+
+        This function will save a plot to a file and directory of the users
+        choosing
+        """
+        plt.savefig(file_name)
 # ================================================================================
 # ================================================================================
 # eof
