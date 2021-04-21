@@ -48,10 +48,6 @@ def test_scatter_plot_parse_columns():
     within the MatPlotDataFrame class to process a plot without
     failing
     """
-    if plat in lin_plat:
-        file = '../data/test/scatter_one.png'
-    else:
-        file = r'..\data\test\scatter_one.png'
     length = 20
     x = np.linspace(0, 20, num=20)
     linear = x
@@ -71,11 +67,33 @@ def test_scatter_plot_parse_columns():
     parsing_header = 'power'
     column_values = ['linear', 'squared']
     # Plot data
-    obj = MatPlotDataFrame(1, 1)
+    obj = MatPlotDataFrame(nrows=1, ncols=1)
     obj.scatter_plot_parse_column(df, 'x', 'y', parsing_header, column_values,
                                   x_label='x-axis', y_label='y-axis', title='Test',
                                   style_name='default', marker_style=['o', '^'],
                                   label_pos='upper left', grid=True)
+# --------------------------------------------------------------------------------
+
+
+def test_scatter_plot_column():
+    length = 20
+    x = np.linspace(0, 20, num=20)
+    linear = x
+    squared = x ** 2.0
+
+    # create dataframe
+    dictionary = {'x': x, 'linear': linear, 'squared': squared}
+    df = pd.DataFrame(dictionary)
+
+    # plot data
+    obj = MatPlotDataFrame(1, 1)
+    x_headers = ['x', 'x']
+    y_headers = ['linear', 'squared']
+    obj.scatter_plot_columns(df, x_headers, y_headers, y_headers,
+                             x_label='x-axis', y_label='y-axis', title='Test',
+                             style_name='default',marker_colors=['red', 'green'],
+                             fill_alpha=0.7, marker_style=['o', '^'],
+                             label_pos='upper left', grid=False)
 # ================================================================================
 # ================================================================================
 # eof
