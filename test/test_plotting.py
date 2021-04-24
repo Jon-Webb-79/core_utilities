@@ -100,7 +100,6 @@ def test_scatter_plot_column():
                              style_name='default',marker_colors=['red', 'green'],
                              fill_alpha=0.7, marker_style=['o', '^'],
                              label_pos='upper left', grid=False)
-    obj.save_fig('scatter_two.png')
 # --------------------------------------------------------------------------------
 
 
@@ -129,6 +128,28 @@ def test_line_plot_parse_column():
                                column_values,
                                line_colors=['red', 'green'],
                                label_pos='upper left')
+# --------------------------------------------------------------------------------
+
+
+def test_line_plot_column():
+    length = 20
+    x = np.linspace(0, 20, num=20)
+    linear = x
+    squared = x ** 2.0
+
+    # create dataframe
+    dictionary = {'x': x, 'linear': linear, 'squared': squared}
+    df = pd.DataFrame(dictionary)
+
+    # plot data
+    obj = MatPlotDataFrame(1, 1)
+    x_headers = ['x', 'x']
+    y_headers = ['linear', 'squared']
+    obj = MatPlotDataFrame(nrows=1, ncols=1)
+    obj.line_plot_columns(df, x_headers, y_headers, labels=False,
+                          x_label='x-axis', y_label='y-axis', title='Test',
+                          style_name='default',line_colors=['red', 'green'],
+                          label_pos='upper left', grid=False)
 # ================================================================================
 # ================================================================================
 # eof

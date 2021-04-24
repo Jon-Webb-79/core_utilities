@@ -609,7 +609,7 @@ class MatPlotDataFrame:
                                       label_pos='upper left')
            obj.show_plot()
 
-        .. image:: line_one.png 
+        .. image:: line_one.png
            :align: center
         """
 
@@ -735,6 +735,189 @@ class MatPlotDataFrame:
                 self.ax[col].legend(loc=label_pos)
             else:
                 self.ax.legend(loc=label_pos)
+        if grid:
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].grid(color=grid_color, linestyle=grid_style)
+            elif self.nrows > 1:
+                self.ax[row].grid(color=grid_color, linestyle=grid_style)
+            elif self.ncols > 1:
+                self.ax[col].grid(color=grid_color, linestyle=grid_style)
+            else:
+                self.ax.grid(color=grid_color, linestyle=grid_style)
+# --------------------------------------------------------------------------------
+
+    def line_plot_columns(self, df: pd.DataFrame, x_headers: str, y_headers: str,
+                          labels: List[str], style_name: str='default',
+                          line_colors: List[str]=['None'],
+                          line_weight: np.float32=2.0,
+                          line_style: str='-', x_label: str='', y_label: str='',
+                          title: str='', label_pos: str='upper right', x_scale: str='LIN',
+                          y_scale: str='LIN', label_font_size: int=18,
+                          tick_font_size: int=18, title_font_size: int=24,
+                          grid: bool=False, grid_style='-', grid_color='grey',
+                          row: int=0, col: int=0) -> None:
+        """
+
+        :param df: A pandas dataframe containing the data to be plotted
+        :param x_headers: The title of the dataframe columns containing the x-axis
+                          data sets
+        :param y_headers: The title of the dataframe columns containing the y-axis
+                          data sets
+        :param labels: A list containing the name of each label
+        :param style_name: The name of the matplotlib style that will be used to
+                           format the plot.  Defaulted to 'default'.  Possible
+                           styles can be found at :href
+                           `styles<https://matplotlib.org/stable/api/style_api.html>`
+        :param line_colors: A list of line colors, where each marker color
+                            corresponds to each data set.  This parameter has a
+                            default color lists that can accomodate 18 different
+                            data sets.  The user can override the default colors
+                            with a list of their own.  Potential colors can be
+                            found at :href `colors<https://matplotlib.org/stable/gallery/color/named_colors.html>`
+        :param line_weight: The weight corresponding to the line thickness, defaulted to 2.0
+        :param x_label: The x axis label,defaulted to ' '
+        :param y_label: The y axis label, defaulted to ' '
+        :param title: The plot title, defaulted to ' '
+        :param label_pos: The position of the legend in the plot.  Defaulted to 'upper right'
+        :param x_scale: 'LOG' or 'LIN', defaulted to 'LIN'
+        :param y_scale: 'LOG' or 'LIN', defaulted to 'LIN'
+        :param label_font_size: The label font size, defaulted to 18
+        :param tick_font_size: The tick font size, defaulted to 18
+        :param title_font_size: The title font size, defaulted to 24
+        :param grid: True if a grid overlaid on the plot is desired, False if not
+        :param grid_color: Defaulted to 'grey'
+        :grid_style: Defaulted to '-'
+
+        This method will plot used defined dataframe columns for the x and
+        y axis of a 2-d plot as a line plot.
+
+        .. code-block:: python
+
+           > length = 20
+           > x = np.linspace(0, 20, num=20)
+           > linear = x
+           > squared = x ** 2.0
+           > # create dataframe
+           > dictionary = {'x': x, 'linear': linear, 'squared': squared}
+           > df = pd.DataFrame(dictionary)
+           > # plot data
+           > obj = MatPlotDataFrame()
+           > x_headers = ['x', 'x']
+           > y_headers = ['linear', 'squared']
+           obj.line_plot_columns(df, x_headers, y_headers, labels=False,
+                                 x_label='x-axis', y_label='y-axis', title='Test',
+                                 style_name='default',line_colors=['red', 'green'],
+                                 label_pos='upper left', grid=False)
+
+        .. image:: line_one.png
+           :align: center
+        """
+
+        # Error checking
+        if line_colors[0] == 'None':
+            line_colors = self.colors
+        if y_scale not in ('LOG', 'LIN'):
+            warnings.warn('y_scale must be set to LOG or LIN')
+        if x_scale not in ('LOG', 'LIN'):
+            warnings.warn('y_scale must be set to LOG or LIN')
+
+        # begin plot
+        plt.rcParams.update({'figure.autolayout': True})
+        plt.style.use(style_name)
+        rc('xtick', labelsize=tick_font_size)
+        rc('ytick', labelsize=tick_font_size)
+        if self.nrows > 1 and self.ncols > 1:
+            self.ax[row, col].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[row, col].set_ylabel(y_label, fontsize=label_font_size)
+        elif self.nrows > 1:
+            self.ax[row].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[row].set_ylabel(y_label, fontsize=label_font_size)
+        elif self.ncols > 1:
+            self.ax[col].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[col].set_ylabel(y_label, fontsize=label_font_size)
+        else:
+            self.ax.set_xlabel(x_label, fontsize=label_font_size)
+            self.ax.set_ylabel(y_label, fontsize=label_font_size)
+
+        if title != 'NULL':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_title(title, fontsize=title_font_size)
+            elif self.nrows > 1:
+                self.ax[row].set_title(title, fontsize=title_font_size)
+            elif self.ncols > 1:
+                self.ax[col].set_title(title, fontsize=title_font_size)
+            else:
+                self.ax.set_title(title, fontsize=title_font_size)
+        if x_scale.upper() == 'LOG':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_xscale('log')
+            elif self.nrows > 1:
+                self.ax[row].set_xscale('log')
+            elif self.ncols > 1:
+                self.ax[col].set_xscale('log')
+            else:
+                self.ax[row, col].set_xscale('log')
+        if y_scale.upper() == 'LOG':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_yscale('log')
+            elif self.nrows > 1:
+                self.ax[row].set_yscale('log')
+            elif self.ncols > 1:
+                self.ax[col].set_yscale('log')
+            else:
+                self.ax[row, col].set_yscale('log')
+
+        if self.nrows > 1 and self.ncols > 1 and labels is True:
+            for i in range(len(x_headers)):
+                self.ax[row, col].plot(df[x_headers[i]], df[y_headers[i]],
+                                       label=y_headers[i], color=line_colors[i],
+                                       linewidth=line_weight, linestyle=line_style)
+        elif self.nrows > 1 and labels is True:
+            for i in range(len(x_headers)):
+                self.ax[row].plot(df[x_headers[i]], df[y_headers[i]],
+                                  label=y_headers[i], color=line_colors[i],
+                                  linewidth=line_weight, linestyle=line_style)
+        elif self.ncols > 1 and labels is True:
+            for i in range(len(x_headers)):
+                self.ax[col].plot(df[x_headers[i]], df[y_headers[i]],
+                                  label=y_headers[i], color=line_colors[i],
+                                  linewidth=line_weight, linestyle=line_style)
+        elif self.ncols == 1 and self.nrows == 1 and labels is True:
+            for i in range(len(x_headers)):
+                self.ax.plot(df[x_headers[i]], df[y_headers[i]],
+                             label=y_headers[i], color=line_colors[i],
+                             linewidth=line_weight, linestyle=line_style)
+        if self.nrows > 1 and self.ncols > 1 and labels is False:
+            for i in range(len(x_headers)):
+                self.ax[row, col].plot(df[x_headers[i]], df[y_headers[i]],
+                                       color=line_colors[i],
+                                       linewidth=line_weight, linestyle=line_style)
+        elif self.nrows > 1 and labels is False:
+            for i in range(len(x_headers)):
+                self.ax[row].plot(df[x_headers[i]], df[y_headers[i]],
+                                  color=line_colors[i],
+                                  linewidth=line_weight, linestyle=line_style)
+        elif self.ncols > 1 and labels is False:
+            for i in range(len(x_headers)):
+                self.ax[col].plot(df[x_headers[i]], df[y_headers[i]],
+                                  color=line_colors[i],
+                                  linewidth=line_weight, linestyle=line_style)
+        else:
+            for i in range(len(x_headers)):
+                self.ax.plot(df[x_headers[i]], df[y_headers[i]],
+                             color=line_colors[i],
+                             linewidth=line_weight, linestyle=line_style)
+
+        if labels is True:
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].legend(loc=label_pos)
+            elif self.nrows > 1:
+                self.ax[row].legend(loc=label_pos)
+            elif self.ncols > 1:
+                self.ax[col].legend(loc=label_pos)
+            else:
+                self.ax.legend(loc=label_pos)
+
         if grid:
             if self.nrows > 1 and self.ncols > 1:
                 self.ax[row, col].grid(color=grid_color, linestyle=grid_style)
