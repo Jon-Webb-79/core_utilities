@@ -105,10 +105,10 @@ found at :href <cite>colors&lt;https://matplotlib.org/stable/gallery/color/named
 <li><p><strong>title_font_size</strong> – The title font size, defaulted to 24</p></li>
 <li><p><strong>grid</strong> – True if a grid overlaid on the plot is desired, False if not</p></li>
 <li><p><strong>grid_color</strong> – Defaulted to ‘grey’</p></li>
+<li><p><strong>grid_style</strong> – Defaulted to ‘-‘</p></li>
+<li><p><strong>row</strong> – The row within the grid that the plot fill fill</p></li>
+<li><p><strong>col</strong> – The column within the gird that the plot will fill</p></li>
 </ul>
-</dd>
-<dt class="field-even">Grid_style</dt>
-<dd class="field-even"><p>Defaulted to ‘-‘</p>
 </dd>
 </dl>
 <p>This method will plot used defined dataframe columns for the x and
@@ -381,6 +381,95 @@ to True</p></li>
 <dt id="plotting.MatPlotDataFrame.show_plot">
 <code class="sig-name descname"><span class="pre">show_plot</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/plotting.html#MatPlotDataFrame.show_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plotting.MatPlotDataFrame.show_plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function will show a plot on the users screen without saving it</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="plotting.MatPlotDataFrame.timedate_plot_parse_column">
+<code class="sig-name descname"><span class="pre">timedate_plot_parse_column</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_header</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_header</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parsing_header</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_values</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_colors</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">['None']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_weight</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.float32</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_style</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_pos</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'upper</span> <span class="pre">right'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_scale</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'LIN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_scale</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'LIN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_font_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">18</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_font_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">18</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_font_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">24</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'grey'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/plotting.html#MatPlotDataFrame.timedate_plot_parse_column"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#plotting.MatPlotDataFrame.timedate_plot_parse_column" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – A pandas dataframe containing the data to be plotted</p></li>
+<li><p><strong>x_header</strong> – The title of the dataframe column containing the x-axis
+data sets.  It is assumes that the x axis is the datetime
+axis for this plot.</p></li>
+<li><p><strong>y_header</strong> – The title of the dataframe column containing the y-axis
+data sets</p></li>
+<li><p><strong>parsing_header</strong> – The title of the dataframe column containing the
+values which will be used to parse the dataframe into
+one or multiple data sets</p></li>
+<li><p><strong>column_values</strong> – The values contained in the parsing_header column
+that will be used to parse the data set into
+multiple data sets</p></li>
+<li><p><strong>style_name</strong> – The name of the matplotlib style that will be used to
+format the plot.  Defaulted to ‘default’.  Possible
+styles can be found at :href
+<cite>styles&lt;https://matplotlib.org/stable/api/style_api.html&gt;</cite></p></li>
+<li><p><strong>line_colors</strong> – A list of line colors, where each marker color
+corresponds to each data set.  This parameter has a
+default color lists that can accomodate 18 different
+data sets.  The user can override the default colors
+with a list of their own.  Potential colors can be
+found at :href <cite>colors&lt;https://matplotlib.org/stable/gallery/color/named_colors.html&gt;</cite></p></li>
+<li><p><strong>line_weight</strong> – The weight corresponding to the line thickness, defaulted to 2.0</p></li>
+<li><p><strong>fill_apha</strong> – The density of the marker fill.  Defaulted to 0.7</p></li>
+<li><p><strong>x_label</strong> – The x axis label,defaulted to ‘ ‘</p></li>
+<li><p><strong>y_label</strong> – The y axis label, defaulted to ‘ ‘</p></li>
+<li><p><strong>title</strong> – The plot title, defaulted to ‘ ‘</p></li>
+<li><p><strong>label_pos</strong> – The position of the legend in the plot.  Defaulted to ‘upper right’</p></li>
+<li><p><strong>x_scale</strong> – ‘LOG’ or ‘LIN’, defaulted to ‘LIN’</p></li>
+<li><p><strong>y_scale</strong> – ‘LOG’ or ‘LIN’, defaulted to ‘LIN’</p></li>
+<li><p><strong>plot_name</strong> – The name of the file containing the plot if the plot is to
+be saved.  Defaulted to ‘NULL’</p></li>
+<li><p><strong>save</strong> – True if the plot is to be saved, False if the plot is to be
+shown and not saved.  Defaulted to False</p></li>
+<li><p><strong>label_font_size</strong> – The label font size, defaulted to 18</p></li>
+<li><p><strong>tick_font_size</strong> – The tick font size, defaulted to 18</p></li>
+<li><p><strong>title_font_size</strong> – The title font size, defaulted to 24</p></li>
+<li><p><strong>marker_size</strong> – The size of the marker, defaulted to 35</p></li>
+<li><p><strong>marker_edge_width</strong> – The thickness of the line outlining
+each marker.  Defaulted to 0.8</p></li>
+<li><p><strong>grid</strong> – True if a grid overlaid on the plot is desired, False if not</p></li>
+<li><p><strong>grid_color</strong> – Defaulted to ‘grey’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Grid_style</dt>
+<dd class="field-even"><p>Defaulted to ‘-‘</p>
+</dd>
+</dl>
+<p>This method will parse a dataframe column based on a user specified
+value or list of values, and plot the data in a user specified
+x and y axis column based on filter data.  As an example, consider
+a dataframe with the following columnar data structure.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">length</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="o">&gt;</span> <span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2016-09-24&#39;</span><span class="p">),</span>
+                        <span class="n">periods</span> <span class="o">=</span> <span class="n">length</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">length</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">linear</span> <span class="o">=</span> <span class="n">x</span>
+<span class="o">&gt;</span> <span class="n">squared</span> <span class="o">=</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">2.0</span>
+<span class="o">&gt;</span> <span class="n">lin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="s1">&#39;squared&#39;</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+
+<span class="o">&gt;</span> <span class="c1"># Combine arrays into one</span>
+<span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">dates</span><span class="p">,</span> <span class="n">dates</span><span class="p">))</span>
+<span class="o">&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">linear</span><span class="p">,</span> <span class="n">squared</span><span class="p">))</span>
+<span class="o">&gt;</span> <span class="n">power</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">lin</span><span class="p">,</span> <span class="n">sq</span><span class="p">))</span>
+
+<span class="o">&gt;</span> <span class="c1"># Create dataframe</span>
+<span class="o">&gt;</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dates&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;power&#39;</span><span class="p">:</span> <span class="n">power</span><span class="p">}</span>
+<span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="c1"># Plot data</span>
+<span class="o">&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">MatPlotDataFrame</span><span class="p">()</span>
+
+<span class="o">&gt;</span> <span class="n">parsing_header</span> <span class="o">=</span> <span class="s1">&#39;power&#39;</span>
+<span class="o">&gt;</span> <span class="n">column_values</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="s1">&#39;squared&#39;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">obj</span><span class="o">.</span><span class="n">timedate_plot_parse_column</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;dates&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">parsing_header</span><span class="p">,</span> <span class="n">column_values</span><span class="p">,</span>
+                                 <span class="n">x_label</span><span class="o">=</span><span class="s1">&#39;x-axis&#39;</span><span class="p">,</span> <span class="n">y_label</span><span class="o">=</span><span class="s1">&#39;y-axis&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Test&#39;</span><span class="p">,</span>
+                                 <span class="n">style_name</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">line_colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">],</span>
+                                 <span class="n">label_pos</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/time_plot.png" class="align-center" src="_images/time_plot.png" />
 </dd></dl>
 
 </dd></dl>

@@ -3,6 +3,7 @@ import sys
 import warnings
 from typing import List
 from matplotlib import rc, pyplot as plt
+import matplotlib.dates as mdates
 import pandas as pd
 import numpy as np
 # ================================================================================
@@ -210,7 +211,7 @@ class MatPlotDataFrame:
             elif self.ncols > 1:
                 self.ax[col].set_xscale('log')
             else:
-                self.ax[row, col].set_xscale('log')
+                self.ax.set_xscale('log')
         if y_scale.upper() == 'LOG':
             if self.nrows > 1 and self.ncols > 1:
                 self.ax[row, col].set_yscale('log')
@@ -219,7 +220,7 @@ class MatPlotDataFrame:
             elif self.ncols > 1:
                 self.ax[col].set_yscale('log')
             else:
-                self.ax[row, col].set_yscale('log')
+                self.ax.set_yscale('log')
         if self.nrows > 1 and self.ncols > 1 and labels is True:
             for dfs in enumerate(df_list):
                 self.ax[row, col].scatter(dfs[1][x_header], dfs[1][y_header],
@@ -437,7 +438,7 @@ class MatPlotDataFrame:
             elif self.ncols > 1:
                 self.ax[col].set_xscale('log')
             else:
-                self.ax[row, col].set_xscale('log')
+                self.ax.set_xscale('log')
         if y_scale.upper() == 'LOG':
             if self.nrows > 1 and self.ncols > 1:
                 self.ax[row, col].set_yscale('log')
@@ -446,7 +447,7 @@ class MatPlotDataFrame:
             elif self.ncols > 1:
                 self.ax[col].set_yscale('log')
             else:
-                self.ax[row, col].set_yscale('log')
+                self.ax.set_yscale('log')
 
         if self.nrows > 1 and self.ncols > 1 and labels is True:
             for i in range(len(x_headers)):
@@ -662,7 +663,7 @@ class MatPlotDataFrame:
             elif self.ncols > 1:
                 self.ax[col].set_xscale('log')
             else:
-                self.ax[row, col].set_xscale('log')
+                self.ax.set_xscale('log')
         if y_scale.upper() == 'LOG':
             if self.nrows > 1 and self.ncols > 1:
                 self.ax[row, col].set_yscale('log')
@@ -671,7 +672,7 @@ class MatPlotDataFrame:
             elif self.ncols > 1:
                 self.ax[col].set_yscale('log')
             else:
-                self.ax[row, col].set_yscale('log')
+                self.ax.set_yscale('log')
 
         if self.nrows > 1 and self.ncols > 1 and labels is True:
             for dfs in enumerate(df_list):
@@ -786,7 +787,9 @@ class MatPlotDataFrame:
         :param title_font_size: The title font size, defaulted to 24
         :param grid: True if a grid overlaid on the plot is desired, False if not
         :param grid_color: Defaulted to 'grey'
-        :grid_style: Defaulted to '-'
+        :param grid_style: Defaulted to '-'
+        :param row: The row within the grid that the plot fill fill
+        :param col: The column within the gird that the plot will fill
 
         This method will plot used defined dataframe columns for the x and
         y axis of a 2-d plot as a line plot.
@@ -856,7 +859,7 @@ class MatPlotDataFrame:
             elif self.ncols > 1:
                 self.ax[col].set_xscale('log')
             else:
-                self.ax[row, col].set_xscale('log')
+                self.ax.set_xscale('log')
         if y_scale.upper() == 'LOG':
             if self.nrows > 1 and self.ncols > 1:
                 self.ax[row, col].set_yscale('log')
@@ -865,7 +868,7 @@ class MatPlotDataFrame:
             elif self.ncols > 1:
                 self.ax[col].set_yscale('log')
             else:
-                self.ax[row, col].set_yscale('log')
+                self.ax.set_yscale('log')
 
         if self.nrows > 1 and self.ncols > 1 and labels is True:
             for i in range(len(x_headers)):
@@ -918,6 +921,308 @@ class MatPlotDataFrame:
             else:
                 self.ax.legend(loc=label_pos)
 
+        if grid:
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].grid(color=grid_color, linestyle=grid_style)
+            elif self.nrows > 1:
+                self.ax[row].grid(color=grid_color, linestyle=grid_style)
+            elif self.ncols > 1:
+                self.ax[col].grid(color=grid_color, linestyle=grid_style)
+            else:
+                self.ax.grid(color=grid_color, linestyle=grid_style)
+# --------------------------------------------------------------------------------
+
+    def timedate_plot_parse_column(self, df: pd.DataFrame, x_header: str,
+                                   y_header: str, parsing_header: str, column_values: List[str],
+                                   style_name: str='default', line_colors: List[str]=['None'],
+                                   line_weight: np.float32=2.0,
+                                   line_style: str='-', x_label: str='', y_label: str='',
+                                   title: str='', label_pos: str='upper right',
+                                   x_scale: str='LIN', y_scale: str='LIN',
+                                   label_font_size: int=18,
+                                   tick_font_size: int=18, title_font_size: int=24,
+                                   grid: bool=False, grid_style='-', grid_color='grey',
+                                   row: int=0, col: int=0, labels: bool=True) -> None:
+        """
+
+        :param df: A pandas dataframe containing the data to be plotted
+        :param x_header: The title of the dataframe column containing the x-axis
+                         data sets.  It is assumes that the x axis is the datetime
+                         axis for this plot.
+        :param y_header: The title of the dataframe column containing the y-axis
+                         data sets
+        :param parsing_header: The title of the dataframe column containing the
+                               values which will be used to parse the dataframe into
+                               one or multiple data sets
+        :param column_values: The values contained in the parsing_header column
+                              that will be used to parse the data set into
+                              multiple data sets
+        :param style_name: The name of the matplotlib style that will be used to
+                           format the plot.  Defaulted to 'default'.  Possible
+                           styles can be found at :href
+                           `styles<https://matplotlib.org/stable/api/style_api.html>`
+        :param line_colors: A list of line colors, where each marker color
+                            corresponds to each data set.  This parameter has a
+                            default color lists that can accomodate 18 different
+                            data sets.  The user can override the default colors
+                            with a list of their own.  Potential colors can be
+                            found at :href `colors<https://matplotlib.org/stable/gallery/color/named_colors.html>`
+        :param line_weight: The weight corresponding to the line thickness, defaulted to 2.0
+        :param fill_apha: The density of the marker fill.  Defaulted to 0.7
+        :param x_label: The x axis label,defaulted to ' '
+        :param y_label: The y axis label, defaulted to ' '
+        :param title: The plot title, defaulted to ' '
+        :param label_pos: The position of the legend in the plot.  Defaulted to 'upper right'
+        :param x_scale: 'LOG' or 'LIN', defaulted to 'LIN'
+        :param y_scale: 'LOG' or 'LIN', defaulted to 'LIN'
+        :param plot_name: The name of the file containing the plot if the plot is to
+                          be saved.  Defaulted to 'NULL'
+        :param save: True if the plot is to be saved, False if the plot is to be
+                     shown and not saved.  Defaulted to False
+        :param label_font_size: The label font size, defaulted to 18
+        :param tick_font_size: The tick font size, defaulted to 18
+        :param title_font_size: The title font size, defaulted to 24
+        :param marker_size: The size of the marker, defaulted to 35
+        :param marker_edge_width: The thickness of the line outlining
+                                  each marker.  Defaulted to 0.8
+        :param grid: True if a grid overlaid on the plot is desired, False if not
+        :param grid_color: Defaulted to 'grey'
+        :grid_style: Defaulted to '-'
+
+        This method will parse a dataframe column based on a user specified
+        value or list of values, and plot the data in a user specified
+        x and y axis column based on filter data.  As an example, consider
+        a dataframe with the following columnar data structure.
+
+        .. code-block:: python
+
+           > length = 6
+           > dates = pd.date_range(start=pd.to_datetime('2016-09-24'),
+                                   periods = length, freq='w')
+           > x = np.linspace(0, length, num=length)
+           > linear = x
+           > squared = x ** 2.0
+           > lin = np.repeat('linear', length)
+           > sq = np.repeat('squared', length)
+
+           > # Combine arrays into one
+           > x = np.hstack((dates, dates))
+           > y = np.hstack((linear, squared))
+           > power = np.hstack((lin, sq))
+
+           > # Create dataframe
+           > dictionary = {'dates': x, 'y': y, 'power': power}
+           > df = pd.DataFrame(dictionary)
+           > # Plot data
+           > obj = MatPlotDataFrame()
+
+           > parsing_header = 'power'
+           > column_values = ['linear', 'squared']
+           > obj.timedate_plot_parse_column(df, 'dates', 'y', parsing_header, column_values,
+                                            x_label='x-axis', y_label='y-axis', title='Test',
+                                            style_name='default', line_colors=['red', 'green'],
+                                            label_pos='upper left', grid=True)
+
+        .. image:: time_plot.png
+           :align: center
+        """
+        df_list = [df[df[parsing_header] == col_val] for
+                   col_val in column_values]
+        max_date = df[x_header].max()
+        min_date = df[x_header].min()
+        diff = (max_date - min_date) / np.timedelta64(1, 'D')
+        df_list = [df[df[parsing_header] == col_val] for
+                   col_val in column_values]
+        df_list = [df.set_index(x_header) for df in df_list]
+
+        # Error checking
+        if line_colors[0] == 'None':
+            line_colors = self.colors
+        if len(line_colors) < len(column_values):
+            msg1 = 'FATAL ERROR: The length of the marker color list must be as '
+            msg2 =  'large or larger than the size of the column values'
+            sys.exit(msg1 + msg2)
+        if y_scale not in ('LOG', 'LIN'):
+            warnings.warn('y_scale must be set to LOG or LIN')
+        if x_scale not in ('LOG', 'LIN'):
+            warnings.warn('y_scale must be set to LOG or LIN')
+
+        # begin plot
+        plt.rcParams.update({'figure.autolayout': True})
+        plt.style.use(style_name)
+        rc('xtick', labelsize=tick_font_size)
+        rc('ytick', labelsize=tick_font_size)
+
+        if self.nrows > 1 and self.ncols > 1:
+            self.ax[row, col].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[row, col].set_ylabel(y_label, fontsize=label_font_size)
+        elif self.nrows >1:
+            self.ax[row].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[row].set_ylabel(y_label, fontsize=label_font_size)
+        elif self.ncols > 1:
+            self.ax[col].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[col].set_ylabel(y_label, fontsize=label_font_size)
+        else:
+            self.ax.set_xlabel(x_label, fontsize=label_font_size)
+            self.ax.set_ylabel(y_label, fontsize=label_font_size)
+        if title != 'NULL':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_title(title, fontsize=title_font_size)
+            elif self.nrows > 1:
+                self.ax[row].set_title(title, fontsize=title_font_size)
+            elif self.ncols > 1:
+                self.ax[col].set_title(title, fontsize=title_font_size)
+            else:
+                self.ax.set_title(title, fontsize=title_font_size)
+        if x_scale.upper() == 'LOG':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_xscale('log')
+            elif self.nrows > 1:
+                self.ax[row].set_xscale('log')
+            elif self.ncols > 1:
+                self.ax[col].set_xscale('log')
+            else:
+                self.ax.set_xscale('log')
+        if y_scale.upper() == 'LOG':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_yscale('log')
+            elif self.nrows > 1:
+                self.ax[row].set_yscale('log')
+            elif self.ncols > 1:
+                self.ax[col].set_yscale('log')
+            else:
+                self.ax.set_yscale('log')
+
+        if self.nrows > 1 and self.ncols > 1:
+            if diff <= 2:
+                myfmt = mdates.DateFormatter('%H')
+                self.ax[row, col].xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 15:
+                myfmt = mdates.DateFormatter('%b-%d')
+                self.ax[row, col].xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 180:
+                myfmt = mdates.DateFormatter('%b-%Y')
+                self.ax[row, col].xaxis.set_major_locator(plt.MaxNLocator(5))
+            elif diff <= 2191:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax[row, col].xaxis.set_major_locator(plt.MaxNLocator(5))
+            else:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax[row, col].xaxis.set_major_locator(plt.MaxNLocator(5))
+            self.ax[row, col].xaxis.set_major_formatter(myfmt)
+        elif self.nrows > 1:
+            if diff <= 2:
+                myfmt = mdates.DateFormatter('%H')
+                self.ax[row].xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 15:
+                myfmt = mdates.DateFormatter('%b-%d')
+                self.ax[row].xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 180:
+                myfmt = mdates.DateFormatter('%b-%Y')
+                self.ax[row].xaxis.set_major_locator(plt.MaxNLocator(5))
+            elif diff <= 2191:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax[row].xaxis.set_major_locator(plt.MaxNLocator(5))
+            else:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax[row].xaxis.set_major_locator(plt.MaxNLocator(5))
+            self.ax[row].xaxis.set_major_formatter(myfmt)
+        elif self.ncols > 1:
+            if diff <= 2:
+                myfmt = mdates.DateFormatter('%H')
+                self.ax[col].xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 15:
+                myfmt = mdates.DateFormatter('%b-%d')
+                self.ax[col].xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 180:
+                myfmt = mdates.DateFormatter('%b-%Y')
+                self.ax[col].xaxis.set_major_locator(plt.MaxNLocator(5))
+            elif diff <= 2191:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax[col].xaxis.set_major_locator(plt.MaxNLocator(5))
+            else:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax[col].xaxis.set_major_locator(plt.MaxNLocator(5))
+            self.ax[col].xaxis.set_major_formatter(myfmt)
+        else:
+            if diff <= 2:
+                myfmt = mdates.DateFormatter('%H')
+                self.ax.xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 60:
+                myfmt = mdates.DateFormatter('%b-%d')
+                self.ax.xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 180:
+                myfmt = mdates.DateFormatter('%b-%Y')
+                self.ax.xaxis.set_major_locator(plt.MaxNLocator(5))
+            elif diff <= 2191:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax.xaxis.set_major_locator(plt.MaxNLocator(5))
+            else:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax.xaxis.set_major_locator(plt.MaxNLocator(5))
+            self.ax.xaxis.set_major_formatter(myfmt)
+        if self.nrows > 1 and self.ncols > 1 and labels is True:
+            for dfs in enumerate(df_list):
+                self.ax[row, col].plot(dfs[1][x_header], dfs[1][y_header],
+                                       label=column_values[dfs[0]],
+                                       linestyle=line_style,
+                                       color=line_colors[dfs[0]],
+                                       linewidth=line_weight)
+        elif self.nrows > 1 and labels is True:
+            for dfs in enumerate(df_list):
+                self.ax[row].plot(dfs[1][x_header], dfs[1][y_header],
+                                         label=column_values[dfs[0]],
+                                         linestyle=line_style,
+                                         color=line_colors[dfs[0]],
+                                         linewidth=line_weight)
+        elif self.ncols > 1 and labels is True:
+            for dfs in enumerate(df_list):
+                self.ax[col].plot(dfs[1][x_header], dfs[1][y_header],
+                                         label=column_values[dfs[0]],
+                                         linestyle=line_style,
+                                         color=line_colors[dfs[0]],
+                                         linewidth=line_weight)
+        elif self.ncols == 1 and self.nrows ==1 and labels is True:
+            for dfs in enumerate(df_list):
+                self.ax.plot(dfs[1].index, dfs[1][y_header],
+                             label=column_values[dfs[0]],
+                             linestyle=line_style,
+                             color=line_colors[dfs[0]],
+                             linewidth=line_weight)
+        if self.nrows > 1 and self.ncols > 1 and labels is False:
+            for dfs in enumerate(df_list):
+                self.ax[row, col].plot(dfs[1].index, dfs[1][y_header],
+                                       linestyle=line_style,
+                                       color=line_colors[dfs[0]],
+                                       linewidth=line_weight)
+        elif self.nrows > 1 and labels is False:
+            for dfs in enumerate(df_list):
+                self.ax[row].plot(dfs[1].index, dfs[1][y_header],
+                                  linestyle=line_style,
+                                  color=line_colors[dfs[0]],
+                                  linewidth=line_weight)
+        elif self.ncols > 1 and labels is False:
+            for dfs in enumerate(df_list):
+                self.ax[col].plot(dfs[1].index, dfs[1][y_header],
+                                  linestyle=line_style,
+                                  color=line_colors[dfs[0]],
+                                  linewidth=line_weight)
+        else:
+            for dfs in enumerate(df_list):
+                self.ax.plot(dfs[1].index, dfs[1][y_header],
+                             linestyle=line_style,
+                             color=line_colors[dfs[0]],
+                             linewidth=line_weight)
+
+        if labels is True:
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].legend(loc=label_pos)
+            elif self.nrows > 1:
+                self.ax[row].legend(loc=label_pos)
+            elif self.ncols > 1:
+                self.ax[col].legend(loc=label_pos)
+            else:
+                self.ax.legend(loc=label_pos)
         if grid:
             if self.nrows > 1 and self.ncols > 1:
                 self.ax[row, col].grid(color=grid_color, linestyle=grid_style)

@@ -150,6 +150,36 @@ def test_line_plot_column():
                           x_label='x-axis', y_label='y-axis', title='Test',
                           style_name='default',line_colors=['red', 'green'],
                           label_pos='upper left', grid=False)
+# --------------------------------------------------------------------------------
+
+
+def test_datetime_plot_parse_column():
+    length = 6
+    dates = pd.date_range(start=pd.to_datetime('2016-09-24'),
+                          periods = length, freq='w')
+    x = np.linspace(0, length, num=length)
+    linear = x
+    squared = x ** 2.0
+    lin = np.repeat('linear', length)
+    sq = np.repeat('squared', length)
+
+    # Combine arrays into one
+    x = np.hstack((dates, dates))
+    y = np.hstack((linear, squared))
+    power = np.hstack((lin, sq))
+
+    # Create dataframe
+    dictionary = {'dates': x, 'y': y, 'power': power}
+    df = pd.DataFrame(dictionary)
+    # Plot data
+    obj = MatPlotDataFrame()
+
+    parsing_header = 'power'
+    column_values = ['linear', 'squared']
+    obj.timedate_plot_parse_column(df, 'dates', 'y', parsing_header, column_values,
+                                   x_label='x-axis', y_label='y-axis', title='Test',
+                                   style_name='default', line_colors=['red', 'green'],
+                                   label_pos='upper left', grid=True)
 # ================================================================================
 # ================================================================================
 # eof
