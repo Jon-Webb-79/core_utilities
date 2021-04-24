@@ -71,11 +71,17 @@ def test_scatter_plot_parse_columns():
     obj.scatter_plot_parse_column(df, 'x', 'y', parsing_header, column_values,
                                   x_label='x-axis', y_label='y-axis', title='Test',
                                   style_name='default', marker_style=['o', '^'],
-                                  label_pos='upper left', grid=True)
+                                  label_pos='upper left', grid=True, labels=True)
 # --------------------------------------------------------------------------------
 
 
 def test_scatter_plot_column():
+    """
+
+    This function tests the ability of scatter_plot_column
+    within the MatPlotDataFrame class to process a plot without
+    failint
+    """
     length = 20
     x = np.linspace(0, 20, num=20)
     linear = x
@@ -89,11 +95,40 @@ def test_scatter_plot_column():
     obj = MatPlotDataFrame(1, 1)
     x_headers = ['x', 'x']
     y_headers = ['linear', 'squared']
-    obj.scatter_plot_columns(df, x_headers, y_headers, y_headers,
+    obj.scatter_plot_columns(df, x_headers, y_headers, labels=False,
                              x_label='x-axis', y_label='y-axis', title='Test',
                              style_name='default',marker_colors=['red', 'green'],
                              fill_alpha=0.7, marker_style=['o', '^'],
                              label_pos='upper left', grid=False)
+    obj.save_fig('scatter_two.png')
+# --------------------------------------------------------------------------------
+
+
+def test_line_plot_parse_column():
+    length = 20
+    x = np.linspace(0, 20, num=20)
+    linear = x
+    squared = x ** 2.0
+    lin = np.repeat('linear', 20)
+    sq = np.repeat('squared', 20)
+
+    # Combine arrays into one
+    x = np.hstack((x, x))
+    y = np.hstack((linear, squared))
+    power = np.hstack((lin, sq))
+
+    # Create dataframe
+    dictionary = {'x': x, 'y': y, 'power': power}
+    df = pd.DataFrame(dictionary)
+
+    parsing_header = 'power'
+    column_values = ['linear', 'squared']
+    # Plot data
+    obj = MatPlotDataFrame(nrows=1, ncols=1)
+    obj.line_plot_parse_column(df, 'x', 'y', parsing_header,
+                               column_values,
+                               line_colors=['red', 'green'],
+                               label_pos='upper left')
 # ================================================================================
 # ================================================================================
 # eof
