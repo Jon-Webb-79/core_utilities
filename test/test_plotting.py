@@ -237,6 +237,7 @@ def test_fill_between_parse_columns():
     obj.close_plot()
 # --------------------------------------------------------------------------------
 
+
 def test_fill_between_columns():
     length = 20
     x = np.linspace(0, 20, num=20)
@@ -253,6 +254,36 @@ def test_fill_between_columns():
     y_headers = ['linear', 'squared']
     obj = MatPlotDataFrame(nrows=1, ncols=1)
     obj.fill_between_lines_columns(df, x_headers, y_headers)
+    obj.close_plot()
+# --------------------------------------------------------------------------------
+
+
+def test_fill_between_datetime_parse():
+    length = 6
+    dates = pd.date_range(start=pd.to_datetime('2016-09-24'),
+                          periods = length, freq='w')
+    x = np.linspace(0, length, num=length)
+    linear = x
+    squared = x ** 2.0
+    lin = np.repeat('linear', length)
+    sq = np.repeat('squared', length)
+
+    # Combine arrays into one
+    x = np.hstack((dates, dates))
+    y = np.hstack((linear, squared))
+    power = np.hstack((lin, sq))
+
+    # Create dataframe
+    dictionary = {'dates': x, 'y': y, 'power': power}
+    df = pd.DataFrame(dictionary)
+    # Plot data
+    obj = MatPlotDataFrame()
+
+    parsing_header = 'power'
+    column_values = ['linear', 'squared']
+    obj.fill_between_dt_parse_column(df, 'dates', 'y', parsing_header,
+                                     column_values)
+    obj.save_fig('time_fill.png')
     obj.close_plot()
 # ================================================================================
 # ================================================================================
