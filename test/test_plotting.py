@@ -283,7 +283,26 @@ def test_fill_between_datetime_parse():
     column_values = ['linear', 'squared']
     obj.fill_between_dt_parse_column(df, 'dates', 'y', parsing_header,
                                      column_values)
-    obj.save_fig('time_fill.png')
+    obj.close_plot()
+# --------------------------------------------------------------------------------
+
+
+def test_fill_between_datetime_column():
+    length = 6
+    dates = pd.date_range(start=pd.to_datetime('2016-09-24'),
+                          periods = length, freq='y')
+    x = np.linspace(0, length, num=length)
+    linear = x
+    squared = x ** 2.0
+
+    dictionary = {'dates': dates, 'squared': squared,
+                  'linear': linear}
+    df = pd.DataFrame(dictionary)
+    # Plot data
+    obj = MatPlotDataFrame()
+    time_axis = ['dates', 'dates']
+    y_axis = ['linear', 'squared']
+    obj.fill_between_dt_column(df, time_axis, y_axis)
     obj.close_plot()
 # ================================================================================
 # ================================================================================

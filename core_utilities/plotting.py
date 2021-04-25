@@ -1577,6 +1577,9 @@ class MatPlotDataFrame:
         :param labels: True is a legend is to be printed, False if not.  Defaulted
                        to True
 
+        This plot method will fill the space between two lines with a solid
+        color.  An example is shown below.
+
         .. code-block:: python
 
            > length = 20
@@ -1716,6 +1719,9 @@ class MatPlotDataFrame:
         :param grid_color: Defaulted to 'grey'
         :param row: The row in the grid where the plot will be placed
         :param col: The column in the grid where the plot will be placed
+
+        This plot method will fill the space between two lines with a solid
+        color.  An example is shown below.
 
         .. code-block:: python
 
@@ -1872,6 +1878,9 @@ class MatPlotDataFrame:
                     0
         :param col: The column in which the plot is to be placed.  Defaulted
                     to 0
+
+        This plot method will fill the space between two date time lines with a solid
+        color.  An example is shown below.
 
         .. code-block:: python
 
@@ -2058,6 +2067,231 @@ class MatPlotDataFrame:
                 self.ax.grid(color=grid_color, linestyle=grid_style)
 # --------------------------------------------------------------------------------
 
+    def fill_between_dt_column(self, df: pd.DataFrame, x_headers: str, y_headers: str,
+                               style_name: str='default',
+                               fill_color: str='red',
+                               fill_alpha: np.float32=0.7,
+                               label_font_size: np.float32=18,
+                               x_label: str='', y_label: str='',
+                               title: str='', x_scale: str='LIN',
+                               y_scale: str='LIN',
+                               tick_font_size: int=18, title_font_size: int=24,
+                               grid: bool=False, grid_style='-', grid_color='grey',
+                               row: int=0, col: int=0) -> None:
+        """
+
+        :param pd: A pandas dataframe contining data to be plotted
+        :param x_headers: A list containing a single header that defines
+                          the time axis for plotting
+        :param y_headers: A list containing two headers, each header
+                          describing the column to be used for one of the
+                          two y-axis plots
+        :param style_name: The plot style, defaulted to 'default'
+        :param fill_color: The color of the fill between lines.  Defaulted
+                           to 'red'
+        :param fill_alpha: The weight of the fill between lines.  Defaulted
+                           to 0.7
+        :param label_fint_size: Defaulted to 18
+        :param x_label: The label for the x-axis, defaulted to ''
+        :param y_label: The label for the y-axis, defaulted to ''
+        :param title: The plot title.  Defaulted to ''
+        :param x_scale: 'LOG' or 'LIN', defaulted to 'LIN'
+        :param y_scale: 'LOG' or 'LIN', defaulted to 'LIN'
+        :param tick_font_size: Defaulted to 18
+        :param title_font_size: Defaulted to 24
+        :param grid: True if a grid is desired, False otherwise.  Defaulted
+                     to False
+        :param grid_style: Defaulted to '-'
+        :param grid_color: Defaulted to 'grey'
+        :param row: The row position in the plot grid where the plot is to be
+                    placed.  Defaulted to 0
+        :param col: The column in the plot grid where the plot is to be placed.
+                    Defaulted to 0
+
+        This plot method will fill the space between two date time lines with a solid
+        color.  An example is shown below.
+
+        .. code-block:: python
+
+           > length = 6
+           > dates = pd.date_range(start=pd.to_datetime('2016-09-24'),
+                                   periods = length, freq='y')
+           > x = np.linspace(0, length, num=length)
+           > linear = x
+           > squared = x ** 2.0
+
+           > dictionary = {'dates': dates, 'squared': squared,
+                           'linear': linear}
+           > df = pd.DataFrame(dictionary)
+           > # Plot data
+           > obj = MatPlotDataFrame()
+           > time_axis = ['dates', 'dates']
+           > y_axis = ['linear', 'squared']
+           > obj.fill_between_dt_column(df, time_axis, y_axis)
+           > obj.show_plot()
+
+        .. image:: time_fill.png
+           :align: center
+        """
+        diff = 0
+        for headers in enumerate(x_headers):
+            max_date = df[headers[1]].max()
+            min_date = df[headers[1]].min()
+            delta = (max_date - min_date) / np.timedelta64(1, 'D')
+            if delta > diff:
+                diff = delta
+
+        # Error checking
+        if y_scale not in ('LOG', 'LIN'):
+            warnings.warn('y_scale must be set to LOG or LIN')
+        if x_scale not in ('LOG', 'LIN'):
+            warnings.warn('y_scale must be set to LOG or LIN')
+        print(style_name)
+
+        # begin plot
+        plt.rcParams.update({'figure.autolayout': True})
+        plt.style.use(style_name)
+        rc('xtick', labelsize=tick_font_size)
+        rc('ytick', labelsize=tick_font_size)
+
+        if self.nrows > 1 and self.ncols > 1:
+            self.ax[row, col].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[row, col].set_ylabel(y_label, fontsize=label_font_size)
+        elif self.nrows >1:
+            self.ax[row].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[row].set_ylabel(y_label, fontsize=label_font_size)
+        elif self.ncols > 1:
+            self.ax[col].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[col].set_ylabel(y_label, fontsize=label_font_size)
+        else:
+            self.ax.set_xlabel(x_label, fontsize=label_font_size)
+            self.ax.set_ylabel(y_label, fontsize=label_font_size)
+
+        if title != 'NULL':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_title(title, fontsize=title_font_size)
+            elif self.nrows > 1:
+                self.ax[row].set_title(title, fontsize=title_font_size)
+            elif self.ncols > 1:
+                self.ax[col].set_title(title, fontsize=title_font_size)
+            else:
+                self.ax.set_title(title, fontsize=title_font_size)
+
+        if x_scale.upper() == 'LOG':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_xscale('log')
+            elif self.nrows > 1:
+                self.ax[row].set_xscale('log')
+            elif self.ncols > 1:
+                self.ax[col].set_xscale('log')
+            else:
+                self.ax.set_xscale('log')
+        if y_scale.upper() == 'LOG':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_yscale('log')
+            elif self.nrows > 1:
+                self.ax[row].set_yscale('log')
+            elif self.ncols > 1:
+                self.ax[col].set_yscale('log')
+            else:
+                self.ax.set_yscale('log')
+
+        if self.nrows > 1 and self.ncols > 1:
+            if diff <= 2:
+                myfmt = mdates.DateFormatter('%H')
+                self.ax[row, col].xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 15:
+                myfmt = mdates.DateFormatter('%b-%d')
+                self.ax[row, col].xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 180:
+                myfmt = mdates.DateFormatter('%b-%Y')
+                self.ax[row, col].xaxis.set_major_locator(plt.MaxNLocator(5))
+            elif diff <= 2191:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax[row, col].xaxis.set_major_locator(plt.MaxNLocator(5))
+            else:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax[row, col].xaxis.set_major_locator(plt.MaxNLocator(5))
+            self.ax[row, col].xaxis.set_major_formatter(myfmt)
+        elif self.nrows > 1:
+            if diff <= 2:
+                myfmt = mdates.DateFormatter('%H')
+                self.ax[row].xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 15:
+                myfmt = mdates.DateFormatter('%b-%d')
+                self.ax[row].xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 180:
+                myfmt = mdates.DateFormatter('%b-%Y')
+                self.ax[row].xaxis.set_major_locator(plt.MaxNLocator(5))
+            elif diff <= 2191:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax[row].xaxis.set_major_locator(plt.MaxNLocator(5))
+            else:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax[row].xaxis.set_major_locator(plt.MaxNLocator(5))
+            self.ax[row].xaxis.set_major_formatter(myfmt)
+        elif self.ncols > 1:
+            if diff <= 2:
+                myfmt = mdates.DateFormatter('%H')
+                self.ax[col].xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 15:
+                myfmt = mdates.DateFormatter('%b-%d')
+                self.ax[col].xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 180:
+                myfmt = mdates.DateFormatter('%b-%Y')
+                self.ax[col].xaxis.set_major_locator(plt.MaxNLocator(5))
+            elif diff <= 2191:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax[col].xaxis.set_major_locator(plt.MaxNLocator(5))
+            else:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax[col].xaxis.set_major_locator(plt.MaxNLocator(5))
+            self.ax[col].xaxis.set_major_formatter(myfmt)
+        else:
+            if diff <= 2:
+                myfmt = mdates.DateFormatter('%H')
+                self.ax.xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 60:
+                myfmt = mdates.DateFormatter('%b-%d')
+                self.ax.xaxis.set_major_locator(plt.MaxNLocator(6))
+            elif diff <= 180:
+                myfmt = mdates.DateFormatter('%b-%Y')
+                self.ax.xaxis.set_major_locator(plt.MaxNLocator(5))
+            elif diff <= 2191:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax.xaxis.set_major_locator(plt.MaxNLocator(5))
+            else:
+                myfmt = mdates.DateFormatter('%Y')
+                self.ax.xaxis.set_major_locator(plt.MaxNLocator(5))
+            self.ax.xaxis.set_major_formatter(myfmt)
+
+        if self.nrows > 1 and self.ncols > 1:
+            self.ax[row, col].fill_between(df[x_headers[0]], df[y_headers[0]],
+                                           df[y_headers[1]], interpolate=True,
+                                           color=fill_color, alpha=fill_alpha)
+        elif self.nrows > 1:
+            self.ax[row].fill_between(df[x_headers[0]], df[y_headers[0]],
+                                      df[y_headers[1]], interpolate=True,
+                                      color=fill_color, alpha=fill_alpha)
+        elif self.ncols > 1:
+            self.ax[col].fill_between(df[x_headers[0]], df[y_headers[0]],
+                                      df[y_headers[1]], interpolate=True,
+                                      color=fill_color, alpha=fill_alpha)
+        else:
+            self.ax.fill_between(df[x_headers[0]], df[y_headers[0]],
+                                 df[y_headers[1]], interpolate=True,
+                                 color=fill_color, alpha=fill_alpha)
+        if grid:
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].grid(color=grid_color, linestyle=grid_style)
+            elif self.nrows > 1:
+                self.ax[row].grid(color=grid_color, linestyle=grid_style)
+            elif self.ncols > 1:
+                self.ax[col].grid(color=grid_color, linestyle=grid_style)
+            else:
+                self.ax.grid(color=grid_color, linestyle=grid_style)
+# --------------------------------------------------------------------------------
+
     def show_plot(self):
         """
 
@@ -2079,6 +2313,11 @@ class MatPlotDataFrame:
 # --------------------------------------------------------------------------------
 
     def close_plot(self):
+        """
+
+        This function will close the plot object so no other data
+        is written on it
+        """
         plt.close()
 # ================================================================================
 # ================================================================================

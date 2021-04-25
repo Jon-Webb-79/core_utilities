@@ -1612,6 +1612,9 @@
 <span class="sd">        :param labels: True is a legend is to be printed, False if not.  Defaulted</span>
 <span class="sd">                       to True</span>
 
+<span class="sd">        This plot method will fill the space between two lines with a solid</span>
+<span class="sd">        color.  An example is shown below.</span>
+
 <span class="sd">        .. code-block:: python</span>
 
 <span class="sd">           &gt; length = 20</span>
@@ -1751,6 +1754,9 @@
 <span class="sd">        :param grid_color: Defaulted to &#39;grey&#39;</span>
 <span class="sd">        :param row: The row in the grid where the plot will be placed</span>
 <span class="sd">        :param col: The column in the grid where the plot will be placed</span>
+
+<span class="sd">        This plot method will fill the space between two lines with a solid</span>
+<span class="sd">        color.  An example is shown below.</span>
 
 <span class="sd">        .. code-block:: python</span>
 
@@ -1907,6 +1913,9 @@
 <span class="sd">                    0</span>
 <span class="sd">        :param col: The column in which the plot is to be placed.  Defaulted</span>
 <span class="sd">                    to 0</span>
+
+<span class="sd">        This plot method will fill the space between two date time lines with a solid</span>
+<span class="sd">        color.  An example is shown below.</span>
 
 <span class="sd">        .. code-block:: python</span>
 
@@ -2093,6 +2102,231 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">grid_color</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="n">grid_style</span><span class="p">)</span></div>
 <span class="c1"># --------------------------------------------------------------------------------</span>
 
+<div class="viewcode-block" id="MatPlotDataFrame.fill_between_dt_column"><a class="viewcode-back" href="../plotting.html#plotting.MatPlotDataFrame.fill_between_dt_column">[docs]</a>    <span class="k">def</span> <span class="nf">fill_between_dt_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">x_headers</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">y_headers</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                               <span class="n">style_name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span>
+                               <span class="n">fill_color</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+                               <span class="n">fill_alpha</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+                               <span class="n">label_font_size</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span>
+                               <span class="n">x_label</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">y_label</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                               <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">x_scale</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;LIN&#39;</span><span class="p">,</span>
+                               <span class="n">y_scale</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;LIN&#39;</span><span class="p">,</span>
+                               <span class="n">tick_font_size</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">title_font_size</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span>
+                               <span class="n">grid</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">grid_style</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">grid_color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span>
+                               <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">col</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param pd: A pandas dataframe contining data to be plotted</span>
+<span class="sd">        :param x_headers: A list containing a single header that defines</span>
+<span class="sd">                          the time axis for plotting</span>
+<span class="sd">        :param y_headers: A list containing two headers, each header</span>
+<span class="sd">                          describing the column to be used for one of the</span>
+<span class="sd">                          two y-axis plots</span>
+<span class="sd">        :param style_name: The plot style, defaulted to &#39;default&#39;</span>
+<span class="sd">        :param fill_color: The color of the fill between lines.  Defaulted</span>
+<span class="sd">                           to &#39;red&#39;</span>
+<span class="sd">        :param fill_alpha: The weight of the fill between lines.  Defaulted</span>
+<span class="sd">                           to 0.7</span>
+<span class="sd">        :param label_fint_size: Defaulted to 18</span>
+<span class="sd">        :param x_label: The label for the x-axis, defaulted to &#39;&#39;</span>
+<span class="sd">        :param y_label: The label for the y-axis, defaulted to &#39;&#39;</span>
+<span class="sd">        :param title: The plot title.  Defaulted to &#39;&#39;</span>
+<span class="sd">        :param x_scale: &#39;LOG&#39; or &#39;LIN&#39;, defaulted to &#39;LIN&#39;</span>
+<span class="sd">        :param y_scale: &#39;LOG&#39; or &#39;LIN&#39;, defaulted to &#39;LIN&#39;</span>
+<span class="sd">        :param tick_font_size: Defaulted to 18</span>
+<span class="sd">        :param title_font_size: Defaulted to 24</span>
+<span class="sd">        :param grid: True if a grid is desired, False otherwise.  Defaulted</span>
+<span class="sd">                     to False</span>
+<span class="sd">        :param grid_style: Defaulted to &#39;-&#39;</span>
+<span class="sd">        :param grid_color: Defaulted to &#39;grey&#39;</span>
+<span class="sd">        :param row: The row position in the plot grid where the plot is to be</span>
+<span class="sd">                    placed.  Defaulted to 0</span>
+<span class="sd">        :param col: The column in the plot grid where the plot is to be placed.</span>
+<span class="sd">                    Defaulted to 0</span>
+
+<span class="sd">        This plot method will fill the space between two date time lines with a solid</span>
+<span class="sd">        color.  An example is shown below.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">           &gt; length = 6</span>
+<span class="sd">           &gt; dates = pd.date_range(start=pd.to_datetime(&#39;2016-09-24&#39;),</span>
+<span class="sd">                                   periods = length, freq=&#39;y&#39;)</span>
+<span class="sd">           &gt; x = np.linspace(0, length, num=length)</span>
+<span class="sd">           &gt; linear = x</span>
+<span class="sd">           &gt; squared = x ** 2.0</span>
+
+<span class="sd">           &gt; dictionary = {&#39;dates&#39;: dates, &#39;squared&#39;: squared,</span>
+<span class="sd">                           &#39;linear&#39;: linear}</span>
+<span class="sd">           &gt; df = pd.DataFrame(dictionary)</span>
+<span class="sd">           &gt; # Plot data</span>
+<span class="sd">           &gt; obj = MatPlotDataFrame()</span>
+<span class="sd">           &gt; time_axis = [&#39;dates&#39;, &#39;dates&#39;]</span>
+<span class="sd">           &gt; y_axis = [&#39;linear&#39;, &#39;squared&#39;]</span>
+<span class="sd">           &gt; obj.fill_between_dt_column(df, time_axis, y_axis)</span>
+<span class="sd">           &gt; obj.show_plot()</span>
+
+<span class="sd">        .. image:: time_fill.png</span>
+<span class="sd">           :align: center</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">headers</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x_headers</span><span class="p">):</span>
+            <span class="n">max_date</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">headers</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="n">min_date</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">headers</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_date</span> <span class="o">-</span> <span class="n">min_date</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="n">diff</span><span class="p">:</span>
+                <span class="n">diff</span> <span class="o">=</span> <span class="n">delta</span>
+
+        <span class="c1"># Error checking</span>
+        <span class="k">if</span> <span class="n">y_scale</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;LOG&#39;</span><span class="p">,</span> <span class="s1">&#39;LIN&#39;</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;y_scale must be set to LOG or LIN&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x_scale</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;LOG&#39;</span><span class="p">,</span> <span class="s1">&#39;LIN&#39;</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;y_scale must be set to LOG or LIN&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">style_name</span><span class="p">)</span>
+
+        <span class="c1"># begin plot</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;figure.autolayout&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">style_name</span><span class="p">)</span>
+        <span class="n">rc</span><span class="p">(</span><span class="s1">&#39;xtick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">tick_font_size</span><span class="p">)</span>
+        <span class="n">rc</span><span class="p">(</span><span class="s1">&#39;ytick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">tick_font_size</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">x_label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">label_font_size</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">label_font_size</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">x_label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">label_font_size</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">label_font_size</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">x_label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">label_font_size</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">label_font_size</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">x_label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">label_font_size</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">label_font_size</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">title</span> <span class="o">!=</span> <span class="s1">&#39;NULL&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">title_font_size</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">title_font_size</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">title_font_size</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">title_font_size</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">x_scale</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;LOG&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">y_scale</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;LOG&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%H&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">15</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%b-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">180</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%b-%Y&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">2191</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">myfmt</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%H&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">15</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%b-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">180</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%b-%Y&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">2191</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">myfmt</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%H&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">15</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%b-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">180</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%b-%Y&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">2191</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">myfmt</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%H&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">60</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%b-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">180</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%b-%Y&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="mi">2191</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">myfmt</span> <span class="o">=</span> <span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">myfmt</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">x_headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">df</span><span class="p">[</span><span class="n">y_headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+                                           <span class="n">df</span><span class="p">[</span><span class="n">y_headers</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">interpolate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                           <span class="n">color</span><span class="o">=</span><span class="n">fill_color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">fill_alpha</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">x_headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">df</span><span class="p">[</span><span class="n">y_headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+                                      <span class="n">df</span><span class="p">[</span><span class="n">y_headers</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">interpolate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                      <span class="n">color</span><span class="o">=</span><span class="n">fill_color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">fill_alpha</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">x_headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">df</span><span class="p">[</span><span class="n">y_headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+                                      <span class="n">df</span><span class="p">[</span><span class="n">y_headers</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">interpolate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                      <span class="n">color</span><span class="o">=</span><span class="n">fill_color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">fill_alpha</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">x_headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">df</span><span class="p">[</span><span class="n">y_headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+                                 <span class="n">df</span><span class="p">[</span><span class="n">y_headers</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">interpolate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                 <span class="n">color</span><span class="o">=</span><span class="n">fill_color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">fill_alpha</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">grid</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">grid_color</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="n">grid_style</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">grid_color</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="n">grid_style</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">grid_color</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="n">grid_style</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">grid_color</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="n">grid_style</span><span class="p">)</span></div>
+<span class="c1"># --------------------------------------------------------------------------------</span>
+
 <div class="viewcode-block" id="MatPlotDataFrame.show_plot"><a class="viewcode-back" href="../plotting.html#plotting.MatPlotDataFrame.show_plot">[docs]</a>    <span class="k">def</span> <span class="nf">show_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -2113,8 +2347,13 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span></div>
 <span class="c1"># --------------------------------------------------------------------------------</span>
 
-    <span class="k">def</span> <span class="nf">close_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+<div class="viewcode-block" id="MatPlotDataFrame.close_plot"><a class="viewcode-back" href="../plotting.html#plotting.MatPlotDataFrame.close_plot">[docs]</a>    <span class="k">def</span> <span class="nf">close_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        This function will close the plot object so no other data</span>
+<span class="sd">        is written on it</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># ================================================================================</span>
 <span class="c1"># eof</span>
