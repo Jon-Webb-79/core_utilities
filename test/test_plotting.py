@@ -180,6 +180,28 @@ def test_datetime_plot_parse_column():
                                    x_label='x-axis', y_label='y-axis', title='Test',
                                    style_name='default', line_colors=['red', 'green'],
                                    label_pos='upper left', grid=True)
+# --------------------------------------------------------------------------------
+
+
+def test_datetime_plot_column():
+    length = 6
+    dates = pd.date_range(start=pd.to_datetime('2016-09-24'),
+                          periods = length, freq='y')
+    x = np.linspace(0, length, num=length)
+    linear = x
+    squared = x ** 2.0
+
+    dictionary = {'dates': dates, 'squared': squared,
+                  'linear': linear}
+    df = pd.DataFrame(dictionary)
+    # Plot data
+    obj = MatPlotDataFrame()
+    time_axis = ['dates', 'dates']
+    y_axis = ['linear', 'squared']
+    obj.timedate_plot_columns(df, time_axis, y_axis, y_axis,
+                              x_label='x-axis', y_label='y-axis', title='Test',
+                              style_name='default', line_colors=['red', 'green'],
+                              label_pos='upper left', grid=True)
 # ================================================================================
 # ================================================================================
 # eof
