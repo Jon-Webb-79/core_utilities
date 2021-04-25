@@ -72,6 +72,7 @@ def test_scatter_plot_parse_columns():
                                   x_label='x-axis', y_label='y-axis', title='Test',
                                   style_name='default', marker_style=['o', '^'],
                                   label_pos='upper left', grid=True, labels=True)
+    obj.close_plot()
 # --------------------------------------------------------------------------------
 
 
@@ -100,6 +101,7 @@ def test_scatter_plot_column():
                              style_name='default',marker_colors=['red', 'green'],
                              fill_alpha=0.7, marker_style=['o', '^'],
                              label_pos='upper left', grid=False)
+    obj.close_plot()
 # --------------------------------------------------------------------------------
 
 
@@ -128,6 +130,7 @@ def test_line_plot_parse_column():
                                column_values,
                                line_colors=['red', 'green'],
                                label_pos='upper left')
+    obj.close_plot()
 # --------------------------------------------------------------------------------
 
 
@@ -150,6 +153,7 @@ def test_line_plot_column():
                           x_label='x-axis', y_label='y-axis', title='Test',
                           style_name='default',line_colors=['red', 'green'],
                           label_pos='upper left', grid=False)
+    obj.close_plot()
 # --------------------------------------------------------------------------------
 
 
@@ -180,6 +184,7 @@ def test_datetime_plot_parse_column():
                                    x_label='x-axis', y_label='y-axis', title='Test',
                                    style_name='default', line_colors=['red', 'green'],
                                    label_pos='upper left', grid=True)
+    obj.close_plot()
 # --------------------------------------------------------------------------------
 
 
@@ -202,6 +207,53 @@ def test_datetime_plot_column():
                               x_label='x-axis', y_label='y-axis', title='Test',
                               style_name='default', line_colors=['red', 'green'],
                               label_pos='upper left', grid=True)
+    obj.close_plot()
+# --------------------------------------------------------------------------------
+
+
+def test_fill_between_parse_columns():
+    length = 20
+    x = np.linspace(0, 20, num=20)
+    linear = x
+    squared = x ** 2.0
+    lin = np.repeat('linear', 20)
+    sq = np.repeat('squared', 20)
+
+    # Combine arrays into one
+    x = np.hstack((x, x))
+    y = np.hstack((linear, squared))
+    power = np.hstack((lin, sq))
+
+    # Create dataframe
+    dictionary = {'x': x, 'y': y, 'power': power}
+    df = pd.DataFrame(dictionary)
+
+    parsing_header = 'power'
+    column_values = ['linear', 'squared']
+    # Plot data
+    obj = MatPlotDataFrame(nrows=1, ncols=1)
+    obj.fill_between_lines_parse_column(df, 'x', 'y', parsing_header,
+                                        column_values)
+    obj.close_plot()
+# --------------------------------------------------------------------------------
+
+def test_fill_between_columns():
+    length = 20
+    x = np.linspace(0, 20, num=20)
+    linear = x
+    squared = x ** 2.0
+
+    # create dataframe
+    dictionary = {'x': x, 'linear': linear, 'squared': squared}
+    df = pd.DataFrame(dictionary)
+
+    # plot data
+    obj = MatPlotDataFrame(1, 1)
+    x_headers = ['x', 'x']
+    y_headers = ['linear', 'squared']
+    obj = MatPlotDataFrame(nrows=1, ncols=1)
+    obj.fill_between_lines_columns(df, x_headers, y_headers)
+    obj.close_plot()
 # ================================================================================
 # ================================================================================
 # eof

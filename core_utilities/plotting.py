@@ -749,7 +749,7 @@ class MatPlotDataFrame:
 # --------------------------------------------------------------------------------
 
     def line_plot_columns(self, df: pd.DataFrame, x_headers: str, y_headers: str,
-                          labels: List[str], style_name: str='default',
+                          labels: bool=True, style_name: str='default',
                           line_colors: List[str]=['None'],
                           line_weight: np.float32=2.0,
                           line_style: str='-', x_label: str='', y_label: str='',
@@ -1310,7 +1310,7 @@ class MatPlotDataFrame:
                                        style_name='default', line_colors=['red', 'green'],
                                        label_pos='upper left', grid=True)
            > obj.show_plot()
-        .. image:: time_two.png 
+        .. image:: time_two.png
            :align: center
         """
         diff = 0
@@ -1508,6 +1508,298 @@ class MatPlotDataFrame:
                 self.ax.grid(color=grid_color, linestyle=grid_style)
 # --------------------------------------------------------------------------------
 
+    def fill_between_lines_parse_column(self, df: pd.DataFrame, x_header: str,
+                                        y_header: str, parsing_header: str,
+                                        column_values: List[str],
+                                        style_name: str='default',
+                                        fill_color: str='red',
+                                        fill_alpha: np.float32=0.7,
+                                        label_font_size: np.float32=18,
+                                        x_label: str='',
+                                        y_label: str='', title: str='',
+                                        x_scale: str='LIN', y_scale: str='LIN',
+                                        tick_font_size: int=18,
+                                        title_font_size: int=24,
+                                        grid: bool=False, grid_style='-',
+                                        grid_color='grey', row: int=0,
+                                        col: int=0) -> None:
+        """
+        :param df: A pandas dataframe containing data to be plotted
+        :param x_header: The column header containing data to be plotted in the
+                         x-axis
+        :param y_header: The column header containing data to be plotted in the
+                         y-axis
+        :param parsing_header: The column containing key words that are used
+                               to determine what data is plotted.  The keywords
+                               will also be used as the plot labels is ``labels`` is
+                               set to true
+        :param column_values: The keywords that exist within the column defined by parsing
+                              header.  The function will filter the dataframe to only
+                              contain rows where this keyword is present
+        :param style_name: The plot style, defaulted to 'default'.
+                           See :href `styles<https://matplotlib.org/stable/api/style_api.html>`
+        :param fill_color: The color of the fill between the lines
+        :param fill_alpha: The fill weight
+        :param label_font_size: The size of the x and y axis labels.  Defaulted to 18
+        :param x_label: The x-axis label, defaulted to ''
+        :param y_label: The y-axis label, defaulted to ''
+        :param title: The plot title, defaulted to ''
+        :param x_scale: 'LOG' or 'LIN', defaulted to 'LIN'
+        :param y_scale: 'LOG' or 'LIN', defaulted to 'LIN'
+        :param tick_font_size: The tick font size, defaulted to 18
+        :param grid: True if a grid is desired.  Defaulted to False
+        :param row: The row within the plot grid where this plot will be
+                    placed.  Defaulted to 1
+        :param col: The column within the plot grid where this plot will
+                    be placed.  Defaulted to 1
+        :param labels: True is a legend is to be printed, False if not.  Defaulted
+                       to True
+
+        .. code-block:: python
+
+           > length = 20
+           > x = np.linspace(0, length, num=length)
+           > linear = x
+           > squared = x ** 2.0
+           > lin = np.repeat('linear', length)
+           > sq = np.repeat('squared', length)
+           > # Combine arrays into one
+           > x = np.hstack((x, x))
+           > y = np.hstack((linear, squared))
+           > power = np.hstack((lin, sq))
+           > # Create dataframe
+           > dictionary = {'x': x, 'y': y, 'power': power}
+           > df = pd.DataFrame(dictionary)
+           > # Plot data
+           > obj = MatPlotDataFrame(1, 1)
+           > parsing_header = 'power'
+           > column_values = ['linear', 'squared']
+           > obj.fill_between_lines_parse_column(df, 'x', 'y', parsing_header,
+                                        column_values)
+           > obj.show_plot()
+
+        .. image:: fill_between.png
+           :align: center
+        """
+        df_list = [df[df[parsing_header] == col_val] for
+                   col_val in column_values]
+
+        # Error checking
+        if len(column_values) != 2:
+            sys.exit('FATAL ERROR: Column Values should have a length of 2')
+        # begin plot
+        plt.rcParams.update({'figure.autolayout': True})
+        plt.style.use(style_name)
+        rc('xtick', labelsize=tick_font_size)
+        rc('ytick', labelsize=tick_font_size)
+
+        if self.nrows > 1 and self.ncols > 1:
+            self.ax[row, col].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[row, col].set_ylabel(y_label, fontsize=label_font_size)
+        elif self.nrows >1:
+            self.ax[row].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[row].set_ylabel(y_label, fontsize=label_font_size)
+        elif self.ncols > 1:
+            self.ax[col].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[col].set_ylabel(y_label, fontsize=label_font_size)
+        else:
+            self.ax.set_xlabel(x_label, fontsize=label_font_size)
+            self.ax.set_ylabel(y_label, fontsize=label_font_size)
+        if title != 'NULL':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_title(title, fontsize=title_font_size)
+            elif self.nrows > 1:
+                self.ax[row].set_title(title, fontsize=title_font_size)
+            elif self.ncols > 1:
+                self.ax[col].set_title(title, fontsize=title_font_size)
+            else:
+                self.ax.set_title(title, fontsize=title_font_size)
+        if x_scale.upper() == 'LOG':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_xscale('log')
+            elif self.nrows > 1:
+                self.ax[row].set_xscale('log')
+            elif self.ncols > 1:
+                self.ax[col].set_xscale('log')
+            else:
+                self.ax.set_xscale('log')
+        if y_scale.upper() == 'LOG':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_yscale('log')
+            elif self.nrows > 1:
+                self.ax[row].set_yscale('log')
+            elif self.ncols > 1:
+                self.ax[col].set_yscale('log')
+            else:
+                self.ax.set_yscale('log')
+
+        if self.nrows > 1 and self.ncols > 1:
+            self.ax[row, col].fill_between(df_list[0][x_header], df_list[0][y_header],
+                                           df_list[1][y_header], interpolate=True,
+                                           color=fill_color, alpha=fill_alpha)
+        elif self.nrows > 1:
+            self.ax[row].fill_between(df_list[0][x_header], df_list[0][y_header],
+                                      df_list[1][y_header], interpolate=True,
+                                      color=fill_color, alpha=fill_alpha)
+        elif self.ncols > 1:
+            self.ax[col].fill_between(df_list[0][x_header], df_list[0][y_header],
+                                      df_list[1][y_header], interpolate=True,
+                                      color=fill_color, alpha=fill_alpha)
+        else:
+            self.ax.fill_between(df_list[0][x_header], df_list[0][y_header],
+                                 df_list[1][y_header], interpolate=True,
+                                 color=fill_color, alpha=fill_alpha)
+        if grid:
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].grid(color=grid_color, linestyle=grid_style)
+            elif self.nrows > 1:
+                self.ax[row].grid(color=grid_color, linestyle=grid_style)
+            elif self.ncols > 1:
+                self.ax[col].grid(color=grid_color, linestyle=grid_style)
+            else:
+                self.ax.grid(color=grid_color, linestyle=grid_style)
+# --------------------------------------------------------------------------------
+
+    def fill_between_lines_columns(self, df: pd.DataFrame, x_headers: str, y_headers: str,
+                                   style_name: str='default',
+                                   fill_color: str='red',
+                                   fill_alpha: np.float32=0.7,
+                                   label_font_size: np.float32=18,
+                                   x_label: str='', y_label: str='',
+                                   title: str='', x_scale: str='LIN',
+                                   y_scale: str='LIN',
+                                   tick_font_size: int=18, title_font_size: int=24,
+                                   grid: bool=False, grid_style='-', grid_color='grey',
+                                   row: int=0, col: int=0):
+        """
+
+        :param df: A pandas dataframe containing information to be plotted
+        :param x_headers: A list of the name for columns containing x data.  This
+                          list should only conain one name
+        :param y_headers: A list of the names for columns containing y_data.  This
+                          should only contain two names
+        :param style_name: The plot style, set to default
+        :param fill_color: The color for the fill between two lines.  Defaulted to red
+        :param fill_alpha: The weight for the fill between two lines
+        :param label_font_size: The font size for the x and y axis labels
+        :param x_label: The x-axis label
+        :param y_label: The y-axis label
+        :param title: The plot title
+        :param x_scale: 'LIN' or 'LOG', defaulted to 'LIN'
+        :param y_scale: 'LIN' or 'LOG', defaulted to 'LOG'
+        :param tick_font_size: Defaulted to 18
+        :param title_font_size: Defaulted to 24
+        :param grid: True or False
+        :param grid_style: Defaulted to '-'
+        :param grid_color: Defaulted to 'grey'
+        :param row: The row in the grid where the plot will be placed
+        :param col: The column in the grid where the plot will be placed
+
+        .. code-block:: python
+
+           > length = 20
+           > x = np.linspace(0, 20, num=20)
+           > linear = x
+           > squared = x ** 2.0
+
+           > # create dataframe
+           > dictionary = {'x': x, 'linear': linear, 'squared': squared}
+           > df = pd.DataFrame(dictionary)
+
+           > # plot data
+           > obj = MatPlotDataFrame(1, 1)
+           > x_headers = ['x', 'x']
+           > y_headers = ['linear', 'squared']
+           > obj = MatPlotDataFrame(nrows=1, ncols=1)
+           > obj.fill_between_lines_columns(df, x_headers, y_headers)
+
+           > obj.show_plot()
+
+        .. image:: fill_between.png
+           :align: center
+        """
+        # Error checking
+        if y_scale not in ('LOG', 'LIN'):
+            warnings.warn('y_scale must be set to LOG or LIN')
+        if x_scale not in ('LOG', 'LIN'):
+            warnings.warn('y_scale must be set to LOG or LIN')
+        if len(y_headers) != 2:
+            sys.exit('FATAL ERROR: Y-headers must have a length of 2')
+
+        # begin plot
+        plt.rcParams.update({'figure.autolayout': True})
+        plt.style.use(style_name)
+        rc('xtick', labelsize=tick_font_size)
+        rc('ytick', labelsize=tick_font_size)
+        if self.nrows > 1 and self.ncols > 1:
+            self.ax[row, col].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[row, col].set_ylabel(y_label, fontsize=label_font_size)
+        elif self.nrows > 1:
+            self.ax[row].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[row].set_ylabel(y_label, fontsize=label_font_size)
+        elif self.ncols > 1:
+            self.ax[col].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[col].set_ylabel(y_label, fontsize=label_font_size)
+        else:
+            self.ax.set_xlabel(x_label, fontsize=label_font_size)
+            self.ax.set_ylabel(y_label, fontsize=label_font_size)
+
+        if title != 'NULL':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_title(title, fontsize=title_font_size)
+            elif self.nrows > 1:
+                self.ax[row].set_title(title, fontsize=title_font_size)
+            elif self.ncols > 1:
+                self.ax[col].set_title(title, fontsize=title_font_size)
+            else:
+                self.ax.set_title(title, fontsize=title_font_size)
+        if x_scale.upper() == 'LOG':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_xscale('log')
+            elif self.nrows > 1:
+                self.ax[row].set_xscale('log')
+            elif self.ncols > 1:
+                self.ax[col].set_xscale('log')
+            else:
+                self.ax.set_xscale('log')
+        if y_scale.upper() == 'LOG':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_yscale('log')
+            elif self.nrows > 1:
+                self.ax[row].set_yscale('log')
+            elif self.ncols > 1:
+                self.ax[col].set_yscale('log')
+            else:
+                self.ax.set_yscale('log')
+
+        if self.nrows > 1 and self.ncols > 1:
+            self.ax[row, col].fill_between(df[x_headers[0]], df[y_headers[0]],
+                                           df[y_headers[1]], interpolate=True,
+                                           color=fill_color, alpha=fill_alpha)
+        elif self.nrows > 1:
+            self.ax[row].fill_between(df[x_headers[0]], df[y_headers[0]],
+                                      df[y_headers[1]], interpolate=True,
+                                      color=fill_color, alpha=fill_alpha)
+        elif self.ncols > 1:
+            self.ax[col].fill_between(df[x_headers[0]], df[y_headers[0]],
+                                      df[y_headers[1]], interpolate=True,
+                                      color=fill_color, alpha=fill_alpha)
+        else:
+            self.ax.fill_between(df[x_headers[0]], df[y_headers[0]],
+                                 df[y_headers[1]], interpolate=True,
+                                 color=fill_color, alpha=fill_alpha)
+
+        if grid:
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].grid(color=grid_color, linestyle=grid_style)
+            elif self.nrows > 1:
+                self.ax[row].grid(color=grid_color, linestyle=grid_style)
+            elif self.ncols > 1:
+                self.ax[col].grid(color=grid_color, linestyle=grid_style)
+            else:
+                self.ax.grid(color=grid_color, linestyle=grid_style)
+# --------------------------------------------------------------------------------
+
     def show_plot(self):
         """
 
@@ -1526,6 +1818,10 @@ class MatPlotDataFrame:
         choosing
         """
         plt.savefig(file_name)
+# --------------------------------------------------------------------------------
+
+    def close_plot(self):
+        plt.close()
 # ================================================================================
 # ================================================================================
 # eof
