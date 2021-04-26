@@ -304,6 +304,26 @@ def test_fill_between_datetime_column():
     y_axis = ['linear', 'squared']
     obj.fill_between_dt_column(df, time_axis, y_axis)
     obj.close_plot()
+# --------------------------------------------------------------------------------
+
+
+def test_hist_plot_parse_column():
+    np.random.seed(19680801)
+    x = np.random.normal(15.0, 3.0, 1000)
+    y = np.random.normal(20.0, 3.0, 1000)
+    data = [x, y]
+    labels = ['one', 'two']
+    one = np.repeat('one', len(x))
+    two = np.repeat('two', len(x))
+    x = np.hstack((x, y))
+    y = np.hstack((one, two))
+
+    dictionary = {'data': x, 'type': y}
+    df = pd.DataFrame(dictionary)
+    obj = MatPlotDataFrame()
+    obj.histogram_plot_parse_column(df, 'data', 'type', labels, x_label='x-axis',
+                                    y_label='y-axis', shading=[0.9, 0.4])
+    obj.close_plot()
 # ================================================================================
 # ================================================================================
 # eof

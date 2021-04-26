@@ -2292,6 +2292,176 @@ class MatPlotDataFrame:
                 self.ax.grid(color=grid_color, linestyle=grid_style)
 # --------------------------------------------------------------------------------
 
+    def histogram_plot_parse_column(self, df: pd.DataFrame, header: str,
+                                    parsing_header: str, column_values: List[str],
+                                    x_label: str='', y_label: str='',
+                                    colors: List[str]=['None'],
+                                    edge_colors: List[str]=['None'],
+                                    shading: List[float]=['None'],
+                                    label_pos: str='upper right',
+                                    num_bins: int = 50,
+                                    tick_font_size: int = 18,
+                                    label_font_size: str = 18,
+                                    style_name: str = 'default',
+                                    hist_type: str = 'bar',
+                                    dens: bool = False, title: str = 'NULL',
+                                    title_font_size: int = 24,
+                                    row: int=0, col: int=0,
+                                    labels: bool=True) -> None:
+        """
+
+        :param df: A pandas dataframe containing data to be plotted
+        :param header: The name of the column header containing the
+                       data to be plotted
+        :param parsing_header: The name of the column header containing
+                               key words that will be used to parse the
+                               dataframe
+        :param column_values: A list containing the keywords within the
+                              column described by ``parsing_header``.
+        :param x_label: The x-axis label, defaulted to ''
+        :param y_label: The y-axis label, defaulted to ''
+        :param colors: A list containing the colors for each hsitogram
+        :param shading: A list describing The opacity of each histogram
+                        color, defaulted to ["None']
+        :param label_pos: The position of the legend, defaulted to 'upper right'
+        :param num_bins: The number of bins used for the histogram.  Defaulted
+                         to 50
+        :param tick_font_size: Defaulted to 18
+        :param label_font_size: Defaulted to 18
+        :param style_name: The plot style, defaulted to 'default'
+        :param hist_type: The type of histogram, defaulted to 'bar'; however,
+                          the options are 'bar', 'barstacked', 'step',
+                          and 'stepfilled'
+        :param dens: If True, the first element of the return tuple will be the counts
+                     normalized to form a probability density, i.e., the area (or integral)
+                     under the histogram will sum to 1
+        :param title: The title of the plot to incorporate into the header.  Defaulted to NULL
+        :param title_font_size: The font size for the tile, defaulted to 24
+
+        This plot method will allow a user to plot one or multiple histograms on a
+        single plot.  This function will also allow a user to create a histogram plot
+        as one of several plots in a grid array of plots.
+
+        .. code-block:: python
+
+           > np.random.seed(19680801)
+           > x = np.random.normal(15.0, 3.0, 1000)
+           > y = np.random.normal(20.0, 3.0, 1000)
+           > data = [x, y]
+           > labels = ['one', 'two']
+           > one = np.repeat('one', len(x))
+           > two = np.repeat('two', len(x))
+           > x = np.hstack((x, y))
+           > y = np.hstack((one, two))
+
+           > dictionary = {'data': x, 'type': y}
+           > df = pd.DataFrame(dictionary)
+           > obj = MatPlotDataFrame()
+           > obj.histogram_plot_parse_column(df, 'data', 'type', labels, x_label='x-axis',
+                                             y_label='y-axis', shading=[0.9, 0.4])
+           > obj.show_plot()
+
+        .. image:: hist_plot.png
+           :align: center
+        """
+        if colors[0] == "None":
+            colors = self.colors
+        if edge_colors[0] == 'None':
+            edge_colors = np.repeat('black', len(column_values))
+        if shading[0] == "None":
+            shading = np.repeat(0.7, len(column_values))
+        df_list = [df[df[parsing_header] == col_val] for
+                   col_val in column_values]
+
+        # begin plot
+        plt.rcParams.update({'figure.autolayout': True})
+        plt.style.use(style_name)
+        rc('xtick', labelsize=tick_font_size)
+        rc('ytick', labelsize=tick_font_size)
+
+        if self.nrows > 1 and self.ncols > 1:
+            self.ax[row, col].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[row, col].set_ylabel(y_label, fontsize=label_font_size)
+        elif self.nrows >1:
+            self.ax[row].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[row].set_ylabel(y_label, fontsize=label_font_size)
+        elif self.ncols > 1:
+            self.ax[col].set_xlabel(x_label, fontsize=label_font_size)
+            self.ax[col].set_ylabel(y_label, fontsize=label_font_size)
+        else:
+            self.ax.set_xlabel(x_label, fontsize=label_font_size)
+            self.ax.set_ylabel(y_label, fontsize=label_font_size)
+        if title != 'NULL':
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].set_title(title, fontsize=title_font_size)
+            elif self.nrows > 1:
+                self.ax[row].set_title(title, fontsize=title_font_size)
+            elif self.ncols > 1:
+                self.ax[col].set_title(title, fontsize=title_font_size)
+            else:
+                self.ax.set_title(title, fontsize=title_font_size)
+
+        if self.nrows > 1 and self.ncols > 1 and labels is True:
+            for i in range(len(column_values)):
+                self.ax[row, col].hist(df_list[i][header], bins=num_bins,
+                                       color=colors[i], edgecolor=edge_colors[i],
+                                       alpha=shading[i], label=column_values[i],
+                                       histtype=hist_type, density=dens)
+        elif self.nrows > 1 and labels is True:
+            for i in range(len(column_values)):
+                self.ax[row].hist(df_list[i][header], bins=num_bins,
+                                  color=colors[i], edgecolor=edge_colors[i],
+                                  alpha=shading[i], label=column_values[i],
+                                  histtype=hist_type, density=dens)
+        elif self.ncols > 1 and labels is True:
+            for i in range(len(column_values)):
+                self.ax[col].hist(df_list[i][header], bins=num_bins,
+                                  color=colors[i], edgecolor=edge_colors[i],
+                                  alpha=shading[i], label=column_values[i],
+                                  histtype=hist_type, density=dens)
+        elif self.ncols == 1 and self.nrows == 1 and labels is True:
+            for i in range(len(column_values)):
+                self.ax.hist(df_list[i][header], bins=num_bins,
+                             color=colors[i], edgecolor=edge_colors[i],
+                             alpha=shading[i], label=column_values[i],
+                             histtype=hist_type, density=dens)
+        elif self.nrows > 1 and self.ncols > 1 and labels is not True:
+            for i in range(len(column_values)):
+                self.ax[row, col].hist(df_list[i][header], bins=num_bins,
+                                       color=colors[i], edgecolor=edge_colors[i],
+                                       alpha=shading[i],
+                                       histtype=hist_type, density=dens)
+        elif self.nrows > 1 and labels is not True:
+            for i in range(len(column_values)):
+                self.ax[row].hist(df_list[i][header], bins=num_bins,
+                                  color=colors[i], edgecolor=edge_colors[i],
+                                  alpha=shading[i],
+                                  histtype=hist_type, density=dens)
+        elif self.ncols > 1 and labels is not True:
+            for i in range(len(column_values)):
+                self.ax[col].hist(df_list[i][header], bins=num_bins,
+                                  color=colors[i], edgecolor=edge_colors[i],
+                                  alpha=shading[i],
+                                  histtype=hist_type, density=dens)
+        else:
+            for i in range(len(column_values)):
+                self.ax.hist(df_list[i][header], bins=num_bins,
+                             color=colors[i], edgecolor=edge_colors[i],
+                             alpha=shading[i],
+                             histtype=hist_type, density=dens)
+
+        if labels is True:
+            if self.nrows > 1 and self.ncols > 1:
+                self.ax[row, col].legend(loc=label_pos)
+            elif self.nrows > 1:
+                self.ax[row].legend(loc=label_pos)
+            elif self.ncols > 1:
+                self.ax[col].legend(loc=label_pos)
+            else:
+                self.ax.legend(loc=label_pos)
+        plt.legend(loc=label_pos)
+# --------------------------------------------------------------------------------
+
     def show_plot(self):
         """
 
